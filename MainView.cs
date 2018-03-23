@@ -94,7 +94,7 @@ namespace Rca.Hue2Xml
 
         private void btn_SaveParameters_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Title = "Parameter-datei speichern";
+            saveFileDialog1.Title = "Parameter-Datei speichern";
             saveFileDialog1.ShowDialog();
         }
     }

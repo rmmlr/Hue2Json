@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Xml.Serialization;
 
 namespace Rca.Hue2Xml
 {
@@ -13,10 +14,19 @@ namespace Rca.Hue2Xml
     {
         #region Member
 
+        private HueParameters m_Parameters;
 
         #endregion Member
 
         #region Properties
+        /// <summary>
+        /// Hue Parameter
+        /// </summary>
+        public HueParameters Parameters
+        {
+            get { return m_Parameters; }
+            set { m_Parameters = value; }
+        }
 
 
         #endregion Properties
@@ -50,6 +60,31 @@ namespace Rca.Hue2Xml
         public bool ConnectBridge(string ip)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Serialisieren der aktuellen Parameter
+        /// </summary>
+        /// <param name="path">Pfad zur Datei</param>
+        /// <returns>true: Erfolgreich serialisiert; false: Serialisierung fehlgeschlagen</returns>
+        public bool SaveParameterFile(string path)
+        {
+            try
+            {
+                var xs = new XmlSerializer(typeof(HueParameters));
+                var fs = new FileStream(path, FileMode.CreateNew);
+
+                xs.Serialize(fs, Parameters);
+                fs.Flush();
+                fs.Close();
+            }
+            catch (Exception)
+            {
+                //TODO: Fehler ausgeben
+                return false;
+            }
+
+            return true;
         }
 
         //TODO: Methode zum Anonymisieren individueller Namen von Räumen, Gruppen, Leuchtmitteln, Regeln, etc.

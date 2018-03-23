@@ -76,7 +76,7 @@
             // 
             // btn_ConnectBridge
             // 
-            this.btn_ConnectBridge.Location = new System.Drawing.Point(21, 71);
+            this.btn_ConnectBridge.Location = new System.Drawing.Point(21, 78);
             this.btn_ConnectBridge.Name = "btn_ConnectBridge";
             this.btn_ConnectBridge.Size = new System.Drawing.Size(167, 23);
             this.btn_ConnectBridge.TabIndex = 3;
@@ -94,7 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 121);
+            this.label2.Location = new System.Drawing.Point(18, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 13);
             this.label2.TabIndex = 5;
