@@ -34,22 +34,14 @@
             this.btn_ConnectBridge = new System.Windows.Forms.Button();
             this.txt_BridgeIp = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_SaveParameters = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btn_ReadParameters = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // clb_Parameter
             // 
             this.clb_Parameter.BackColor = System.Drawing.SystemColors.Control;
             this.clb_Parameter.FormattingEnabled = true;
-            this.clb_Parameter.Items.AddRange(new object[] {
-            "Leuchtmittel",
-            "Gruppen",
-            "Timer",
-            "Szenen",
-            "Sensoren",
-            "Regeln",
-            "Konfiguration"});
             this.clb_Parameter.Location = new System.Drawing.Point(21, 137);
             this.clb_Parameter.Name = "clb_Parameter";
             this.clb_Parameter.Size = new System.Drawing.Size(167, 109);
@@ -94,32 +86,33 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 121);
+            this.label2.Location = new System.Drawing.Point(19, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Parameter-Auswahl";
             // 
-            // btn_SaveParameters
+            // btn_ReadParameters
             // 
-            this.btn_SaveParameters.Location = new System.Drawing.Point(21, 263);
-            this.btn_SaveParameters.Name = "btn_SaveParameters";
-            this.btn_SaveParameters.Size = new System.Drawing.Size(167, 23);
-            this.btn_SaveParameters.TabIndex = 6;
-            this.btn_SaveParameters.Text = "Parameter speichern...";
-            this.btn_SaveParameters.UseVisualStyleBackColor = true;
-            this.btn_SaveParameters.Click += new System.EventHandler(this.btn_SaveParameters_Click);
+            this.btn_ReadParameters.Enabled = false;
+            this.btn_ReadParameters.Location = new System.Drawing.Point(21, 263);
+            this.btn_ReadParameters.Name = "btn_ReadParameters";
+            this.btn_ReadParameters.Size = new System.Drawing.Size(167, 23);
+            this.btn_ReadParameters.TabIndex = 6;
+            this.btn_ReadParameters.Text = "Parameter auslesen...";
+            this.btn_ReadParameters.UseVisualStyleBackColor = true;
+            this.btn_ReadParameters.Click += new System.EventHandler(this.btn_ReadParameters_Click);
             // 
-            // saveFileDialog1
+            // saveFileDialog
             // 
-            this.saveFileDialog1.Filter = "XML Datei|*.xml";
+            this.saveFileDialog.Filter = "XML Datei|*.xml";
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(214, 302);
-            this.Controls.Add(this.btn_SaveParameters);
+            this.Controls.Add(this.btn_ReadParameters);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_BridgeIp);
             this.Controls.Add(this.btn_ConnectBridge);
@@ -141,8 +134,8 @@
         private System.Windows.Forms.Button btn_ConnectBridge;
         private System.Windows.Forms.TextBox txt_BridgeIp;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_SaveParameters;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btn_ReadParameters;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

@@ -19,6 +19,7 @@ namespace Rca.Hue2Xml
             #region Form initialisieren
             InitializeComponent();
             handleBridgeIp();
+            setupParameterSelection();
             setAllParameters(true);
             #endregion
 
@@ -37,6 +38,12 @@ namespace Rca.Hue2Xml
             }
         }
 
+        void setupParameterSelection()
+        {
+            foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
+                clb_Parameter.Items.Add(param.DisplayName());
+        }
+
         /// <summary>
         /// Checkboxen der Parameterauswahl setzen
         /// </summary>
@@ -47,6 +54,28 @@ namespace Rca.Hue2Xml
             {
                 clb_Parameter.SetItemChecked(i, state);
             }
+        }
+
+        /// <summary>
+        /// Abfrage der ausgewählten Parameter
+        /// </summary>
+        /// <returns></returns>
+        HueParameterEnum getSelectedParams()
+        {
+            var res = HueParameterEnum.Configuration;
+
+            foreach (var item in clb_Parameter.SelectedItems)
+            {
+                //TODO: !!!!!!!!!!!!!!!
+            }
+
+
+            foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
+            {
+                clb_Parameter.Items.Add(param.DisplayName());
+            }
+
+            return HueParameterEnum.Configuration;
         }
 
         private void btn_SearchBridge_Click(object sender, EventArgs e)
@@ -65,6 +94,7 @@ namespace Rca.Hue2Xml
                             Properties.Settings.Default.lastBridgeIp = ips[0];
                             Properties.Settings.Default.Save();
                             btn_ConnectBridge.Enabled = false;
+                            btn_ReadParameters.Enabled = true;
                         }
                         break;
                     case DialogResult.No:
@@ -89,13 +119,27 @@ namespace Rca.Hue2Xml
                 Properties.Settings.Default.lastBridgeIp = txt_BridgeIp.Text;
                 Properties.Settings.Default.Save();
                 btn_ConnectBridge.Enabled = false;
+                btn_ReadParameters.Enabled = true;
             }
         }
 
-        private void btn_SaveParameters_Click(object sender, EventArgs e)
+        private void btn_ReadParameters_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Title = "Parameter-Datei speichern";
-            saveFileDialog1.ShowDialog();
+            if (m_Controller.ReadParameters(getSelectedParams()))
+            {
+                if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
+                    "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    saveFileDialog.Title = "Parameter-Datei speichern";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
+                }
+                else
+                {
+                    m_Controller.Parameters = null;
+                }
+            }
+            
         }
     }
 }

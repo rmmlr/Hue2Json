@@ -63,6 +63,16 @@ namespace Rca.Hue2Xml
         }
 
         /// <summary>
+        /// Parameter auslesen
+        /// </summary>
+        /// <param name="paras">Auswahl der zu lesenden Parameter</param>
+        /// <returns>true: Parameter erfolgreich gelesen; false: Lesen fehlgeschlagen</returns>
+        public bool ReadParameters(HueParameterEnum paras)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Serialisieren der aktuellen Parameter
         /// </summary>
         /// <param name="path">Pfad zur Datei</param>
