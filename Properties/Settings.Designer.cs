@@ -22,5 +22,17 @@ namespace Rca.Hue2Xml.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastBridgeIp {
+            get {
+                return ((string)(this["lastBridgeIp"]));
+            }
+            set {
+                this["lastBridgeIp"] = value;
+            }
+        }
     }
 }
