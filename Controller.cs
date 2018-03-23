@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Q42.HueApi;
+using Q42.HueApi.Interfaces;
+using Q42.HueApi.Models.Bridge;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -12,13 +15,26 @@ namespace Rca.Hue2Xml
 {
     public class Controller : INotifyPropertyChanged
     {
-        #region Member
+        #region Constants
+        const string APP_NAME = "Hue2Xml";
+        const string DEVICE_NAME = "TestDevice";
 
-        private HueParameters m_Parameters;
+        #endregion
+
+        #region Member
+        AppKeyManager m_AppKeyManager;
+        ILocalHueClient m_HueClient;
+
+        HueParameters m_Parameters;
 
         #endregion Member
 
         #region Properties
+        /// <summary>
+        /// Gefundene Bridges
+        /// </summary>
+        public List<LocatedBridge> LocatedBridges { get; set; }
+
         /// <summary>
         /// Hue Parameter
         /// </summary>
@@ -37,7 +53,8 @@ namespace Rca.Hue2Xml
         /// </summary>
         public Controller()
         {
-
+            LocatedBridges = new List<LocatedBridge>();
+            m_AppKeyManager = new AppKeyManager();
         }
 
         #endregion Constructor
@@ -47,19 +64,44 @@ namespace Rca.Hue2Xml
         /// Sucht im Netzwerk nach Bridges
         /// </summary>
         /// <returns>IP Ardessen der gefunden Bridges</returns>
-        public string[] SearchBridges()
+        public async Task<string[]> ScanBridges()
         {
-            throw new NotImplementedException();
+            IBridgeLocator locator = new HttpBridgeLocator();
+            var bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(5));
+
+            foreach (LocatedBridge bridge in bridgeIPs)
+                LocatedBridges.Add(bridge);
+
+            return LocatedBridges.Select(x => x.IpAddress).ToArray();
         }
 
         /// <summary>
         /// Verbindung zu einer bekannten Bridge herstellen
         /// </summary>
-        /// <param name="ip">IP Adresse der zu verbindenden Bridge</param>
+        /// <param name="bridgeIp">IP Adresse der zu verbindenden Bridge</param>
         /// <returns>true: Erfolgreich verbunden; false: Verbindungsaufbau fehlgeschlagen</returns>
-        public bool ConnectBridge(string ip)
+        public async Task<bool> ConnectBridge(string bridgeIp)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_HueClient = new LocalHueClient(bridgeIp);
+
+                var appKey = m_AppKeyManager.AppKey;
+                if (String.IsNullOrEmpty(appKey))
+                {
+                    appKey = await m_HueClient.RegisterAsync(APP_NAME, DEVICE_NAME);
+                    m_AppKeyManager.AppKey = appKey;
+                }
+                m_HueClient.Initialize(appKey);
+
+                //return await m_Client.GetBridgeAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -69,6 +111,9 @@ namespace Rca.Hue2Xml
         /// <returns>true: Parameter erfolgreich gelesen; false: Lesen fehlgeschlagen</returns>
         public bool ReadParameters(HueParameterEnum paras)
         {
+            var lights = m_HueClient.GetLightsAsync();
+
+
             throw new NotImplementedException();
         }
 

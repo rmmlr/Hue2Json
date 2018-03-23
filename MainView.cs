@@ -23,6 +23,11 @@ namespace Rca.Hue2Xml
             setAllParameters(true);
             #endregion
 
+#if DEBUG
+            btn_ConnectBridge.Enabled = true;
+            btn_ReadParameters.Enabled = true;
+#endif
+
             m_Controller = new Controller();
         }
 
@@ -40,8 +45,15 @@ namespace Rca.Hue2Xml
 
         void setupParameterSelection()
         {
+            //foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
+            //    if (param.HasDisplayName())
+            //        clb_Parameter.Items.Add(param.DisplayName());
+
             foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
-                clb_Parameter.Items.Add(param.DisplayName());
+                clb_Parameter.Items.Add(new HueParameter(param));
+
+            clb_Parameter.DisplayMember = "DisplayName";
+            clb_Parameter.ValueMember = "Value";
         }
 
         /// <summary>
@@ -51,9 +63,7 @@ namespace Rca.Hue2Xml
         void setAllParameters(bool state)
         {
             for (int i = 0; i < clb_Parameter.Items.Count; i++)
-            {
                 clb_Parameter.SetItemChecked(i, state);
-            }
         }
 
         /// <summary>
@@ -62,25 +72,17 @@ namespace Rca.Hue2Xml
         /// <returns></returns>
         HueParameterEnum getSelectedParams()
         {
-            var res = HueParameterEnum.Configuration;
+            HueParameterEnum paras = 0;
 
-            foreach (var item in clb_Parameter.SelectedItems)
-            {
-                //TODO: !!!!!!!!!!!!!!!
-            }
+            foreach (HueParameter item in clb_Parameter.CheckedItems)
+                paras |= item.Value;
 
-
-            foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
-            {
-                clb_Parameter.Items.Add(param.DisplayName());
-            }
-
-            return HueParameterEnum.Configuration;
+            return paras;
         }
 
-        private void btn_SearchBridge_Click(object sender, EventArgs e)
+        private async void btn_SearchBridge_Click(object sender, EventArgs e)
         {
-            var ips = m_Controller.SearchBridges();
+            var ips = await m_Controller.ScanBridges();
 
             if (ips.Length == 1)
             {
@@ -88,7 +90,7 @@ namespace Rca.Hue2Xml
                     "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.Yes:
-                        if (m_Controller.ConnectBridge(ips[0]))
+                        if (await m_Controller.ConnectBridge(ips[0]))
                         {
                             txt_BridgeIp.Text = ips[0];
                             Properties.Settings.Default.lastBridgeIp = ips[0];
@@ -112,9 +114,9 @@ namespace Rca.Hue2Xml
             }
         }
 
-        private void btn_ConnectBridge_Click(object sender, EventArgs e)
+        private async void btn_ConnectBridge_Click(object sender, EventArgs e)
         {
-            if (m_Controller.ConnectBridge(txt_BridgeIp.Text))
+            if (await m_Controller.ConnectBridge(txt_BridgeIp.Text))
             {
                 Properties.Settings.Default.lastBridgeIp = txt_BridgeIp.Text;
                 Properties.Settings.Default.Save();
@@ -139,7 +141,7 @@ namespace Rca.Hue2Xml
                     m_Controller.Parameters = null;
                 }
             }
-            
+
         }
     }
 }

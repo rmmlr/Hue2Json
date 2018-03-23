@@ -68,6 +68,7 @@
             // 
             // btn_ConnectBridge
             // 
+            this.btn_ConnectBridge.Enabled = false;
             this.btn_ConnectBridge.Location = new System.Drawing.Point(21, 78);
             this.btn_ConnectBridge.Name = "btn_ConnectBridge";
             this.btn_ConnectBridge.Size = new System.Drawing.Size(167, 23);
