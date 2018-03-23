@@ -17,7 +17,6 @@ namespace Rca.Hue2Xml
     {
         #region Constants
         const string APP_NAME = "Hue2Xml";
-        const string DEVICE_NAME = "TestDevice";
 
         #endregion
 
@@ -89,15 +88,16 @@ namespace Rca.Hue2Xml
                 var appKey = m_AppKeyManager.AppKey;
                 if (String.IsNullOrEmpty(appKey))
                 {
-                    appKey = await m_HueClient.RegisterAsync(APP_NAME, DEVICE_NAME);
+                    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
                     m_AppKeyManager.AppKey = appKey;
                 }
                 m_HueClient.Initialize(appKey);
 
                 //return await m_Client.GetBridgeAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                throw ex;
                 return false;
             }
 
@@ -109,12 +109,22 @@ namespace Rca.Hue2Xml
         /// </summary>
         /// <param name="paras">Auswahl der zu lesenden Parameter</param>
         /// <returns>true: Parameter erfolgreich gelesen; false: Lesen fehlgeschlagen</returns>
-        public bool ReadParameters(HueParameterEnum paras)
+        public async Task<bool> ReadParameters(HueParameterGroupEnum paras)
         {
-            var lights = m_HueClient.GetLightsAsync();
+            Parameters = new HueParameters();
 
+            Parameters.Lights = (await m_HueClient.GetLightsAsync()).ToList();
+            //Parameters.Groups = (await m_HueClient.GetGroupsAsync()).ToList();
+            Parameters.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
+            Parameters.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
+            Parameters.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
+            Parameters.Rules = (await m_HueClient.GetRulesAsync()).ToList();
+            Parameters.Configuration = (await m_HueClient.GetBridgeAsync()).Config;
+            Parameters.Capability = await m_HueClient.GetCapabilitiesAsync();
+            Parameters.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
 
         /// <summary>
@@ -133,9 +143,10 @@ namespace Rca.Hue2Xml
                 fs.Flush();
                 fs.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //TODO: Fehler ausgeben
+                throw ex;
                 return false;
             }
 

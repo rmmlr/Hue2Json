@@ -49,8 +49,8 @@ namespace Rca.Hue2Xml
             //    if (param.HasDisplayName())
             //        clb_Parameter.Items.Add(param.DisplayName());
 
-            foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
-                clb_Parameter.Items.Add(new HueParameter(param));
+            foreach (HueParameterGroupEnum param in Enum.GetValues(typeof(HueParameterGroupEnum)))
+                clb_Parameter.Items.Add(new HueParameterGroup(param));
 
             clb_Parameter.DisplayMember = "DisplayName";
             clb_Parameter.ValueMember = "Value";
@@ -70,11 +70,11 @@ namespace Rca.Hue2Xml
         /// Abfrage der ausgewählten Parameter
         /// </summary>
         /// <returns></returns>
-        HueParameterEnum getSelectedParams()
+        HueParameterGroupEnum getSelectedParams()
         {
-            HueParameterEnum paras = 0;
+            HueParameterGroupEnum paras = 0;
 
-            foreach (HueParameter item in clb_Parameter.CheckedItems)
+            foreach (HueParameterGroup item in clb_Parameter.CheckedItems)
                 paras |= item.Value;
 
             return paras;
@@ -125,9 +125,9 @@ namespace Rca.Hue2Xml
             }
         }
 
-        private void btn_ReadParameters_Click(object sender, EventArgs e)
+        private async void btn_ReadParameters_Click(object sender, EventArgs e)
         {
-            if (m_Controller.ReadParameters(getSelectedParams()))
+            if (await m_Controller.ReadParameters(getSelectedParams()))
             {
                 if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
                     "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
