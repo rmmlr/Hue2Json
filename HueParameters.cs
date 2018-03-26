@@ -28,7 +28,7 @@ namespace Rca.Hue2Xml
 
         public List<Light> Lights { get; set; }
 
-        //public List<Group> Groups { get; set; }
+        public List<Group> Groups { get; set; }
 
         public List<Schedule> Schedules { get; set; }
 

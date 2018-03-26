@@ -111,20 +111,43 @@ namespace Rca.Hue2Xml
         /// <returns>true: Parameter erfolgreich gelesen; false: Lesen fehlgeschlagen</returns>
         public async Task<bool> ReadParameters(HueParameterGroupEnum paras)
         {
-            Parameters = new HueParameters();
+            try
+            {
+                Parameters = new HueParameters();
 
-            Parameters.Lights = (await m_HueClient.GetLightsAsync()).ToList();
-            //Parameters.Groups = (await m_HueClient.GetGroupsAsync()).ToList();
-            Parameters.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
-            Parameters.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
-            Parameters.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
-            Parameters.Rules = (await m_HueClient.GetRulesAsync()).ToList();
-            Parameters.Configuration = (await m_HueClient.GetBridgeAsync()).Config;
-            Parameters.Capability = await m_HueClient.GetCapabilitiesAsync();
-            Parameters.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
+                if (paras.HasFlag(HueParameterGroupEnum.Lights))
+                    Parameters.Lights = (await m_HueClient.GetLightsAsync()).ToList();
 
-            //throw new NotImplementedException();
-            return true;
+                if (paras.HasFlag(HueParameterGroupEnum.Groups))
+                    Parameters.Groups = (await m_HueClient.GetGroupsAsync()).ToList();
+
+                if (paras.HasFlag(HueParameterGroupEnum.Schedules))
+                    Parameters.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
+
+                if (paras.HasFlag(HueParameterGroupEnum.Scenes))
+                    Parameters.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
+
+                if (paras.HasFlag(HueParameterGroupEnum.Sensors))
+                    Parameters.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
+
+                if (paras.HasFlag(HueParameterGroupEnum.Rules))
+                    Parameters.Rules = (await m_HueClient.GetRulesAsync()).ToList();
+
+                if (paras.HasFlag(HueParameterGroupEnum.Configuration))
+                    Parameters.Configuration = (await m_HueClient.GetBridgeAsync()).Config;
+
+                if (paras.HasFlag(HueParameterGroupEnum.Capability))
+                    Parameters.Capability = await m_HueClient.GetCapabilitiesAsync();
+
+                if (paras.HasFlag(HueParameterGroupEnum.ResourceLinks))
+                    Parameters.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>
