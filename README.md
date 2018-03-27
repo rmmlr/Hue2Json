@@ -1,5 +1,9 @@
-# Hue to Xml
-Speichert alle Parameter eines Hue-Systems in einer XML-Datei.
+# Hue to Json
+Speichert alle Parameter eines Hue-Systems in einer JSON-Datei. Die zu speichernden Parameter können dabei entsprechend angewählt werden, zur Verfügung stehen:
+
+* Lights
+* Groups
+* Rules
 
 
 ## Programm
