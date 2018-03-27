@@ -89,7 +89,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeLights()
         {
-            return Lights != null && Lights.Count > 0;
+            return Lights?.Count > 0;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeGroups()
         {
-            return Groups != null && Groups.Count > 0;
+            return Groups?.Count > 0;
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeSchedules()
         {
-            return Schedules != null && Schedules.Count > 0;
+            return Schedules?.Count > 0;
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeScenes()
         {
-            return Scenes != null && Scenes.Count > 0;
+            return Scenes?.Count > 0;
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeSensors()
         {
-            return Sensors != null && Sensors.Count > 0;
+            return Sensors?.Count > 0;
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeRules()
         {
-            return Rules != null && Rules.Count > 0;
+            return Rules?.Count > 0;
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Rca.Hue2Json
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
         public bool ShouldSerializeResourceLinks()
         {
-            return ResourceLinks != null && ResourceLinks.Count > 0;
+            return ResourceLinks?.Count > 0;
         }
 
         #endregion Services
