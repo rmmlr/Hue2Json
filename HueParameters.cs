@@ -1,8 +1,11 @@
-﻿using Q42.HueApi;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Q42.HueApi;
 using Q42.HueApi.Models;
 using Q42.HueApi.Models.Groups;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +58,7 @@ namespace Rca.Hue2Json
         {
             CreationDate = DateTime.Now;
             Lights = new List<Light>();
-            //Groups = new List<Group>();
+            Groups = new List<Group>();
             Schedules = new List<Schedule>();
             Scenes = new List<Scene>();
             Sensors = new List<Sensor>();
@@ -67,6 +70,99 @@ namespace Rca.Hue2Json
 
         #region Services
 
+        public MemoryStream ToJson()
+        {
+            var stream = new MemoryStream();
+            var sw = new StreamWriter(stream);
+
+            sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter()));
+            sw.Flush();
+            sw.Close();
+            stream.Close();
+
+            return stream;
+        }
+
+        /// <summary>
+        /// Parameter für Leuchtmittel nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeLights()
+        {
+            return Lights != null && Lights.Count > 0;
+        }
+
+        /// <summary>
+        /// Parameter für Gruppen nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeGroups()
+        {
+            return Groups != null && Groups.Count > 0;
+        }
+
+        /// <summary>
+        /// Parameter für Timer nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeSchedules()
+        {
+            return Schedules != null && Schedules.Count > 0;
+        }
+
+        /// <summary>
+        /// Parameter für Szenen nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeScenes()
+        {
+            return Scenes != null && Scenes.Count > 0;
+        }
+
+        /// <summary>
+        /// Parameter für Sensoren nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeSensors()
+        {
+            return Sensors != null && Sensors.Count > 0;
+        }
+
+        /// <summary>
+        /// Parameter für Regeln nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeRules()
+        {
+            return Rules != null && Rules.Count > 0;
+        }
+
+        /// <summary>
+        /// Konfiguration nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeConfiguration()
+        {
+            return Configuration != null;
+        }
+
+        /// <summary>
+        /// Speicherverfügbarkeit nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeCapability()
+        {
+            return Capability != null;
+        }
+
+        /// <summary>
+        /// ResourceLinks nur Serialisieren wenn vorhanden
+        /// </summary>
+        /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
+        public bool ShouldSerializeResourceLinks()
+        {
+            return ResourceLinks != null && ResourceLinks.Count > 0;
+        }
 
         #endregion Services
 

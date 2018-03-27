@@ -154,26 +154,14 @@ namespace Rca.Hue2Json
         /// Serialisieren der aktuellen Parameter
         /// </summary>
         /// <param name="path">Pfad zur Datei</param>
-        /// <returns>true: Erfolgreich serialisiert; false: Serialisierung fehlgeschlagen</returns>
-        public bool SaveParameterFile(string path)
+        public void SaveParameterFile(string path)
         {
-            try
-            {
-                var xs = new XmlSerializer(typeof(HueParameters));
-                var fs = new FileStream(path, FileMode.CreateNew);
+            var fs = new FileStream(path, FileMode.Create);
 
-                xs.Serialize(fs, Parameters);
-                fs.Flush();
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                //TODO: Fehler ausgeben
-                throw ex;
-                return false;
-            }
+            Parameters.ToJson().WriteTo(fs);
 
-            return true;
+            fs.Flush();
+            fs.Close();
         }
 
         //TODO: Methode zum Anonymisieren individueller Namen von Räumen, Gruppen, Leuchtmitteln, Regeln, etc.
