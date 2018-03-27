@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rca.Hue2Xml
+namespace Rca.Hue2Json
 {
     /// <summary>
     /// Klasse zur Aufnahme aller Hue-Parameter
