@@ -121,7 +121,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clb_Parameter);
             this.Name = "MainView";
-            this.Text = "Hue2Xml v0.1a";
+            this.Text = "Hue2Json v0.2a";
             this.ResumeLayout(false);
             this.PerformLayout();
 
