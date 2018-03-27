@@ -87,6 +87,35 @@ namespace Rca.Hue2Json
         }
 
         /// <summary>
+        /// Anonymisieren der in den Parametern enthaltenen Serien-Nummern
+        /// </summary>
+        public void AnonymizeSerials()
+        {
+            if (Lights?.Count > 0)
+                foreach (var light in Lights)
+                {
+                    light.UniqueId = null;
+                    light.LuminaireUniqueId = null;
+                }
+
+            if (Sensors?.Count > 0)
+                foreach (var sensor in Sensors)
+                    sensor.UniqueId = null;
+
+            if (Configuration != null)
+            {
+                Configuration.BridgeId = null;
+                Configuration.Gateway = null;
+                Configuration.IpAddress = null;
+                Configuration.MacAddress = null;
+                Configuration.NetMask = null;
+                Configuration.ReplacesBridgeId = null;
+                Configuration.StarterKitId = null;
+                Configuration.ZigbeeChannel = 0;
+            }
+        }
+
+        /// <summary>
         /// Parameter für Leuchtmittel nur Serialisieren wenn vorhanden
         /// </summary>
         /// <returns>true: Parameter vorhanden; false: keine Parameter vorhanden</returns>
