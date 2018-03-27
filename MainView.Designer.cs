@@ -106,7 +106,7 @@
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "XML Datei|*.xml";
+            this.saveFileDialog.Filter = "JSON Datei|*.json";
             // 
             // MainView
             // 
