@@ -130,7 +130,15 @@ namespace Rca.Hue2Json
                 Parameters.Rules = (await m_HueClient.GetRulesAsync()).ToList();
 
             if (paras.HasFlag(HueParameterGroupEnum.Configuration))
-                Parameters.Configuration = (await m_HueClient.GetBridgeAsync()).Config;
+            {
+                var conf = (await m_HueClient.GetBridgeAsync()).Config;
+                if (conf.WhiteList?.Count > 0)
+                {
+                    conf.WhiteList.Clear();
+                    conf.WhiteList = null;
+                }
+                Parameters.Configuration = conf;
+            }
 
             if (paras.HasFlag(HueParameterGroupEnum.Capability))
                 Parameters.Capability = await m_HueClient.GetCapabilitiesAsync();
