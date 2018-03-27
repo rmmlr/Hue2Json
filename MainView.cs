@@ -125,22 +125,22 @@ namespace Rca.Hue2Json
             }
         }
 
-        private async void btn_ReadParameters_Click(object sender, EventArgs e)
+        private void btn_ReadParameters_Click(object sender, EventArgs e)
         {
-            if (await m_Controller.ReadParameters(getSelectedParams()))
+            m_Controller.ReadParameters(getSelectedParams());
+            
+            if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
+                "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
-                    "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    saveFileDialog.Title = "Parameter-Datei speichern";
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                        m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
-                }
-                else
-                {
-                    m_Controller.Parameters = null;
-                }
+                saveFileDialog.Title = "Parameter-Datei speichern";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
             }
+            else
+            {
+                m_Controller.Parameters = null;
+            }
+            
 
         }
     }
