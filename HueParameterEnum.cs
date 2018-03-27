@@ -30,7 +30,9 @@ namespace Rca.Hue2Json
         [Display(Name = "Links")]
         ResourceLinks = 256,
         [Display(Name = "Speicher-Belegung")]
-        Capability = 512
+        Capability = 512,
+        [Display(Name = "Benutzerliste")]
+        WhiteList = 1024
     }
 
     public class HueParameterGroup

@@ -44,7 +44,7 @@
             this.clb_Parameter.FormattingEnabled = true;
             this.clb_Parameter.Location = new System.Drawing.Point(21, 137);
             this.clb_Parameter.Name = "clb_Parameter";
-            this.clb_Parameter.Size = new System.Drawing.Size(167, 139);
+            this.clb_Parameter.Size = new System.Drawing.Size(167, 154);
             this.clb_Parameter.TabIndex = 0;
             // 
             // label1
@@ -96,7 +96,7 @@
             // btn_ReadParameters
             // 
             this.btn_ReadParameters.Enabled = false;
-            this.btn_ReadParameters.Location = new System.Drawing.Point(21, 294);
+            this.btn_ReadParameters.Location = new System.Drawing.Point(21, 307);
             this.btn_ReadParameters.Name = "btn_ReadParameters";
             this.btn_ReadParameters.Size = new System.Drawing.Size(167, 23);
             this.btn_ReadParameters.TabIndex = 6;
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 330);
+            this.ClientSize = new System.Drawing.Size(214, 344);
             this.Controls.Add(this.btn_ReadParameters);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_BridgeIp);

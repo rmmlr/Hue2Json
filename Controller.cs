@@ -138,6 +138,20 @@ namespace Rca.Hue2Json
             if (paras.HasFlag(HueParameterGroupEnum.ResourceLinks))
                 Parameters.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
 
+            if (paras.HasFlag(HueParameterGroupEnum.WhiteList))
+            {
+                var whiteList = (await m_HueClient.GetBridgeAsync()).WhiteList.ToList();
+
+                if (whiteList?.Count > 0)
+                {
+                    int i = 1;
+                    foreach (var user in whiteList)
+                        user.Id = "user" + i++; //usernames IMMER anonymisieren!
+                }
+
+                Parameters.WhiteList = whiteList;
+            }
+
         }
 
         /// <summary>

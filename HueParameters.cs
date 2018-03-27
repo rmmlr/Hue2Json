@@ -47,6 +47,8 @@ namespace Rca.Hue2Json
 
         public List<ResourceLink> ResourceLinks { get; set; }
 
+        public List<WhiteList> WhiteList { get; set; }
+
 
         #endregion Properties
 
@@ -64,6 +66,7 @@ namespace Rca.Hue2Json
             Sensors = new List<Sensor>();
             Rules = new List<Rule>();
             ResourceLinks = new List<ResourceLink>();
+            WhiteList = new List< WhiteList>();
         }
 
         #endregion Constructor
