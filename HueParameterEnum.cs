@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rca.Hue2Xml
+namespace Rca.Hue2Json
 {
     /// <summary>
     /// Enum mit den verfügbaren Parametern

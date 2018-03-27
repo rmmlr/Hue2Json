@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rca.Hue2Xml.Properties {
+namespace Rca.Hue2Json.Properties {
     using System;
     
     

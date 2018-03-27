@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rca.Hue2Xml.Models
+namespace Rca.Hue2Json.Models
 {
     public class SerializableGroup : Group
     {

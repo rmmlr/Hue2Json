@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rca.Hue2Xml
+namespace Rca.Hue2Json
 {
     static class Program
     {

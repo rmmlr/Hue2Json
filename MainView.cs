@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rca.Hue2Xml
+namespace Rca.Hue2Json
 {
     public partial class MainView : Form
     {
