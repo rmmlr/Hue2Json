@@ -18,8 +18,13 @@ Folgende Parameter können angewählt werden:
 ## Anonymisierung
 Standardgemäß werden alle ausgelesenen __Usernames__ anonymisiert und durch generische Namen (User 1, User 2 ...) ersetzt. Eine Zuordnung der einzelnen User zu den angelegten Szenen, Regeln und Links bleibt dabei erhalten.
 
+Optional können folgende Daten anonymisiert werden:
+
 ### Seriennummern
-Optional können alle ausgelesenen IDs, Seriennummern sowie die Ethernet-Konfiguration anonymisiert werden.
+Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration anonymisiert werden.
+
+### Namen
+Alle ausgelesenen Namen und Beschreibungnen.
 
 ## Programm
 Hauptfenster:
