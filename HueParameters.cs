@@ -29,24 +29,54 @@ namespace Rca.Hue2Json
         /// </summary>
         public DateTime CreationDate { get; set; }
 
+        /// <summary>
+        /// Sammler für Leuchtmittel
+        /// </summary>
         public List<Light> Lights { get; set; }
 
+        /// <summary>
+        /// Sammler für Gruppen
+        /// </summary>
         public List<Group> Groups { get; set; }
 
+        /// <summary>
+        /// Sammler für Timer
+        /// </summary>
         public List<Schedule> Schedules { get; set; }
 
+        /// <summary>
+        /// Sammler für Szenen
+        /// </summary>
         public List<Scene> Scenes { get; set; }
 
+        /// <summary>
+        /// Sammler für Senosren
+        /// </summary>
         public List<Sensor> Sensors { get; set; }
 
+        /// <summary>
+        /// Sammler für Regeln
+        /// </summary>
         public List<Rule> Rules { get; set; }
 
+        /// <summary>
+        /// Konfigurations-Parameter
+        /// </summary>
         public BridgeConfig Configuration { get; set; }
 
+        /// <summary>
+        /// Speicherplatzverfügbarkeit
+        /// </summary>
         public BridgeCapabilities Capability { get; set; }
 
+        /// <summary>
+        /// Sammler für Resource Links
+        /// </summary>
         public List<ResourceLink> ResourceLinks { get; set; }
 
+        /// <summary>
+        /// Userliste
+        /// </summary>
         public List<WhiteList> WhiteList { get; set; }
 
 
