@@ -106,30 +106,30 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Parameter auslesen
         /// </summary>
-        /// <param name="paras">Auswahl der zu lesenden Parameter</param>
-        public async void ReadParameters(HueParameterGroupEnum paras)
+        /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
+        public async void ReadParameters(HueParameterGroupEnum selGroups, AnonymizeOptions[] options = null)
         {
-            Parameters = new HueParameters();
+            var paras = new HueParameters();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Lights))
-                Parameters.Lights = (await m_HueClient.GetLightsAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Lights))
+                paras.Lights = (await m_HueClient.GetLightsAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Groups))
-                Parameters.Groups = (await m_HueClient.GetGroupsAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Groups))
+                paras.Groups = (await m_HueClient.GetGroupsAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Schedules))
-                Parameters.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Schedules))
+                paras.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Scenes))
-                Parameters.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Scenes))
+                paras.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Sensors))
-                Parameters.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Sensors))
+                paras.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Rules))
-                Parameters.Rules = (await m_HueClient.GetRulesAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Rules))
+                paras.Rules = (await m_HueClient.GetRulesAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.Configuration))
+            if (selGroups.HasFlag(HueParameterGroupEnum.Configuration))
             {
                 var conf = (await m_HueClient.GetBridgeAsync()).Config;
                 if (conf.WhiteList?.Count > 0)
@@ -137,16 +137,16 @@ namespace Rca.Hue2Json
                     conf.WhiteList.Clear();
                     conf.WhiteList = null;
                 }
-                Parameters.Configuration = conf;
+                paras.Configuration = conf;
             }
 
-            if (paras.HasFlag(HueParameterGroupEnum.Capability))
-                Parameters.Capability = await m_HueClient.GetCapabilitiesAsync();
+            if (selGroups.HasFlag(HueParameterGroupEnum.Capability))
+                paras.Capability = await m_HueClient.GetCapabilitiesAsync();
 
-            if (paras.HasFlag(HueParameterGroupEnum.ResourceLinks))
-                Parameters.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
+            if (selGroups.HasFlag(HueParameterGroupEnum.ResourceLinks))
+                paras.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
 
-            if (paras.HasFlag(HueParameterGroupEnum.WhiteList))
+            if (selGroups.HasFlag(HueParameterGroupEnum.WhiteList))
             {
                 var whiteList = (await m_HueClient.GetBridgeAsync()).WhiteList.ToList();
 
@@ -157,9 +157,11 @@ namespace Rca.Hue2Json
                         user.Id = "user" + i++; //usernames IMMER anonymisieren!
                 }
 
-                Parameters.WhiteList = whiteList;
+                paras.WhiteList = whiteList;
             }
 
+
+            Parameters = paras;
         }
 
         /// <summary>
