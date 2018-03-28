@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymizeOptions.cs" />
     <Compile Include="AppKeyManager.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="HueParameterEnum.cs" />
