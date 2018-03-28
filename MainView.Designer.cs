@@ -37,8 +37,8 @@
             this.btn_ReadParameters = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbx_AnonSerials = new System.Windows.Forms.CheckBox();
             this.cbx_AnonNames = new System.Windows.Forms.CheckBox();
+            this.cbx_AnonSerials = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             this.clb_Parameter.FormattingEnabled = true;
             this.clb_Parameter.Location = new System.Drawing.Point(21, 137);
             this.clb_Parameter.Name = "clb_Parameter";
-            this.clb_Parameter.Size = new System.Drawing.Size(167, 154);
+            this.clb_Parameter.Size = new System.Drawing.Size(195, 154);
             this.clb_Parameter.TabIndex = 0;
             // 
             // label1
@@ -64,7 +64,7 @@
             // 
             this.btn_SearchBridge.Location = new System.Drawing.Point(21, 16);
             this.btn_SearchBridge.Name = "btn_SearchBridge";
-            this.btn_SearchBridge.Size = new System.Drawing.Size(167, 23);
+            this.btn_SearchBridge.Size = new System.Drawing.Size(195, 23);
             this.btn_SearchBridge.TabIndex = 2;
             this.btn_SearchBridge.Text = "Suche Bridge";
             this.btn_SearchBridge.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             this.btn_ConnectBridge.Enabled = false;
             this.btn_ConnectBridge.Location = new System.Drawing.Point(21, 78);
             this.btn_ConnectBridge.Name = "btn_ConnectBridge";
-            this.btn_ConnectBridge.Size = new System.Drawing.Size(167, 23);
+            this.btn_ConnectBridge.Size = new System.Drawing.Size(195, 23);
             this.btn_ConnectBridge.TabIndex = 3;
             this.btn_ConnectBridge.Text = "Verbinde Bridge";
             this.btn_ConnectBridge.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             // 
             this.txt_BridgeIp.Location = new System.Drawing.Point(74, 45);
             this.txt_BridgeIp.Name = "txt_BridgeIp";
-            this.txt_BridgeIp.Size = new System.Drawing.Size(114, 20);
+            this.txt_BridgeIp.Size = new System.Drawing.Size(142, 20);
             this.txt_BridgeIp.TabIndex = 4;
             // 
             // label2
@@ -102,7 +102,7 @@
             this.btn_ReadParameters.Enabled = false;
             this.btn_ReadParameters.Location = new System.Drawing.Point(21, 395);
             this.btn_ReadParameters.Name = "btn_ReadParameters";
-            this.btn_ReadParameters.Size = new System.Drawing.Size(167, 23);
+            this.btn_ReadParameters.Size = new System.Drawing.Size(195, 23);
             this.btn_ReadParameters.TabIndex = 6;
             this.btn_ReadParameters.Text = "Parameter auslesen...";
             this.btn_ReadParameters.UseVisualStyleBackColor = true;
@@ -118,10 +118,20 @@
             this.groupBox1.Controls.Add(this.cbx_AnonSerials);
             this.groupBox1.Location = new System.Drawing.Point(21, 307);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(167, 68);
+            this.groupBox1.Size = new System.Drawing.Size(195, 68);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Anonymisierung";
+            // 
+            // cbx_AnonNames
+            // 
+            this.cbx_AnonNames.AutoSize = true;
+            this.cbx_AnonNames.Location = new System.Drawing.Point(13, 42);
+            this.cbx_AnonNames.Name = "cbx_AnonNames";
+            this.cbx_AnonNames.Size = new System.Drawing.Size(60, 17);
+            this.cbx_AnonNames.TabIndex = 1;
+            this.cbx_AnonNames.Text = "Namen";
+            this.cbx_AnonNames.UseVisualStyleBackColor = true;
             // 
             // cbx_AnonSerials
             // 
@@ -135,21 +145,11 @@
             this.cbx_AnonSerials.Text = "Seriennummern";
             this.cbx_AnonSerials.UseVisualStyleBackColor = true;
             // 
-            // cbx_AnonNames
-            // 
-            this.cbx_AnonNames.AutoSize = true;
-            this.cbx_AnonNames.Location = new System.Drawing.Point(13, 42);
-            this.cbx_AnonNames.Name = "cbx_AnonNames";
-            this.cbx_AnonNames.Size = new System.Drawing.Size(60, 17);
-            this.cbx_AnonNames.TabIndex = 1;
-            this.cbx_AnonNames.Text = "Namen";
-            this.cbx_AnonNames.UseVisualStyleBackColor = true;
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 430);
+            this.ClientSize = new System.Drawing.Size(243, 430);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_ReadParameters);
             this.Controls.Add(this.label2);
@@ -158,8 +158,9 @@
             this.Controls.Add(this.btn_SearchBridge);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clb_Parameter);
+            this.MaximizeBox = false;
             this.Name = "MainView";
-            this.Text = "Hue2Json v0.2a";
+            this.Text = "Hue2Json";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

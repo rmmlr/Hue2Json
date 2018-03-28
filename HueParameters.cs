@@ -132,8 +132,6 @@ namespace Rca.Hue2Json
 
             sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter()));
             sw.Flush();
-            sw.Close();
-            stream.Close();
 
             return stream;
         }
@@ -179,7 +177,10 @@ namespace Rca.Hue2Json
 
             if (Schedules?.Count > 0)
                 foreach (var schedule in Schedules)
+                {
                     schedule.Name = "Schedule " + schedule.Id;
+                    schedule.Description = null;
+                }
 
             if (Scenes?.Count > 0)
                 foreach (var scene in Scenes)
@@ -197,7 +198,7 @@ namespace Rca.Hue2Json
                 foreach (var link in ResourceLinks)
                 {
                     link.Name = "Link " + link.Id;
-                    link.Description = "";
+                    link.Description = null;
                 }
 
             if (Configuration != null)
@@ -207,7 +208,7 @@ namespace Rca.Hue2Json
                 for (int i = 0; i < WhiteList.Count; i++)
                 {
                     if (WhiteList[i].Name.Contains('#'))
-                        WhiteList[i].Name = WhiteList[i].Name.Split('#')[0] + "#User" + i;
+                        WhiteList[i].Name = WhiteList[i].Name.Split('#')[0] + "#User" + (i + 1);
                 }
         }
 

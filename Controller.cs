@@ -180,7 +180,12 @@ namespace Rca.Hue2Json
             }
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Capability))
-                paras.Capability = await m_HueClient.GetCapabilitiesAsync();
+            {
+                var conf = await m_HueClient.GetCapabilitiesAsync();
+                conf.Timezones = null; //Muss nicht serialisiert werden
+
+                paras.Capability = conf;
+            }
 
             if (selGroups.HasFlag(HueParameterGroupEnum.ResourceLinks))
             {
