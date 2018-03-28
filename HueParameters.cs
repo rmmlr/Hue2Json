@@ -145,6 +145,57 @@ namespace Rca.Hue2Json
             }
         }
 
+        public void AnonymizeNames()
+        {
+            if (Lights?.Count > 0)
+                foreach (var light in Lights)
+                    light.Name = "Light " + light.Id;
+
+            if (Groups?.Count > 0)
+                foreach (var group in Groups)
+                    group.Name = "Group " + group.Id;
+
+            if (Schedules?.Count > 0)
+                foreach (var schedule in Schedules)
+                    schedule.Name = "Schedule " + schedule.Id;
+
+            if (Scenes?.Count > 0)
+                foreach (var scene in Scenes)
+                {
+                    scene.Name = "Scene " + scene.Id;
+                    //TODO: Owner?
+                }
+
+            if (Sensors?.Count > 0)
+                foreach (var sensor in Sensors)
+                    sensor.Name = "Sensor " + sensor.Id;
+
+            if (Rules?.Count > 0)
+                foreach (var rule in Rules)
+                {
+                    rule.Name = "Rule " + rule.Id;
+                    //TODO: Owner?
+                }
+
+            if (ResourceLinks?.Count > 0)
+                foreach (var link in ResourceLinks)
+                {
+                    link.Name = "Link " + link.Id;
+                    link.Description = "";
+                    //TODO: Owner?
+                }
+
+            if (Configuration != null)
+                Configuration.Name = "Hue-Bridge 1";
+
+            if (WhiteList?.Count > 0)
+                for (int i = 0; i < WhiteList.Count; i++)
+                {
+                    if (WhiteList[i].Name.Contains('#'))
+                        WhiteList[i].Name = WhiteList[i].Name.Split('#')[0] + "#User" + i;
+                }
+        }
+
         /// <summary>
         /// Parameter für Leuchtmittel nur Serialisieren wenn vorhanden
         /// </summary>
