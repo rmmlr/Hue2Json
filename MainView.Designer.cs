@@ -39,6 +39,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbx_AnonNames = new System.Windows.Forms.CheckBox();
             this.cbx_AnonSerials = new System.Windows.Forms.CheckBox();
+            this.btn_ShowParameters = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +105,7 @@
             this.btn_ReadParameters.Name = "btn_ReadParameters";
             this.btn_ReadParameters.Size = new System.Drawing.Size(195, 23);
             this.btn_ReadParameters.TabIndex = 6;
-            this.btn_ReadParameters.Text = "Parameter auslesen...";
+            this.btn_ReadParameters.Text = "Parameter auslesen";
             this.btn_ReadParameters.UseVisualStyleBackColor = true;
             this.btn_ReadParameters.Click += new System.EventHandler(this.btn_ReadParameters_Click);
             // 
@@ -145,11 +146,23 @@
             this.cbx_AnonSerials.Text = "Seriennummern";
             this.cbx_AnonSerials.UseVisualStyleBackColor = true;
             // 
+            // btn_ShowParameters
+            // 
+            this.btn_ShowParameters.Enabled = false;
+            this.btn_ShowParameters.Location = new System.Drawing.Point(22, 430);
+            this.btn_ShowParameters.Name = "btn_ShowParameters";
+            this.btn_ShowParameters.Size = new System.Drawing.Size(195, 23);
+            this.btn_ShowParameters.TabIndex = 8;
+            this.btn_ShowParameters.Text = "Parameter anzeigen";
+            this.btn_ShowParameters.UseVisualStyleBackColor = true;
+            this.btn_ShowParameters.Click += new System.EventHandler(this.btn_ShowParameters_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 430);
+            this.ClientSize = new System.Drawing.Size(243, 465);
+            this.Controls.Add(this.btn_ShowParameters);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_ReadParameters);
             this.Controls.Add(this.label2);
@@ -181,6 +194,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cbx_AnonNames;
         private System.Windows.Forms.CheckBox cbx_AnonSerials;
+        private System.Windows.Forms.Button btn_ShowParameters;
     }
 }
 

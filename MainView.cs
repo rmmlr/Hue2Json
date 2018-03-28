@@ -147,18 +147,26 @@ namespace Rca.Hue2Json
             m_Controller.ReadParameters(getSelectedParams(), getAnonymizeOptions());
             
             if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
-                "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 saveFileDialog.Title = "Parameter-Datei speichern";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
             }
-            else
+            else //UNDONE: "Cancel" and "No" Handling!
             {
-                m_Controller.Parameters = null;
+                //m_Controller.Parameters = null;
             }
-            
 
+            btn_ShowParameters.Enabled = true;
+        }
+
+        private void btn_ShowParameters_Click(object sender, EventArgs e)
+        {
+            var paramView = new ParameterView();
+            paramView.ApplyParameters(m_Controller.Parameters);
+
+            paramView.ShowDialog();
         }
     }
 }
