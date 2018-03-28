@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Rca.Hue2Json
 {
-    class AnonymizeOptions
+    /// <summary>
+    /// Option zur Auswahl der zu anonymisierenden Daten
+    /// </summary>
+    public enum AnonymizeOptions
     {
+        /// <summary>
+        /// IDs und Sereinnummern
+        /// </summary>
+        Serials = 2,
+        /// <summary>
+        /// Namen und Beschreibungen
+        /// </summary>
+        Names = 4
     }
 }
