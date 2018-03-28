@@ -4,6 +4,7 @@ using Q42.HueApi;
 using Q42.HueApi.Models;
 using Q42.HueApi.Models.Groups;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -79,6 +80,12 @@ namespace Rca.Hue2Json
         /// </summary>
         public List<WhiteList> WhiteList { get; set; }
 
+        /// <summary>
+        /// Tabelle mit Hashs der Usernames
+        /// key: Hash; value: anonymer Name
+        /// </summary>
+        [JsonIgnore]
+        public Hashtable Users { get; set; }
 
         #endregion Properties
 
@@ -97,6 +104,8 @@ namespace Rca.Hue2Json
             Rules = new List<Rule>();
             ResourceLinks = new List<ResourceLink>();
             WhiteList = new List< WhiteList>();
+            Users = new Hashtable();
+        }
         }
 
         #endregion Constructor
@@ -161,10 +170,7 @@ namespace Rca.Hue2Json
 
             if (Scenes?.Count > 0)
                 foreach (var scene in Scenes)
-                {
                     scene.Name = "Scene " + scene.Id;
-                    //TODO: Owner?
-                }
 
             if (Sensors?.Count > 0)
                 foreach (var sensor in Sensors)
@@ -172,17 +178,13 @@ namespace Rca.Hue2Json
 
             if (Rules?.Count > 0)
                 foreach (var rule in Rules)
-                {
                     rule.Name = "Rule " + rule.Id;
-                    //TODO: Owner?
-                }
 
             if (ResourceLinks?.Count > 0)
                 foreach (var link in ResourceLinks)
                 {
                     link.Name = "Link " + link.Id;
                     link.Description = "";
-                    //TODO: Owner?
                 }
 
             if (Configuration != null)

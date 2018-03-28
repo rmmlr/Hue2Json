@@ -110,6 +110,11 @@ namespace Rca.Hue2Json
         public async void ReadParameters(HueParameterGroupEnum selGroups, AnonymizeOptions[] options = null)
         {
             var paras = new HueParameters();
+            int? bridgesCount = null;
+            if (LocatedBridges?.Count > 0)
+                bridgesCount = LocatedBridges.Count;
+
+            var paras = new HueParameters(bridgesCount);
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Lights))
                 paras.Lights = (await m_HueClient.GetLightsAsync()).ToList();
