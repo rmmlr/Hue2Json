@@ -31,6 +31,11 @@ namespace Rca.Hue2Json
         public DateTime CreationDate { get; set; }
 
         /// <summary>
+        /// Anzahl der im Netzwerk gefundenen Hue Bridges
+        /// </summary>
+        public int? BridgesCount { get; set; }
+
+        /// <summary>
         /// Sammler für Leuchtmittel
         /// </summary>
         public List<Light> Lights { get; set; }
@@ -91,7 +96,7 @@ namespace Rca.Hue2Json
 
         #region Constructor
         /// <summary>
-        /// Empty constructor for HueParameters
+        /// Initialisierung aller Properties
         /// </summary>
         public HueParameters()
         {
@@ -106,6 +111,14 @@ namespace Rca.Hue2Json
             WhiteList = new List< WhiteList>();
             Users = new Hashtable();
         }
+
+        /// <summary>
+        /// Initialisierung aller Properties
+        /// </summary>
+        /// <param name="bridgesCount">Anzahl der im Netzwerk gefundenen Hue Bridges</param>
+        public HueParameters(int? bridgesCount) : this()
+        {
+            BridgesCount = bridgesCount;
         }
 
         #endregion Constructor
