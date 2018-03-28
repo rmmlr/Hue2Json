@@ -1,5 +1,8 @@
 # Hue to Json
-Speichert alle Parameter eines Hue-Systems in einer JSON-Datei. Die zu speichernden Parameter können dabei entsprechend angewählt werden, zur Verfügung stehen:
+Speichert alle Parameter eines Hue-Systems in einer JSON-Datei.
+
+## Parameter
+Folgende Parameter können angewählt werden:
 
 * Lights
 * Groups
@@ -10,7 +13,13 @@ Speichert alle Parameter eines Hue-Systems in einer JSON-Datei. Die zu speichern
 * Configuration
 * Capability
 * ResourceLinks
+* WhiteList
 
+## Anonymisierung
+Standardgemäß werden alle ausgelesenen __Usernames__ anonymisiert und durch generische Namen (User 1, User 2 ...) ersetzt. Eine Zuordnung der einzelnen User zu den angelegten Szenen, Regeln und Links bleibt dabei erhalten.
+
+### Seriennummern
+Optional können alle ausgelesenen IDs, Seriennummern sowie die Ethernet-Konfiguration anonymisiert werden.
 
 ## Programm
 Hauptfenster:
