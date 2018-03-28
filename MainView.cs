@@ -69,7 +69,7 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Abfrage der ausgewählten Parameter
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Parameter-Gruppen (flagged enum)</returns>
         HueParameterGroupEnum getSelectedParams()
         {
             HueParameterGroupEnum paras = 0;
@@ -78,6 +78,23 @@ namespace Rca.Hue2Json
                 paras |= item.Value;
 
             return paras;
+        }
+
+        /// <summary>
+        /// Abfrage ausgewählter Anonymisierungs-Optionen
+        /// </summary>
+        /// <returns>Anonymisierungs-Optionen, als Array</returns>
+        AnonymizeOptions[] getAnonymizeOptions()
+        {
+            var opts = new List<AnonymizeOptions>();
+
+            if (cbx_AnonSerials.Checked)
+                opts.Add(AnonymizeOptions.Serials);
+
+            if (cbx_AnonNames.Checked)
+                opts.Add(AnonymizeOptions.Names);
+
+            return opts.ToArray();
         }
 
         private async void btn_SearchBridge_Click(object sender, EventArgs e)
@@ -127,7 +144,7 @@ namespace Rca.Hue2Json
 
         private void btn_ReadParameters_Click(object sender, EventArgs e)
         {
-            m_Controller.ReadParameters(getSelectedParams());
+            m_Controller.ReadParameters(getSelectedParams(), getAnonymizeOptions());
             
             if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
                 "Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
