@@ -109,12 +109,26 @@ namespace Rca.Hue2Json
         /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
         public async void ReadParameters(HueParameterGroupEnum selGroups, AnonymizeOptions[] options = null)
         {
-            var paras = new HueParameters();
             int? bridgesCount = null;
             if (LocatedBridges?.Count > 0)
                 bridgesCount = LocatedBridges.Count;
 
             var paras = new HueParameters(bridgesCount);
+
+            if (selGroups.HasFlag(HueParameterGroupEnum.Scenes | HueParameterGroupEnum.Rules | HueParameterGroupEnum.ResourceLinks | HueParameterGroupEnum.WhiteList))
+            {
+                var whiteList = (await m_HueClient.GetBridgeAsync()).WhiteList.ToList();
+
+                for (int i = 0; i < whiteList.Count; i++)
+                {
+                    string name = "User " + (i + 1);
+                    paras.Users.Add(whiteList[i].Id.GetHashCode(), name);
+                    whiteList[i].Id = name;
+                }
+                
+                if (selGroups.HasFlag(HueParameterGroupEnum.WhiteList))
+                    paras.WhiteList = whiteList;
+            }
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Lights))
                 paras.Lights = (await m_HueClient.GetLightsAsync()).ToList();
@@ -126,13 +140,33 @@ namespace Rca.Hue2Json
                 paras.Schedules = (await m_HueClient.GetSchedulesAsync()).ToList();
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Scenes))
+            {
                 paras.Scenes = (await m_HueClient.GetScenesAsync()).ToList();
+
+                foreach (var scene in paras.Scenes)
+                {
+                    if (paras.Users.ContainsKey(scene.Owner.GetHashCode()))
+                        scene.Owner = paras.Users[scene.Owner.GetHashCode()].ToString();
+                    else
+                        scene.Owner = "Deleted user!";
+                }
+            }
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Sensors))
                 paras.Sensors = (await m_HueClient.GetSensorsAsync()).ToList();
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Rules))
+            {
                 paras.Rules = (await m_HueClient.GetRulesAsync()).ToList();
+
+                foreach (var rule in paras.Rules)
+                {
+                    if (paras.Users.ContainsKey(rule.Owner.GetHashCode()))
+                        rule.Owner = paras.Users[rule.Owner.GetHashCode()].ToString();
+                    else
+                        rule.Owner = "Deleted user!";
+                }
+            }
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Configuration))
             {
@@ -149,21 +183,18 @@ namespace Rca.Hue2Json
                 paras.Capability = await m_HueClient.GetCapabilitiesAsync();
 
             if (selGroups.HasFlag(HueParameterGroupEnum.ResourceLinks))
+            {
                 paras.ResourceLinks = (await m_HueClient.GetResourceLinksAsync()).ToList();
 
-            if (selGroups.HasFlag(HueParameterGroupEnum.WhiteList))
-            {
-                var whiteList = (await m_HueClient.GetBridgeAsync()).WhiteList.ToList();
-
-                if (whiteList?.Count > 0)
+                foreach (var link in paras.ResourceLinks)
                 {
-                    int i = 1;
-                    foreach (var user in whiteList)
-                        user.Id = "user" + i++; //usernames IMMER anonymisieren!
+                    if (paras.Users.ContainsKey(link.Owner.GetHashCode()))
+                        link.Owner = paras.Users[link.Owner.GetHashCode()].ToString();
+                    else
+                        link.Owner = "Deleted user!";
                 }
-
-                paras.WhiteList = whiteList;
             }
+            
 
             if (options?.Length > 0)
             {
