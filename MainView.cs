@@ -138,7 +138,7 @@ namespace Rca.Hue2Json
             }
             else
             {
-                m_Controller.Parameters = null;
+                m_Controller.para = null;
             }
             
 

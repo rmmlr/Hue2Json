@@ -160,6 +160,13 @@ namespace Rca.Hue2Json
                 paras.WhiteList = whiteList;
             }
 
+            if (options?.Length > 0)
+            {
+                if (options.Any(x => x == AnonymizeOptions.Serials))
+                    paras.AnonymizeSerials();
+                if (options.Any(x => x == AnonymizeOptions.Names))
+                    paras.AnonymizeNames();
+            }
 
             Parameters = paras;
         }

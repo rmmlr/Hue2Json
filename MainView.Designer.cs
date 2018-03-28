@@ -36,6 +36,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_ReadParameters = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbx_AnonSerials = new System.Windows.Forms.CheckBox();
+            this.cbx_AnonNames = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clb_Parameter
@@ -96,7 +100,7 @@
             // btn_ReadParameters
             // 
             this.btn_ReadParameters.Enabled = false;
-            this.btn_ReadParameters.Location = new System.Drawing.Point(21, 307);
+            this.btn_ReadParameters.Location = new System.Drawing.Point(21, 395);
             this.btn_ReadParameters.Name = "btn_ReadParameters";
             this.btn_ReadParameters.Size = new System.Drawing.Size(167, 23);
             this.btn_ReadParameters.TabIndex = 6;
@@ -108,11 +112,45 @@
             // 
             this.saveFileDialog.Filter = "JSON Datei|*.json";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbx_AnonNames);
+            this.groupBox1.Controls.Add(this.cbx_AnonSerials);
+            this.groupBox1.Location = new System.Drawing.Point(21, 307);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(167, 68);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Anonymisierung";
+            // 
+            // cbx_AnonSerials
+            // 
+            this.cbx_AnonSerials.AutoSize = true;
+            this.cbx_AnonSerials.Checked = true;
+            this.cbx_AnonSerials.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbx_AnonSerials.Location = new System.Drawing.Point(13, 19);
+            this.cbx_AnonSerials.Name = "cbx_AnonSerials";
+            this.cbx_AnonSerials.Size = new System.Drawing.Size(99, 17);
+            this.cbx_AnonSerials.TabIndex = 0;
+            this.cbx_AnonSerials.Text = "Seriennummern";
+            this.cbx_AnonSerials.UseVisualStyleBackColor = true;
+            // 
+            // cbx_AnonNames
+            // 
+            this.cbx_AnonNames.AutoSize = true;
+            this.cbx_AnonNames.Location = new System.Drawing.Point(13, 42);
+            this.cbx_AnonNames.Name = "cbx_AnonNames";
+            this.cbx_AnonNames.Size = new System.Drawing.Size(60, 17);
+            this.cbx_AnonNames.TabIndex = 1;
+            this.cbx_AnonNames.Text = "Namen";
+            this.cbx_AnonNames.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 344);
+            this.ClientSize = new System.Drawing.Size(214, 430);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_ReadParameters);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_BridgeIp);
@@ -122,6 +160,8 @@
             this.Controls.Add(this.clb_Parameter);
             this.Name = "MainView";
             this.Text = "Hue2Json v0.2a";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +177,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_ReadParameters;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox cbx_AnonNames;
+        private System.Windows.Forms.CheckBox cbx_AnonSerials;
     }
 }
 
