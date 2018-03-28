@@ -21,10 +21,10 @@ Standardgemäß werden alle ausgelesenen __Usernames__ anonymisiert und durch ge
 Optional können folgende Daten anonymisiert werden:
 
 ### Seriennummern
-Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration anonymisiert werden.
+Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration werden anonymisiert.
 
 ### Namen
-Alle ausgelesenen Namen und Beschreibungnen.
+Alle ausgelesenen Beschreibungnen und Namen einschließlich Gerätenamen werden anonymisiert.
 
 ## Programm
 Hauptfenster:
