@@ -6,6 +6,7 @@ using Q42.HueApi.Models.Groups;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Rca.Hue2Json
     /// Klasse zur Aufnahme aller Hue-Parameter
     /// </summary>
     [Serializable]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class HueParameters
     {
         #region Member
