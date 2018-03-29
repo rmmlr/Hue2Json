@@ -1,3 +1,11 @@
+## Projekt in Entstehung
+### Milestones
+1. Auslesen und Serialisieren der Parameter (erl.)
+2. Visualisieren der Parameter (offen)
+3. Bearbeiten und Rückspielen von Parametern (offen)
+
+---------------------------------------------------------------------
+
 # Hue to Json
 Speichert alle Parameter eines Hue-Systems in einer JSON-Datei.
 
