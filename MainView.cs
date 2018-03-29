@@ -31,6 +31,15 @@ namespace Rca.Hue2Json
             m_Controller = new Controller();
         }
 
+        public MainView(string[] args) : this()
+        {
+            if (args.Any(x => x.ToLower().Contains("devmode")))
+            {
+                m_Controller.DevMode = true;
+                m_Controller.LoadParameterFile(@"F:\hue_params_elias.json");
+            }
+        }
+
         /// <summary>
         /// Bridge-IP aus Einstellungen in Textbox übernehmen
         /// </summary>

@@ -43,6 +43,10 @@ namespace Rca.Hue2Json
             set { m_Parameters = value; }
         }
 
+        /// <summary>
+        /// Testmode aktiv
+        /// </summary>
+        public bool DevMode { get; set; }
 
         #endregion Properties
 
@@ -224,6 +228,11 @@ namespace Rca.Hue2Json
 
             fs.Flush();
             fs.Close();
+        }
+
+        public void LoadParameterFile(string path)
+        {
+            Parameters = HueParameters.FromJson(path);
         }
 
         //TODO: Methode zum Anonymisieren individueller Namen von Räumen, Gruppen, Leuchtmitteln, Regeln, etc.

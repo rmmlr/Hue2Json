@@ -136,6 +136,14 @@ namespace Rca.Hue2Json
             return stream;
         }
 
+        public static HueParameters FromJson(string path)
+        {
+            var sr = new StreamReader(path);
+            var paras = JsonConvert.DeserializeObject<HueParameters>(sr.ReadToEnd(), new StringEnumConverter());
+
+            return paras;
+        }
+
         /// <summary>
         /// Anonymisieren der in den Parametern enthaltenen Serien-Nummern
         /// </summary>
