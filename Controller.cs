@@ -16,7 +16,7 @@ namespace Rca.Hue2Json
     public class Controller : INotifyPropertyChanged
     {
         #region Constants
-        const string APP_NAME = "Hue2Xml";
+        const string APP_NAME = "Hue2Json";
 
         #endregion
 
