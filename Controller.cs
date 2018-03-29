@@ -101,6 +101,7 @@ namespace Rca.Hue2Json
             }
             catch (Exception ex)
             {
+                //TODO: MsgBox: LinkButton drücken
                 throw ex;
             }
 
