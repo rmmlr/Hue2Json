@@ -26,7 +26,9 @@ namespace Rca.Hue2Json
 #if DEBUG
             btn_ConnectBridge.Enabled = true;
             btn_ReadParameters.Enabled = true;
+            btn_ShowParameters.Enabled = true;
 #endif
+
 
             m_Controller = new Controller();
         }
@@ -37,6 +39,7 @@ namespace Rca.Hue2Json
             {
                 m_Controller.DevMode = true;
                 m_Controller.LoadParameterFile(@"F:\hue_params_elias.json");
+                btn_ShowParameters.Enabled = true;
             }
         }
 
@@ -172,10 +175,12 @@ namespace Rca.Hue2Json
 
         private void btn_ShowParameters_Click(object sender, EventArgs e)
         {
-            var paramView = new ParameterView();
-            paramView.ApplyParameters(m_Controller.Parameters);
+            m_Controller.VisualizeParameters();
 
-            paramView.ShowDialog();
+            //var paramView = new ParameterView();
+            //paramView.ApplyParameters(m_Controller.Parameters);
+
+            //paramView.ShowDialog();
         }
     }
 }

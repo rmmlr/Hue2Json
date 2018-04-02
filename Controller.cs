@@ -1,6 +1,7 @@
 ﻿using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
+using Rca.Hue2Json.HtmlConverter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,6 +216,11 @@ namespace Rca.Hue2Json
             }
 
             Parameters = paras;
+        }
+
+        public void VisualizeParameters()
+        {
+            var html = Parameters.Lights[0].ToHtml(HtmlOutputFormat.UnsortetList);
         }
 
         /// <summary>

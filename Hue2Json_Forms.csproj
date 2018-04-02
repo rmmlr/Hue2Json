@@ -57,6 +57,7 @@
     <Compile Include="AnonymizeOptions.cs" />
     <Compile Include="AppKeyManager.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="HtmlConverter\HtmlExtensions.cs" />
     <Compile Include="HueParameterEnum.cs" />
     <Compile Include="HueParameters.cs" />
     <Compile Include="MainView.cs">
@@ -105,9 +106,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HtmlConverter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
