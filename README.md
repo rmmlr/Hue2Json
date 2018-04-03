@@ -1,10 +1,10 @@
 ## Projekt in Arbeit
 ### Milestones
-1. Auslesen und Serialisieren der Parameter :heavy_check_mark:
-2. Remapping von IDs zu UniqueIDs
-3. Wiederherstellen der Parameter
+| 1. | Auslesen und Serialisieren der Parameter | :heavy_check_mark: |
+| 2. | Remapping von IDs zu UniqueIDs           |                    |
+| 3. | Wiederherstellen der Parameter           |                    |
 
----------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 # Hue to Json
 Neben den reinen sichern (Backup) der Parameter im JSON-Format, ermöglicht __Hue to JSON__ das Wiederherstellen (Restore) der ausgelesenen Parameter auf die Bridge. Somit wird die Möglichkeit geboten eine *Datensicherung* der Bridge anzulegen.
@@ -14,7 +14,7 @@ Neben den reinen sichern (Backup) der Parameter im JSON-Format, ermöglicht __Hu
 Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter, ein Restore ist hingegen nicht vollumfänglich möglich.
 
 | Parameter     | Beschreibung         | Restore                               |
-| ------------- |----------------------| --------------------------------------|
+| ------------- |----------------------|:-------------------------------------:|
 | Lights        | Leuchtmittel         | nicht möglich, siehe Remapping        |
 | Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
 | Schedules     | Timer                | :heavy_check_mark:                    |
