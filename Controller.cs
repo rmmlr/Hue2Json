@@ -115,6 +115,7 @@ namespace Rca.Hue2Json
         /// </summary>
         /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
         /// <returns>ID-Liste</returns>
+        [Obsolete]
         public async Task<List<IdPair>> ReadIds(HueParameterGroupEnum selGroups)
         {
             var idList = new List<IdPair>();

@@ -20,14 +20,14 @@ namespace Rca.Hue2Json.Remapping
         public DeviceCategory Category { get; set; }
 
         /// <summary>
-        /// Von der Bridge vergebene ID
+        /// Alte von der Bridge vergebene ID
         /// </summary>
-        public string Id { get; set; }
+        public string OldId { get; set; }
 
         /// <summary>
-        /// Hardware-ID
+        /// Neue von der Bridge vergebene ID
         /// </summary>
-        public string UniqueId { get; set; }
+        public string NewId { get; set; }
 
         #endregion Properties
 
@@ -40,10 +40,10 @@ namespace Rca.Hue2Json.Remapping
 
         }
 
-        public IdPair(string id, string uniqueId, DeviceCategory category)
+        public IdPair(string oldId, string newId, DeviceCategory category)
         {
-            Id = id;
-            UniqueId = uniqueId;
+            OldId = oldId;
+            NewId = newId;
             Category = category;
 
         }

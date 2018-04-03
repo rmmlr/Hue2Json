@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Q42.HueApi;
 using Q42.HueApi.Models;
 using Q42.HueApi.Models.Groups;
+using Rca.Hue2Json.Remapping;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -144,6 +145,30 @@ namespace Rca.Hue2Json
             var paras = JsonConvert.DeserializeObject<HueParameters>(sr.ReadToEnd(), new StringEnumConverter());
 
             return paras;
+        }
+
+        /// <summary>
+        /// Remapping der IDs, auf Basis der UniqueIDs
+        /// </summary>
+        /// <param name="newIds">Parameter-Objekt mit den alten IDs</param>
+        public void RemapIds(HueParameters newIds)
+        {
+            #region IDs extrahieren
+            var lightIds = new Dictionary<string, IdPair>();
+            var sensorIds = new Dictionary<string, IdPair>();
+
+            //TODO: Ungetetstet!
+            foreach (var light in newIds.Lights)
+                lightIds.Add(light.UniqueId, new IdPair() { NewId = light.Id, OldId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
+                    Category = DeviceCategory.Light });
+            foreach (var sensor in newIds.Sensors)
+                lightIds.Add(sensor.UniqueId, new IdPair() { NewId = sensor.Id, OldId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
+                    Category = DeviceCategory.Sensor });
+
+            //TODO: Ermitteln von nicht zuordnungsbarer IDs
+
+
+            #endregion
         }
 
         /// <summary>
