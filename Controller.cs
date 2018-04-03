@@ -218,6 +218,14 @@ namespace Rca.Hue2Json
             Parameters = paras;
         }
 
+        /// <summary>
+        /// Übertragen der Parameter auf die Bridge
+        /// </summary>
+        public async void RestoreParameters()
+        {
+
+        }
+
         public void VisualizeParameters()
         {
             var html = Parameters.Lights[0].ToHtml(HtmlOutputFormat.UnsortetList);
