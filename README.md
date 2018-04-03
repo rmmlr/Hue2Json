@@ -16,11 +16,11 @@ Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter,
 
 | Parameter     | Beschreibung         | Restore                               |
 | ------------- |----------------------|:-------------------------------------:|
-| Lights        | Leuchtmittel         | nicht möglich, siehe Remapping        |
+| Lights        | Leuchtmittel         | :x: siehe Remapping                   |
 | Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
 | Schedules     | Timer                | :heavy_check_mark:                    |
 | Scenes        | Szenen               | :heavy_check_mark:                    |
-| Sensors       | Sensoren u. Schalter | nicht möglich, siehe Remapping        |
+| Sensors       | Sensoren u. Schalter | :x: siehe Remapping                   |
 | Rules         | Regeln               | :heavy_check_mark:                    |
 | Configuration | allg. Konfiguration  | bedingt möglich                       |
 | Capability    | Speicherbelegung     | nur lesender Zugriff, rein Informativ |
