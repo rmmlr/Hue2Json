@@ -12,6 +12,9 @@ Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hu
 
 
 
+## Build-Status
+[![Build status](https://ci.appveyor.com/api/projects/status/69khhgbnb8g2k36l?svg=true)](https://ci.appveyor.com/project/rmmlr/hue2json)
+
 ## Parameter
 Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter, ein Restore ist hingegen nicht vollumfänglich möglich.
 
