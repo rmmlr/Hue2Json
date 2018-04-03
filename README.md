@@ -5,7 +5,7 @@
 | 2. | Remapping von IDs zu UniqueIDs           |                     |
 | 3. | Wiederherstellen der Parameter           |                     |
 
------------------------------------------------------------------------------------------------------------------------------
+---
 
 # Hue to Json
 Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen.
@@ -56,10 +56,8 @@ Hauptfenster:
 ## Release
 Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](/releases) veröffentlicht.
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)
-
-[![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/releases/latest)
-
+[![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)  
+[![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/releases/latest)  
 [![GitHub (pre-)release](https://img.shields.io/github/release/rmmlr/Hue2Json/all.svg)](https://github.com/rmmlr/Hue2Json/releases) (Pre-)Release
 
 
@@ -70,6 +68,7 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
 
 * [Q42.HueApi](https://github.com/Q42/Q42.HueApi) Bedienung der Hue-API
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
+* [UIkit](https://github.com/uikit/uikit) Parameter-Visualisierung
 
 ## License
 
