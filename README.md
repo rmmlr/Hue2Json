@@ -11,10 +11,6 @@
 Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen.
 
 
-
-## Build-Status
-[![Build status](https://ci.appveyor.com/api/projects/status/69khhgbnb8g2k36l?svg=true)](https://ci.appveyor.com/project/rmmlr/hue2json)
-
 ## Parameter
 Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter, ein Restore ist hingegen nicht vollumfänglich möglich.
 
@@ -55,6 +51,13 @@ Hauptfenster:
 ![MainView 0.2a - Screenshot][MainView_0_2a]
 
 [MainView_0_2a]: docu/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
+
+
+## Release
+Dieses Projekt wird auf der Continuous Integration Platform [AppVeyor](https://www.appveyor.com/) kompiliert und im Release-Feed veröfentlicht.
+[![Build status](https://ci.appveyor.com/api/projects/status/69khhgbnb8g2k36l?svg=true)](https://ci.appveyor.com/project/rmmlr/hue2json)
+[Aktuelle Stable Version](/releases/latest)
+[Aktuelles Release](/releases/latest)
 
 
 
