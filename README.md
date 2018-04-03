@@ -8,7 +8,8 @@
 -----------------------------------------------------------------------------------------------------------------------------
 
 # Hue to Json
-Neben den reinen sichern (Backup) der Parameter im JSON-Format, ermöglicht __Hue to JSON__ das Wiederherstellen (Restore) der ausgelesenen Parameter auf die Bridge. Somit wird die Möglichkeit geboten eine *Datensicherung* der Bridge anzulegen.
+Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen.
+
 
 
 ## Parameter
@@ -28,6 +29,7 @@ Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter,
 | WhiteList     | Benutzerliste        | :x:                                   |
 
 
+
 ## Remapping
 Soll ein Backup auf einen neuen, respektive zurückgesetzten System wiederhergestellt werden, so ist es erforderlich alle Teilnehmer/Geräte (Leuchtmittel, Sensoren, Schalter, ...) manuell an die Bridge anzulernen. Hierbei vergibt die Bridge den Geräten neue IDs. Diese IDs werden intern für die Steuerung und Verknüpfung verwendet und sind somit essentiell. __Hue to JSON__ kann die *neuen IDs* auslesen und im vorhandenen Backup ein Remapping vornehmen, hierbei werden die alten IDs durch die neuen ersetzt. Da hierbei jedoch auch die UniqueIDs der Geräte herangezogen werden, bleibt die ursprüngliche Zuordnung erhalten.
 
@@ -43,6 +45,7 @@ Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration wer
 Alle ausgelesenen Beschreibungen und Namen einschließlich Gerätenamen werden anonymisiert.
 
 
+
 ## Programm
 Hauptfenster:
 
@@ -51,8 +54,9 @@ Hauptfenster:
 [MainView_0_2a]: docu/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
 
 
+
 ## Credits
-Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt. (Contributions are welcome)
+Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
 
 ### Open Source Project Credits
 
@@ -61,4 +65,4 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt. (Cont
 
 ## License
 
-_Hue to JSON__ is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) für weitere Informationen.
+__Hue to JSON__ is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) für weitere Informationen.
