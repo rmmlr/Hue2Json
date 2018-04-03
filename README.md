@@ -58,9 +58,9 @@ Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)
 
-[![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/releases/latest)
+[![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/releases/latest)
 
-[![GitHub (pre-)release](https://img.shields.io/github/release/rmmlr/Hue2Json/all.svg)](https://github.com/rmmlr/Hue2Json/blob/master/releases) (Pre-Release)
+[![GitHub (pre-)release](https://img.shields.io/github/release/rmmlr/Hue2Json/all.svg)](https://github.com/rmmlr/Hue2Json/releases) (Pre-)Release
 
 
 ## Credits
