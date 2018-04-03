@@ -55,11 +55,12 @@ Hauptfenster:
 
 ## Release
 Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](/releases) veröfentlicht.
-[![Build status](https://ci.appveyor.com/api/projects/status/69khhgbnb8g2k36l?svg=true)](https://ci.appveyor.com/project/rmmlr/hue2json)
 
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/rmmlr/Hue2Json) 
-[Aktuelles Release](/releases/latest)
+Build Status: [![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)
 
+Release: [![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/releases/latest)
+
+Pre-Release: [![GitHub (pre-)release](https://img.shields.io/github/release/rmmlr/Hue2Json/all.svg)](https://github.com/rmmlr/Hue2Json/blob/master/releases)
 
 
 ## Credits
