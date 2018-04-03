@@ -13,16 +13,18 @@ Neben den reinen sichern (Backup) der Parameter im JSON-Format ermöglicht __Hue
 ## Parameter
 Folgende Parameter verarbeitet werden:
 
-* Lights *Restore nicht möglich, siehe Remapping*
-* Groups
-* Schedules
-* Scenes
-* Sensors *Restore nicht möglich, siehe Remapping*
-* Rules
-* Configuration *Restore nur bedingt möglich*
-* Capability *nur lesender Zugriff, rein Informativ*
-* ResourceLinks
-* WhiteList *Restore nicht möglich*
+| Parameter     | Beschreibung         | Restore                               |
+| ------------- |:--------------------:| -------------------------------------:|
+| Lights        | Leuchtmittel         | nicht möglich, siehe Remapping        |
+| Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
+| Schedules     | Timer                | :heavy_check_mark:                    |
+| Scenes        | Szenen               | :heavy_check_mark:                    |
+| Sensors       | Sensoren u. Schalter | nicht möglich, siehe Remapping        |
+| Rules         | Regeln               | :heavy_check_mark:                    |
+| Configuration | allg. Konfiguration  | bedingt möglich                       |
+| Capability    | Speicherbelegung     | nur lesender Zugriff, rein Informativ |
+| ResourceLinks | Links                | :heavy_check_mark:                    |
+| WhiteList     | Benutzerliste        | :x:                                   |
 
 
 ## Remapping
