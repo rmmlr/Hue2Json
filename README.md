@@ -60,4 +60,4 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt. (Cont
 
 ## License
 
-_Hue to JSON__ is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Siehe auch [license.txt](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE.txt) für weitere Informationen.
+_Hue to JSON__ is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) für weitere Informationen.
