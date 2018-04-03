@@ -54,9 +54,9 @@ Hauptfenster:
 
 
 ## Release
-Dieses Projekt wird auf der Continuous Integration Platform [AppVeyor](https://www.appveyor.com/) kompiliert und im Release-Feed veröfentlicht.
+Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](/releases) veröfentlicht.
 [![Build status](https://ci.appveyor.com/api/projects/status/69khhgbnb8g2k36l?svg=true)](https://ci.appveyor.com/project/rmmlr/hue2json)
-[Aktuelle Stable Version](/releases/latest)
+
 [Aktuelles Release](/releases/latest)
 
 
