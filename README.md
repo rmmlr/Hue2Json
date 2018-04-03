@@ -1,5 +1,6 @@
 ## Projekt in Arbeit
 ### Milestones
+|----|------------------------------------------|--------------------|
 | 1. | Auslesen und Serialisieren der Parameter | :heavy_check_mark: |
 | 2. | Remapping von IDs zu UniqueIDs           |                    |
 | 3. | Wiederherstellen der Parameter           |                    |
