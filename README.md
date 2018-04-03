@@ -28,7 +28,7 @@ Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter,
 
 
 ## Remapping
-Soll ein Backup auf einen neuen, respektive zurückgesetzen System wiederhergestellt werden, so ist es erforderlich alle Teilnehmer/Geräte (Leuchtmittel, Sensoren, Schalter, ...) manuell an die Bridge anzulernen. Hierbei vergibt die Bridge den Geräten neue IDs. Diese IDs werden intern für die Steuerung und Verknüpfung verwendet und sind somit essentiell. __Hue to JSON__ kann die *neuen IDs* auslesen und im vorhandenen Backup ein Remapping vornehemn, hierbei werden die alten IDs durch die neuen ersetzt. Da hierbei jedoch auch die UniqueIDs der Geräte herangezogen werden, bleibt die ursprüngliche Zuordnung erhalten.
+Soll ein Backup auf einen neuen, respektive zurückgesetzten System wiederhergestellt werden, so ist es erforderlich alle Teilnehmer/Geräte (Leuchtmittel, Sensoren, Schalter, ...) manuell an die Bridge anzulernen. Hierbei vergibt die Bridge den Geräten neue IDs. Diese IDs werden intern für die Steuerung und Verknüpfung verwendet und sind somit essentiell. __Hue to JSON__ kann die *neuen IDs* auslesen und im vorhandenen Backup ein Remapping vornehmen, hierbei werden die alten IDs durch die neuen ersetzt. Da hierbei jedoch auch die UniqueIDs der Geräte herangezogen werden, bleibt die ursprüngliche Zuordnung erhalten.
 
 ## Anonymisierung
 Standardgemäß werden alle ausgelesenen __Usernames__ anonymisiert und durch generische Namen (User 1, User 2 ...) ersetzt. Eine Zuordnung der einzelnen User zu den angelegten Szenen, Regeln und Links bleibt dabei erhalten.
@@ -39,7 +39,7 @@ Gerade wenn man die ausgelesenen Parameter-Dateien weiter geben möchte (z.B. zu
 Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration werden anonymisiert.
 
 ### Namen
-Alle ausgelesenen Beschreibungnen und Namen einschließlich Gerätenamen werden anonymisiert.
+Alle ausgelesenen Beschreibungen und Namen einschließlich Gerätenamen werden anonymisiert.
 
 
 ## Programm
@@ -48,3 +48,12 @@ Hauptfenster:
 ![MainView 0.2a - Screenshot][MainView_0_2a]
 
 [MainView_0_2a]: docu/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
+
+
+## Credits
+Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt. (Contributions are welcome)
+
+### Open Source Project Credits
+
+* [Q42.HueApi](https://github.com/Q42/Q42.HueApi) Bedienung der Hue-API
+* [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
