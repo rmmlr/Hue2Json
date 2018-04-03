@@ -2,19 +2,19 @@
 ### Milestones
 1. Auslesen und Serialisieren der Parameter :heavy_check_mark:
 2. Remapping von IDs zu UniqueIDs
-3. Rückspielen der Parameter
+3. Wiederherstellen der Parameter
 
 ---------------------------------------------------------------------
 
 # Hue to Json
-Neben den reinen sichern (Backup) der Parameter im JSON-Format ermöglicht __Hue to JSON__ das zurück Übertragen (Restore) der ausgelesenen Parameter auf die Bridge. Somit wird die Möglichkeit geboten eine Datensicherung der Bridge anzulegen.
+Neben den reinen sichern (Backup) der Parameter im JSON-Format, ermöglicht __Hue to JSON__ das Wiederherstellen (Restore) der ausgelesenen Parameter auf die Bridge. Somit wird die Möglichkeit geboten eine *Datensicherung* der Bridge anzulegen.
 
 
 ## Parameter
-Folgende Parameter verarbeitet werden:
+Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter, ein Restore ist hingegen nicht vollumfänglich möglich.
 
 | Parameter     | Beschreibung         | Restore                               |
-| ------------- |:--------------------:| -------------------------------------:|
+| ------------- |----------------------| --------------------------------------|
 | Lights        | Leuchtmittel         | nicht möglich, siehe Remapping        |
 | Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
 | Schedules     | Timer                | :heavy_check_mark:                    |
@@ -28,12 +28,12 @@ Folgende Parameter verarbeitet werden:
 
 
 ## Remapping
-...
+Soll ein Backup auf einen neuen, respektive zurückgesetzen System wiederhergestellt werden, so ist es erforderlich alle Teilnehmer/Geräte (Leuchtmittel, Sensoren, Schalter, ...) manuell an die Bridge anzulernen. Hierbei vergibt die Bridge den Geräten neue IDs. Diese IDs werden intern für die Steuerung und Verknüpfung verwendet und sind somit essentiell. __Hue to JSON__ kann die *neuen IDs* auslesen und im vorhandenen Backup ein Remapping vornehemn, hierbei werden die alten IDs durch die neuen ersetzt. Da hierbei jedoch auch die UniqueIDs der Geräte herangezogen werden, bleibt die ursprüngliche Zuordnung erhalten.
 
 ## Anonymisierung
 Standardgemäß werden alle ausgelesenen __Usernames__ anonymisiert und durch generische Namen (User 1, User 2 ...) ersetzt. Eine Zuordnung der einzelnen User zu den angelegten Szenen, Regeln und Links bleibt dabei erhalten.
 
-Optional können folgende Daten anonymisiert werden:
+Gerade wenn man die ausgelesenen Parameter-Dateien weiter geben möchte (z.B. zur Fehlerdiagnose), können optional Seriennummern und Namen anonymisiert werden.
 
 ### Seriennummern
 Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration werden anonymisiert.
