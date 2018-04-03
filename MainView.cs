@@ -23,6 +23,8 @@ namespace Rca.Hue2Json
             setAllParameters(true);
             #endregion
 
+            this.Text = "Hue2Json - " + Application.ProductVersion;
+
 #if DEBUG
             btn_ConnectBridge.Enabled = true;
             btn_ReadParameters.Enabled = true;
