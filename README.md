@@ -57,3 +57,7 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt. (Cont
 
 * [Q42.HueApi](https://github.com/Q42/Q42.HueApi) Bedienung der Hue-API
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
+
+## License
+
+_Hue to JSON__ is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Siehe auch [license.txt](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE.txt) für weitere Informationen.
