@@ -16,7 +16,7 @@ Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter,
 
 | Parameter     | Beschreibung         | Restore                               |
 | ------------- |----------------------|:-------------------------------------:|
-| Lights        | Leuchtmittel         | *siehe Remapping*                     |
+| Lights        | Leuchtmittel         | [siehe Remapping](#Remapping)         |
 | Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
 | Schedules     | Timer                | :heavy_check_mark:                    |
 | Scenes        | Szenen               | :heavy_check_mark:                    |
@@ -70,7 +70,7 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
 * [UIkit](https://github.com/uikit/uikit) Parameter-Visualisierung
 
-## License
+## Lizenz
 
 Diese Software (Hue to JSON) ist lizenziert unter der [MIT Lizenz](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form").
 
