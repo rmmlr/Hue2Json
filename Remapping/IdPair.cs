@@ -40,6 +40,14 @@ namespace Rca.Hue2Json.Remapping
 
         }
 
+        public IdPair(string id, string uniqueId, DeviceCategory category)
+        {
+            Id = id;
+            UniqueId = uniqueId;
+            Category = category;
+
+        }
+
         #endregion Constructor
 
         #region Services
