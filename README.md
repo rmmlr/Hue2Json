@@ -54,6 +54,8 @@ Hauptfenster:
 Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](https://github.com/rmmlr/Hue2Json/releases) veröffentlicht.
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)  
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json/build/tests)
+
 [![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/releases/latest)  
 [![GitHub (pre-)release](https://img.shields.io/github/release/rmmlr/Hue2Json/all.svg)](https://github.com/rmmlr/Hue2Json/releases) (Pre-)Release
 
