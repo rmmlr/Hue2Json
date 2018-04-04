@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remapping\DeviceCategory.cs" />
     <Compile Include="Remapping\IdPair.cs" />
+    <Compile Include="Remapping\RemappingInfo.cs" />
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

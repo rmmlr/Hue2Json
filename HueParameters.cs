@@ -176,16 +176,16 @@ namespace Rca.Hue2Json
 
 
 
-            var lightIds = new Dictionary<string, IdPair>();
-            var sensorIds = new Dictionary<string, IdPair>();
+            //var lightIds = new Dictionary<string, IdPair>();
+            //var sensorIds = new Dictionary<string, IdPair>();
 
-            //TODO: Ungetetstet!
-            foreach (var light in currentParams.Lights)
-                lightIds.Add(light.UniqueId, new IdPair() { NewId = light.Id, OldId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
-                    Category = DeviceCategory.Light });
-            foreach (var sensor in currentParams.Sensors)
-                lightIds.Add(sensor.UniqueId, new IdPair() { NewId = sensor.Id, OldId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
-                    Category = DeviceCategory.Sensor });
+            ////TODO: Ungetetstet!
+            //foreach (var light in currentParams.Lights)
+            //    lightIds.Add(light.UniqueId, new IdPair() { CurrentId = light.Id, BackupId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
+            //        Category = DeviceCategory.Light });
+            //foreach (var sensor in currentParams.Sensors)
+            //    lightIds.Add(sensor.UniqueId, new IdPair() { CurrentId = sensor.Id, BackupId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
+            //        Category = DeviceCategory.Sensor });
 
             //TODO: Ermitteln von nicht zuordnungsbarer IDs
 

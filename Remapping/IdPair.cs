@@ -15,37 +15,42 @@ namespace Rca.Hue2Json.Remapping
 
         #region Properties
         /// <summary>
-        /// Gerätetyp
+        /// Alte von der Bridge vergebene ID, aus Backup
         /// </summary>
-        public DeviceCategory Category { get; set; }
+        public string BackupId { get; set; }
 
         /// <summary>
-        /// Alte von der Bridge vergebene ID
+        /// Aktuelle neu von der Bridge vergebene ID
         /// </summary>
-        public string OldId { get; set; }
+        public string CurrentId { get; set; }
 
         /// <summary>
-        /// Neue von der Bridge vergebene ID
+        /// Eindeutige Hardware-ID
         /// </summary>
-        public string NewId { get; set; }
+        public string UniqueId { get; set; }
 
         #endregion Properties
 
         #region Constructor
         /// <summary>
-        /// Empty constructor for IdPair
+        /// Leerer Konstruktor für IdPair
         /// </summary>
         public IdPair()
         {
 
         }
 
-        public IdPair(string oldId, string newId, DeviceCategory category)
+        /// <summary>
+        /// Erstellt ein neues ID-Pair
+        /// </summary>
+        /// <param name="uniqueId">Eindeutige Hardware-ID</param>
+        /// <param name="backupId">Alte von der Bridge vergebene ID, aus Backup</param>
+        /// <param name="currentId">Aktuelle neu von der Bridge vergebene ID</param>
+        public IdPair(string uniqueId, string backupId, string currentId)
         {
-            OldId = oldId;
-            NewId = newId;
-            Category = category;
-
+            UniqueId = uniqueId;
+            BackupId = backupId;
+            CurrentId = currentId;
         }
 
         #endregion Constructor
