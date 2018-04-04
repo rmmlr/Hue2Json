@@ -46,8 +46,8 @@ namespace Rca.Hue2Json.Remapping
 
         #region Constructor
         /// <summary>
-        /// Empty constructor for RemappingInfo
-        /// Alle Objekte initialisiert
+        /// Leerer KonstruKtor für RemappingInfo
+        /// Alle Objekte werden initialisiert
         /// </summary>
         public RemappingInfo()
         {
