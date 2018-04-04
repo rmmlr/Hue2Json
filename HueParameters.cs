@@ -150,18 +150,40 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Remapping der IDs, auf Basis der UniqueIDs
         /// </summary>
-        /// <param name="newIds">Parameter-Objekt mit den alten IDs</param>
-        public void RemapIds(HueParameters newIds)
+        /// <param name="currentParams">Parameter-Objekt mit den neuen IDs des aktuellen Systems</param>
+        public void RemapIds(HueParameters currentParams)
         {
             #region IDs extrahieren
+
+            var backupIds = new Dictionary<string, string>();
+            foreach (var light in this.Lights)
+                backupIds.Add(light.UniqueId, light.Id);
+
+            var currentIds = new Dictionary<string, string>();
+            foreach (var light in currentParams.Lights)
+                currentIds.Add(light.UniqueId, light.Id);
+
+            var idMap = new Dictionary<string, string>();
+            foreach (var kvp in backupIds)
+                idMap.Add(kvp.Value, currentIds[kvp.Key]);
+
+
+
+
+
+
+
+
+
+
             var lightIds = new Dictionary<string, IdPair>();
             var sensorIds = new Dictionary<string, IdPair>();
 
             //TODO: Ungetetstet!
-            foreach (var light in newIds.Lights)
+            foreach (var light in currentParams.Lights)
                 lightIds.Add(light.UniqueId, new IdPair() { NewId = light.Id, OldId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
                     Category = DeviceCategory.Light });
-            foreach (var sensor in newIds.Sensors)
+            foreach (var sensor in currentParams.Sensors)
                 lightIds.Add(sensor.UniqueId, new IdPair() { NewId = sensor.Id, OldId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
                     Category = DeviceCategory.Sensor });
 
