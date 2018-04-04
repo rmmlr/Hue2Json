@@ -20,9 +20,14 @@ namespace Rca.Hue2Json.Remapping
         public DateTime CreationDate { get; set; }
 
         /// <summary>
-        /// IDs der Philips Hue Bridge
+        /// Hardware-ID der Philips Hue Bridge aus Backup
         /// </summary>
-        public IdPair Bridge { get; set; }
+        public string BridgeBackupUniqueId { get; set; }
+
+        /// <summary>
+        /// Hardware-ID der Philips Hue Bridge aus aktueller Konfiguration
+        /// </summary>
+        public string BridgeCurrentUniqueId { get; set; }
 
         /// <summary>
         /// IDs der Leuchtmittel
@@ -54,13 +59,17 @@ namespace Rca.Hue2Json.Remapping
 
         public static RemappingInfo Create(HueParameters backup, HueParameters current)
         {
-            var result = new RemappingInfo();
+            var result = new RemappingInfo
+            {
+                BridgeBackupUniqueId = backup.Configuration.BridgeId,
+                BridgeCurrentUniqueId = current.Configuration.BridgeId
+            };
 
             foreach (var l in backup.Lights)
-                result.Lights.Add(new IdPair(l.UniqueId, l.Id, current.Lights.FirstOrDefault(x => x.UniqueId == l.UniqueId)?.Id));
+                result.Lights.Add(new IdPair(l.UniqueId, l.Id, current.Lights.FirstOrDefault(x => String.Equals(x.UniqueId, l.UniqueId, StringComparison.InvariantCultureIgnoreCase))?.Id));
 
             foreach (var s in backup.Sensors)
-                result.Sensors.Add(new IdPair(s.UniqueId, s.Id, current.Sensors.FirstOrDefault(x => x.UniqueId == s.UniqueId)?.Id));
+                result.Sensors.Add(new IdPair(s.UniqueId, s.Id, current.Sensors.FirstOrDefault(x => String.Equals(x.UniqueId, s.UniqueId, StringComparison.InvariantCultureIgnoreCase))?.Id));
 
             return result;
         }
