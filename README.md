@@ -1,9 +1,6 @@
 ## Projekt in Arbeit
-| #  | Milestone                                | Status              |
-|----|------------------------------------------|:-------------------:|
-| 1. | Auslesen und Serialisieren der Parameter | :heavy_check_mark:  |
-| 2. | Remapping von IDs zu UniqueIDs           |                     |
-| 3. | Wiederherstellen der Parameter           |                     |
+
+Das Projekt befindet sich aktuell (04.04.2018) in einem frühen Stadium. Eine detailierte Roadmap und der Arbeitsfrotschritt kann unter [Milestones](https://github.com/rmmlr/Hue2Json/milestones) angezeigt werden.
 
 ---
 
@@ -62,7 +59,10 @@ Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://
 
 
 ## Credits
-Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
+
+* **Elias Ruemmler** - *Initial work* - [rmmlr](https://github.com/rmmlr)
+
+Unter [Contributors](https://github.com/rmmlr/Hue2Json/contributors) können weitere Projekt-Unterstützer eingesehen werden.
 
 ### Open Source Project Credits
 
@@ -70,8 +70,9 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
 * [UIkit](https://github.com/uikit/uikit) Parameter-Visualisierung
 
-## Lizenz
+## License
 
-Diese Software (Hue to JSON) ist lizenziert unter der [MIT Lizenz](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form").
+Dieses Projekt (Hue to JSON) ist lizenziert unter der [MIT Lizenz](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form").  
+Weitere Details unter [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE).
 
-[![license](https://img.shields.io/github/license/rmmlr/hue2json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) 
