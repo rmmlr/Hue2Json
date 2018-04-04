@@ -110,30 +110,6 @@ namespace Rca.Hue2Json
             return true;
         }
 
-        /// <summary>
-        /// Einlesen der IDs und UniqueIDs
-        /// </summary>
-        /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
-        /// <returns>ID-Liste</returns>
-        [Obsolete]
-        public async Task<List<IdPair>> ReadIds(HueParameterGroupEnum selGroups)
-        {
-            var idList = new List<IdPair>();
-
-            if (selGroups.HasFlag(HueParameterGroupEnum.Lights))
-            {
-                var lights = (await m_HueClient.GetLightsAsync()).ToList();
-                idList.AddRange(lights.Select(x => new IdPair(x.Id, x.UniqueId, DeviceCategory.Light)));
-            }
-
-            if (selGroups.HasFlag(HueParameterGroupEnum.Sensors))
-            {
-                var sensors = (await m_HueClient.GetLightsAsync()).ToList();
-                idList.AddRange(sensors.Select(x => new IdPair(x.Id, x.UniqueId, DeviceCategory.Sensor)));
-            }
-
-            return idList;
-        }
 
         /// <summary>
         /// Parameter auslesen
@@ -249,7 +225,7 @@ namespace Rca.Hue2Json
         /// </summary>
         public async void RestoreParameters()
         {
-
+            throw new NotImplementedException();
         }
 
         public void VisualizeParameters()
