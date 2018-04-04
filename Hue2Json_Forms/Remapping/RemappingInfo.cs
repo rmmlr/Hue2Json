@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rca.Hue2Json.Remapping
 {
+    /// <summary>
+    /// Sammler mit neuen (current) und alten (backup) IDs
+    /// </summary>
     public class RemappingInfo
     {
         #region Member
