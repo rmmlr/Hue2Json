@@ -16,11 +16,11 @@ Folgende Parameter können verarbeitet werden. Ausgelesen werden alle Parameter,
 
 | Parameter     | Beschreibung         | Restore                               |
 | ------------- |----------------------|:-------------------------------------:|
-| Lights        | Leuchtmittel         | *siehe Remapping*                     |
+| Lights        | Leuchtmittel         | [siehe Remapping](#remapping)         |
 | Groups        | Gruppen u. Räume     | :heavy_check_mark:                    |
 | Schedules     | Timer                | :heavy_check_mark:                    |
 | Scenes        | Szenen               | :heavy_check_mark:                    |
-| Sensors       | Sensoren u. Schalter | *siehe Remapping*                     |
+| Sensors       | Sensoren u. Schalter | [siehe Remapping](#remapping)         |
 | Rules         | Regeln               | :heavy_check_mark:                    |
 | Configuration | allg. Konfiguration  | bedingt möglich                       |
 | Capability    | Speicherbelegung     | nur lesender Zugriff, rein Informativ |
@@ -54,7 +54,7 @@ Hauptfenster:
 
 
 ## Release
-Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](/releases) veröffentlicht.
+Dieses Projekt wird auf der Continuous Integration Plattform [AppVeyor](https://www.appveyor.com/) kompiliert und im [Release-Feed](https://github.com/rmmlr/Hue2Json/releases) veröffentlicht.
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/rmmlr/Hue2Json.svg)](https://ci.appveyor.com/project/rmmlr/hue2json)  
 [![GitHub release](https://img.shields.io/github/release/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/releases/latest)  
@@ -70,6 +70,8 @@ Aktuell gibt es keine weiteren Unterstützer für dieses Software-Projekt.
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
 * [UIkit](https://github.com/uikit/uikit) Parameter-Visualisierung
 
-## License
+## Lizenz
 
-Diese Software (Hue to JSON) ist lizenziert unter der [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") Lizenz. Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) für weitere Informationen.
+Diese Software (Hue to JSON) ist lizenziert unter der [MIT Lizenz](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form").
+
+[![license](https://img.shields.io/github/license/rmmlr/hue2json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) Siehe auch [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE)
