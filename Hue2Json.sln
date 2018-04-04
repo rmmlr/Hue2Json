@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hue2Json_Forms", "Hue2Json_Forms\Hue2Json_Forms.csproj", "{09102389-DCEB-43D6-86CA-3F488273D1A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hue2Json_Tests", "Hue2Json_Tests\Hue2Json_Tests.csproj", "{B3825575-352A-4621-B698-439369FAC3F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{09102389-DCEB-43D6-86CA-3F488273D1A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09102389-DCEB-43D6-86CA-3F488273D1A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09102389-DCEB-43D6-86CA-3F488273D1A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3825575-352A-4621-B698-439369FAC3F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3825575-352A-4621-B698-439369FAC3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3825575-352A-4621-B698-439369FAC3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3825575-352A-4621-B698-439369FAC3F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
