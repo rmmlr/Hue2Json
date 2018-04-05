@@ -148,52 +148,6 @@ namespace Rca.Hue2Json
         }
 
         /// <summary>
-        /// Remapping der IDs, auf Basis der UniqueIDs
-        /// </summary>
-        /// <param name="currentParams">Parameter-Objekt mit den neuen IDs des aktuellen Systems</param>
-        public void RemapIds(HueParameters currentParams)
-        {
-            #region IDs extrahieren
-
-            var backupIds = new Dictionary<string, string>();
-            foreach (var light in this.Lights)
-                backupIds.Add(light.UniqueId, light.Id);
-
-            var currentIds = new Dictionary<string, string>();
-            foreach (var light in currentParams.Lights)
-                currentIds.Add(light.UniqueId, light.Id);
-
-            var idMap = new Dictionary<string, string>();
-            foreach (var kvp in backupIds)
-                idMap.Add(kvp.Value, currentIds[kvp.Key]);
-
-
-
-
-
-
-
-
-
-
-            //var lightIds = new Dictionary<string, IdPair>();
-            //var sensorIds = new Dictionary<string, IdPair>();
-
-            ////TODO: Ungetetstet!
-            //foreach (var light in currentParams.Lights)
-            //    lightIds.Add(light.UniqueId, new IdPair() { CurrentId = light.Id, BackupId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
-            //        Category = DeviceCategory.Light });
-            //foreach (var sensor in currentParams.Sensors)
-            //    lightIds.Add(sensor.UniqueId, new IdPair() { CurrentId = sensor.Id, BackupId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
-            //        Category = DeviceCategory.Sensor });
-
-            //TODO: Ermitteln von nicht zuordnungsbarer IDs
-
-
-            #endregion
-        }
-
-        /// <summary>
         /// Anonymisieren der in den Parametern enthaltenen Serien-Nummern
         /// </summary>
         public void AnonymizeSerials()
