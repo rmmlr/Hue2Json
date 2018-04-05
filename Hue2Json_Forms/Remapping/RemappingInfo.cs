@@ -117,9 +117,13 @@ namespace Rca.Hue2Json.Remapping
                 switch (idCount)
                 {
                     case 0:
-                        throw new CurrentIdNotFoundException("Keinen Eintrag zur übergebenen Backup-ID (" + backupId + ") gefunden.");
+                        throw new BackupIdNotFoundException("Keinen Eintrag zur übergebenen Backup-ID (" + backupId + ") gefunden.");
                     case 1:
-                        return idMap.First(x => x.BackupId == backupId).CurrentId;
+                        var id = idMap.First(x => x.BackupId == backupId).CurrentId;
+                        if (String.IsNullOrEmpty(id))
+                            throw new CurrentIdNotFoundException();
+                        else
+                            return id;
                     default:
                         throw new RemappingException("Meherere Einträge zur übergebenen Backup-ID (" + backupId + ") gefunden.");
                 }
