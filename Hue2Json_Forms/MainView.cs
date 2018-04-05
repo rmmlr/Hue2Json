@@ -184,5 +184,10 @@ namespace Rca.Hue2Json
 
             //paramView.ShowDialog();
         }
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
