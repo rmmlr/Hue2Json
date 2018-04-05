@@ -1,0 +1,36 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+skip_tags: true
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.cs'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+skip_commits:
+  files:
+    - docs/
+    - '**/*.md'
+    - appveyor.yml
+    - LICENSE
+    - '.gitignor'
+before_build:
+- cmd: nuget restore
+build:
+  project: Hue2Json.sln
+  verbosity: minimal
+after_build:
+- cmd: 7z a Hue2Json.zip %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.dll
+artifacts:
+- path: Hue2Json.zip
+deploy:
+- provider: GitHub
+  description: "`Hue2Json.zip` beinhaltet die Anwendung (Hue2Json.exe) und alle benötigten Bibliothek-Dateien (*.dll). Die Anwendung lässt sich direkt starten, eine Installation ist nicht erforderlich."
+  auth_token:
+    secure: 9pN0zXgw1jNaPCo0m14eC3+IUZPy/y4zL/kdbdzvcMIDcT1zpkPwYF1LijP5EB+J
+  prerelease: true
