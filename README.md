@@ -75,6 +75,6 @@ Unter [Contributors](https://github.com/rmmlr/Hue2Json/contributors) können wei
 ## License
 
 Dieses Projekt (Hue to JSON) ist lizenziert unter der [MIT Lizenz](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form").  
-Weitere Details unter [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE).
+Weitere Details unter [LICENSE](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE.txt).
 
-[![license](https://img.shields.io/github/license/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE) 
+[![license](https://img.shields.io/github/license/rmmlr/Hue2Json.svg)](https://github.com/rmmlr/Hue2Json/blob/master/LICENSE.txt) 
