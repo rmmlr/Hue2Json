@@ -43,6 +43,24 @@ namespace Rca.Hue2Json.Remapping
     }
 
     /// <summary>
+    /// Keine Backup-ID verfügbar
+    /// </summary>
+    public class BackupIdNotFoundException : RemappingException
+    {
+        public BackupIdNotFoundException()
+        {
+        }
+
+        public BackupIdNotFoundException(string message) : base(message)
+        {
+        }
+
+        public BackupIdNotFoundException(string message, Exception inner) : base(message, inner)
+        {
+        }
+    }
+
+    /// <summary>
     /// Keine Current-ID verfügbar
     /// </summary>
     public class CurrentIdNotFoundException : RemappingException
