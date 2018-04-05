@@ -6,7 +6,7 @@ Das Projekt befindet sich aktuell (04.04.2018) in einem frühen Entwicklungsstad
 
 # Hue to Json
 
-##Description
+## Description
 Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen.
 
 
