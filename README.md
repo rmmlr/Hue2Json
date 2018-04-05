@@ -54,7 +54,7 @@ Hauptfenster:
 
 ![MainView 0.2a - Screenshot][MainView_0_2a]
 
-[MainView_0_2a]: docu/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
+[MainView_0_2a]: docs/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
 
 
 ## Releases
