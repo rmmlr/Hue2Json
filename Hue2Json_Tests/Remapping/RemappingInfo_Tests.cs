@@ -96,5 +96,144 @@ namespace Hue2Json_Tests
 				Assert.IsTrue(idPairComparer(expectedResult.Sensors[i], testObj.Sensors[i]), "Gemappte Sensor-IDs fehlerhaft");
 
 		}
+
+		[TestMethod, TestCategory("RemappingInfo")]
+		public void GetIds()
+		{
+			var backup = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid001"
+				},
+				Lights = new List<Light>
+				{
+					new Light {Id = "1", UniqueId = "uid001"},
+					new Light {Id = "2", UniqueId = "uid002" },
+					new Light {Id = "3", UniqueId = "uid003" }
+				},
+				Sensors = new List<Sensor>
+				{
+					new Sensor {Id = "1", UniqueId = "uid001" },
+					new Sensor {Id = "2", UniqueId = "uid002" }
+				}
+			};
+
+			var current = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid002"
+				},
+				Lights = new List<Light>
+				{
+					new Light {Id = "2", UniqueId = "uid001"},
+					new Light {Id = "3", UniqueId = "uid002"},
+					new Light {Id = "4", UniqueId = "uid003"}
+				},
+				Sensors = new List<Sensor>
+				{
+					new Sensor {Id = "2", UniqueId = "uid001"}
+				}
+			};
+
+
+
+			var testObj = RemappingInfo.Create(backup, current);
+
+
+			Assert.AreEqual("2", testObj.GetCurrentLightId("1"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (1) gefunden");
+			Assert.AreEqual("3", testObj.GetCurrentLightId("2"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (2) gefunden");
+			Assert.AreEqual("4", testObj.GetCurrentLightId("3"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (3) gefunden");
+			Assert.ThrowsException<BackupIdNotFoundException>(() => testObj.GetCurrentLightId("4"), "Fehler bei Abfrage von Light-Backup-ID (4) welche nicht verfügbar ist.");
+
+			Assert.AreEqual("2", testObj.GetCurrentSensorId("1"), true, "Falsche Sensor-ID zur gegebenen Sensor-Backup-Id (1) gefunden");
+			Assert.ThrowsException<CurrentIdNotFoundException>(() => testObj.GetCurrentSensorId("2"), "Fehler bei Abfrage von Sensor-Current-ID (2) welche nicht verfügbar ist.");
+			Assert.ThrowsException<BackupIdNotFoundException>(() => testObj.GetCurrentSensorId("3"), "Fehler bei Abfrage von Sensor-Backup-ID (3) welche nicht verfügbar ist.");
+		}
+
+		[TestMethod, TestCategory("RemappingInfo")]
+		public void GetIds_EmptyIdMap()
+		{
+			var backup = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid001"
+				},
+				Sensors = new List<Sensor>
+				{
+					new Sensor {Id = "1", UniqueId = "uid001" },
+					new Sensor {Id = "2", UniqueId = "uid002" }
+				}
+			};
+
+			var current = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid002"
+				},
+				Lights = new List<Light>
+				{
+					new Light {Id = "2", UniqueId = "uid001"},
+					new Light {Id = "3", UniqueId = "uid002"},
+					new Light {Id = "4", UniqueId = "uid003"}
+				},
+				Sensors = new List<Sensor>
+				{
+					new Sensor {Id = "2", UniqueId = "uid001"}
+				}
+			};
+
+
+
+			var testObj = RemappingInfo.Create(backup, current);
+
+
+			Assert.ThrowsException<EmptyIdMapException>(() => testObj.GetCurrentLightId("1"), "Leere Light-ID-Map nicht identifiziert.");
+			Assert.AreEqual("2", testObj.GetCurrentSensorId("1"), true, "Falsche Sensor-ID zur gegebenen Sensor-Backup-Id (1) gefunden");
+		}
+
+		[TestMethod, TestCategory("RemappingInfo")]
+		public void GetIds_DuplicatedBackupId()
+		{
+			var backup = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid001"
+				},
+				Lights = new List<Light>
+				{
+					new Light {Id = "1", UniqueId = "uid001"},
+                    new Light {Id = "2", UniqueId = "uid002" },
+                    new Light {Id = "2", UniqueId = "uid002_duplicate" },
+                    new Light {Id = "3", UniqueId = "uid003" }
+				}
+			};
+
+			var current = new HueParameters
+			{
+				Configuration = new BridgeConfig
+				{
+					BridgeId = "bridge_uid002"
+				},
+				Lights = new List<Light>
+				{
+					new Light {Id = "2", UniqueId = "uid001"},
+					new Light {Id = "3", UniqueId = "uid002"},
+					new Light {Id = "4", UniqueId = "uid003"}
+				}
+			};
+
+
+
+			var testObj = RemappingInfo.Create(backup, current);
+
+
+			Assert.ThrowsException<RemappingException>(() => testObj.GetCurrentLightId("2"), "Doppelte Light-Backup-ID nicht gefunden.");
+            Assert.AreEqual("4", testObj.GetCurrentLightId("3"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (3) gefunden");
+        }
 	}
 }
