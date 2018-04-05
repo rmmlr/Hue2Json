@@ -115,6 +115,16 @@ namespace Rca.Hue2Json
         {
             var ips = await m_Controller.ScanBridges();
 
+            //Multibridge Handling
+            if (ips.Length > 0)
+            {
+                foreach (string ip in ips)
+                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(ip);
+
+                bridgeAuswahlToolStripMenuItem.Enabled = true;
+            }
+
+
             if (ips.Length == 1)
             {
                 switch (MessageBox.Show("Es wurde im Netzwerk eine Bridge mit der IP " + ips[0] + " gefunden.\nSoll diese verbunden werden?",
