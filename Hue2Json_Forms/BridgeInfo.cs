@@ -51,7 +51,28 @@ namespace Rca.Hue2Json
         #endregion Constructor
 
         #region Services
+        public string GetNameString()
+        {
+            string name = "TODO";
 
+            //TODO Name nach Settings ausgeben
+            switch (Controller.GlobalSettings.BridgeNameDisplay)
+            {
+                case Settings.BridgeNameDisplayEnum.IpOnly:
+                    throw new NotImplementedException();
+                case Settings.BridgeNameDisplayEnum.IpAndName:
+                    throw new NotImplementedException();
+                case Settings.BridgeNameDisplayEnum.IpAndId:
+                    throw new NotImplementedException();
+                case Settings.BridgeNameDisplayEnum.NameAndIp:
+                    throw new NotImplementedException();
+                default: //NameAndIp
+                    name = String.Format("{0} ({1})", Name, IpAddress);
+                    break;
+            }
+
+            return name;
+        }
 
         #endregion Services
 

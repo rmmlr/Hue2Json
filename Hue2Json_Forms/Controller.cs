@@ -3,6 +3,7 @@ using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
 using Rca.Hue2Json.HtmlConverter;
 using Rca.Hue2Json.Remapping;
+using Rca.Hue2Json.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,8 @@ namespace Rca.Hue2Json
         const string APP_NAME = "Hue2Json";
 
         #endregion
+
+        public static ProgramSettings GlobalSettings;
 
         #region Member
         AppKeyManager m_AppKeyManager;

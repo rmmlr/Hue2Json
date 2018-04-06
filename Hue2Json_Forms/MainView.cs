@@ -119,7 +119,7 @@ namespace Rca.Hue2Json
             if (bridgeInfos.Length > 0)
             {
                 foreach (var info in bridgeInfos)
-                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(info.IpAddress);
+                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(info.GetNameString());
 
                 bridgeAuswahlToolStripMenuItem.Enabled = true;
             }
