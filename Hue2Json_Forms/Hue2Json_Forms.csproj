@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AnonymizeOptions.cs" />
     <Compile Include="AppKeyManager.cs" />
+    <Compile Include="BridgeInfo.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="HtmlConverter\HtmlExtensions.cs" />
     <Compile Include="HueParameterEnum.cs" />
