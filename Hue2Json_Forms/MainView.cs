@@ -113,35 +113,35 @@ namespace Rca.Hue2Json
 
         private async void btn_SearchBridge_Click(object sender, EventArgs e)
         {
-            var ips = await m_Controller.ScanBridges();
+            var bridgeInfos = await m_Controller.ScanBridges();
 
             //Multibridge Handling
-            if (ips.Length > 0)
+            if (bridgeInfos.Length > 0)
             {
-                foreach (string ip in ips)
-                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(ip);
+                foreach (var info in bridgeInfos)
+                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(info.IpAddress);
 
                 bridgeAuswahlToolStripMenuItem.Enabled = true;
             }
 
 
-            if (ips.Length == 1)
+            if (bridgeInfos.Length == 1)
             {
-                switch (MessageBox.Show("Es wurde im Netzwerk eine Bridge mit der IP " + ips[0] + " gefunden.\nSoll diese verbunden werden?",
+                switch (MessageBox.Show("Es wurde im Netzwerk eine Bridge mit der IP " + bridgeInfos[0].IpAddress + " gefunden.\nSoll diese verbunden werden?",
                     "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.Yes:
-                        if (await m_Controller.ConnectBridge(ips[0]))
+                        if (await m_Controller.ConnectBridge(bridgeInfos[0].IpAddress))
                         {
-                            txt_BridgeIp.Text = ips[0];
-                            Properties.Settings.Default.lastBridgeIp = ips[0];
+                            txt_BridgeIp.Text = bridgeInfos[0].IpAddress;
+                            Properties.Settings.Default.lastBridgeIp = bridgeInfos[0].IpAddress;
                             Properties.Settings.Default.Save();
                             btn_ConnectBridge.Enabled = false;
                             btn_ReadParameters.Enabled = true;
                         }
                         break;
                     case DialogResult.No:
-                        txt_BridgeIp.Text = ips[0];
+                        txt_BridgeIp.Text = bridgeInfos[0].IpAddress;
                         btn_ConnectBridge.Enabled = true;
                         break;
                     default: //Cancel

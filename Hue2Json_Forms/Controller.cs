@@ -34,7 +34,7 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Gefundene Bridges
         /// </summary>
-        public List<LocatedBridge> LocatedBridges { get; set; }
+        public List<BridgeInfo> LocatedBridges { get; set; }
 
         /// <summary>
         /// Hue Parameter
@@ -58,7 +58,7 @@ namespace Rca.Hue2Json
         /// </summary>
         public Controller()
         {
-            LocatedBridges = new List<LocatedBridge>();
+            LocatedBridges = new List<BridgeInfo>();
             m_AppKeyManager = new AppKeyManager();
         }
 
@@ -69,15 +69,23 @@ namespace Rca.Hue2Json
         /// Sucht im Netzwerk nach Bridges
         /// </summary>
         /// <returns>IP Ardessen der gefunden Bridges</returns>
-        public async Task<string[]> ScanBridges()
+        public async Task<BridgeInfo[]> ScanBridges()
         {
+            var bridgeInfos = new List<BridgeInfo>();
+
             IBridgeLocator locator = new HttpBridgeLocator();
-            var bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(5));
+            var bridges = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(5));
 
-            foreach (LocatedBridge bridge in bridgeIPs)
-                LocatedBridges.Add(bridge);
 
-            return LocatedBridges.Select(x => x.IpAddress).ToArray();
+            foreach (LocatedBridge bridge in bridges)
+            {
+                //TODO: friendlyName abfragen, per description.xml oder anonyme Anfrage auf api (http://<bridge-ip>/api/config)
+                string name = "";
+
+                LocatedBridges.Add(new BridgeInfo(bridge, name));
+            }
+
+            return bridgeInfos.ToArray();
         }
 
         /// <summary>
