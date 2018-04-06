@@ -67,6 +67,8 @@
     <Compile Include="MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings\BridgeNameDisplayEnum.cs" />
+    <Compile Include="Settings\ProgramSettings.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
