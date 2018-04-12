@@ -59,10 +59,12 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Empty constructor for Controller
         /// </summary>
-        public Controller()
+        public Controller(ProgramSettings settings)
         {
             LocatedBridges = new List<BridgeInfo>();
             m_AppKeyManager = new AppKeyManager();
+
+            GlobalSettings = settings;
         }
 
         #endregion Constructor
@@ -261,6 +263,11 @@ namespace Rca.Hue2Json
         public void LoadParameterFile(string path)
         {
             Parameters = HueParameters.FromJson(path);
+        }
+
+        public void LoadSettings(string path = null)
+        {
+
         }
 
         //TODO: Methode zum Anonymisieren individueller Namen von Räumen, Gruppen, Leuchtmitteln, Regeln, etc.
