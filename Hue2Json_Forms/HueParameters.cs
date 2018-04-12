@@ -34,6 +34,11 @@ namespace Rca.Hue2Json
         public DateTime CreationDate { get; set; }
 
         /// <summary>
+        /// Parameter sind Anonymisiert, Restore nicht mehr möglich
+        /// </summary>
+        public bool IsAnonymized { get; private set; }
+
+        /// <summary>
         /// Anzahl der im Netzwerk gefundenen Hue Bridges
         /// </summary>
         public int? BridgesCount { get; set; }
@@ -174,6 +179,8 @@ namespace Rca.Hue2Json
                 Configuration.StarterKitId = null;
                 Configuration.ZigbeeChannel = 0;
             }
+
+            IsAnonymized = true;
         }
 
         public void AnonymizeNames()
@@ -221,6 +228,8 @@ namespace Rca.Hue2Json
                     if (WhiteList[i].Name.Contains('#'))
                         WhiteList[i].Name = WhiteList[i].Name.Split('#')[0] + "#User" + (i + 1);
                 }
+
+            IsAnonymized = true;
         }
 
         /// <summary>
