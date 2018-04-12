@@ -139,13 +139,13 @@ namespace Rca.Hue2Json
             {
                 m_HueClient = new LocalHueClient(bridgeIp);
 
-                var appKey = m_AppKeyManager.AppKey;
-                if (String.IsNullOrEmpty(appKey))
-                {
-                    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
-                    m_AppKeyManager.AppKey = appKey;
-                }
-                m_HueClient.Initialize(appKey);
+                //var appKey = m_AppKeyManager.AppKey;
+                //if (String.IsNullOrEmpty(appKey))
+                //{
+                //    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
+                //    m_AppKeyManager.AppKey = appKey;
+                //}
+                //m_HueClient.Initialize(appKey);
 
                 return BridgeResult.SuccessfulConnected;
             }

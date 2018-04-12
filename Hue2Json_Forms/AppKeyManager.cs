@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,42 +12,20 @@ namespace Rca.Hue2Json
     /// <summary>
     /// Manage the personal app key
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public class AppKeyManager
     {
         #region Constants
-        const string APPKEY_FILENAME = "PersonalAppKey";
+        const string APPKEY_FILENAME = "PersonalAppKeys";
         #endregion
 
         #region Member
-        string m_AppKey;
-
+        [JsonProperty]
         Dictionary<string, string> m_Keys;
 
         #endregion Member
 
         #region Properties
-        /// <summary>
-        /// Personal app key
-        /// Returns null, when app key is not available
-        /// </summary>
-        [Obsolete]
-        public string AppKey
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(m_AppKey))
-                    return null;
-                else
-                    return m_AppKey;
-            }
-            set
-            {
-                if (m_AppKey != value)
-                {
-                    safeAppKey(value);
-                }
-            }
-        }
 
         /// <summary>
         /// App key is available
@@ -56,14 +36,24 @@ namespace Rca.Hue2Json
 
         #region Constructor
         /// <summary>
-        /// Empty constructor for PersonalAppKey
+        /// Konstruiert ein neues PersonalAppKey Objekt
         /// </summary>
+        [JsonConstructor]
         public AppKeyManager()
         {
             m_Keys = new Dictionary<string, string>();
 
-            if (File.Exists(APPKEY_FILENAME))
-                loadAppKey();
+        }
+
+
+        /// <summary>
+        /// Konstruiert ein neues PersonalAppKey Objekt
+        /// </summary>
+        /// <param name="restore">ggf. gespeicherte Daten deserialisieren</param>
+        public AppKeyManager(bool restore) : base()
+        {
+            if (restore && File.Exists(APPKEY_FILENAME))
+                fromBson();
         }
 
         #endregion Constructor
@@ -76,12 +66,14 @@ namespace Rca.Hue2Json
         /// <param name="key">AppKey</param>
         /// <param name="replaceKey">Vorhandenen Eintrag überschreiben</param>
         /// <exception cref="ArgumentException">Key zur angegebenen Bridge schon vorhanden</exception>
-        public void AddKey(string bridgeId, string key, bool replaceKey)
+        public void AddKey(string bridgeId, string key, bool replaceKey = false)
         {
             if (replaceKey && m_Keys.ContainsKey(bridgeId.ToLower()))
                 m_Keys.Remove(bridgeId.ToLower());
 
             m_Keys.Add(bridgeId.ToLower(), key);
+
+            toBson();
         }
 
         /// <summary>
@@ -110,41 +102,39 @@ namespace Rca.Hue2Json
 
         #region Internal services
         /// <summary>
-        /// Safe the app key to file
+        /// Serialisieren
         /// </summary>
-        /// <param name="appKey"></param>
-        [Obsolete]
-        void safeAppKey(string appKey)
+        void toBson()
         {
-            m_AppKey = appKey;
+            using (var fs = new FileStream(APPKEY_FILENAME, FileMode.Create))
+            using (var writer = new BsonDataWriter(fs))
+            {
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, this);
 
-            if (File.Exists(APPKEY_FILENAME))
-                File.Delete(APPKEY_FILENAME);
-
-            var sw = new StreamWriter(APPKEY_FILENAME);
-            sw.Write(appKey);
-            sw.Flush();
-            sw.Close();
+                fs.Flush();
+                fs.Close();
+            }
         }
 
         /// <summary>
-        /// Load the app key from file
+        /// Deserialisieren
         /// </summary>
-        /// <returns>app key</returns>
-        [Obsolete]
-        string loadAppKey()
+        private void fromBson()
         {
             if (!File.Exists(APPKEY_FILENAME))
-                throw new FileNotFoundException("No personal app key file found.");
+                throw new FileNotFoundException("AppKey Datei nicht gefunden");
+            
+            using (var fs = new FileStream(APPKEY_FILENAME, FileMode.Open))
+            using (var reader = new BsonDataReader(fs))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                var man = serializer.Deserialize<AppKeyManager>(reader);
+                m_Keys = man.m_Keys;
 
-            var sr = new StreamReader(APPKEY_FILENAME);
-            string appKey = sr.ReadToEnd();
-            sr.Close();
-
-            m_AppKey = appKey.Trim();
-            IsAvailable = true;
-
-            return m_AppKey;
+                fs.Flush();
+                fs.Close();
+            }
         }
 
         #endregion Internal services
