@@ -64,8 +64,6 @@ namespace Rca.Hue2Json
                     throw new NotImplementedException();
                 case Settings.BridgeNameDisplayEnum.IpAndId:
                     throw new NotImplementedException();
-                case Settings.BridgeNameDisplayEnum.NameAndIp:
-                    throw new NotImplementedException();
                 default: //NameAndIp
                     name = String.Format("{0} ({1})", Name, IpAddress);
                     break;
