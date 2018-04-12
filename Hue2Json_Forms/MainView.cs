@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Rca.Hue2Json.Settings;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,27 +14,37 @@ namespace Rca.Hue2Json
 {
     public partial class MainView : Form
     {
+        #region Member
         Controller m_Controller;
+        #endregion Member
 
+        #region Constructor
         public MainView()
         {
+            //Einstellungen laden
+            ProgramSettings settings = null;
+            if (File.Exists(Properties.Settings.Default.DefaultSettingsFileName))
+                settings = ProgramSettings.FromFile(Properties.Settings.Default.DefaultSettingsFileName);
+            else
+                settings = ProgramSettings.CreateDefault();
+
+
             #region Form initialisieren
             InitializeComponent();
-            handleBridgeIp();
             setupParameterSelection();
             setAllParameters(true);
+            toolStripStatusLabel_Bridge.Text = "keine Bridge verbunden";
             #endregion
 
             this.Text = "Hue2Json - " + Application.ProductVersion;
 
 #if DEBUG
-            btn_ConnectBridge.Enabled = true;
             btn_ReadParameters.Enabled = true;
             btn_ShowParameters.Enabled = true;
 #endif
 
 
-            m_Controller = new Controller();
+            m_Controller = new Controller(settings);
         }
 
         public MainView(string[] args) : this()
@@ -40,23 +52,98 @@ namespace Rca.Hue2Json
             if (args.Any(x => x.ToLower().Contains("devmode")))
             {
                 m_Controller.DevMode = true;
-                m_Controller.LoadParameterFile(Properties.Settings.Default.DebugParameterPath);
+                //m_Controller.LoadParameterFile(Properties.Settings.Default.DebugParameterPath);
                 btn_ShowParameters.Enabled = true;
             }
         }
+        #endregion Constructor
 
-        /// <summary>
-        /// Bridge-IP aus Einstellungen in Textbox übernehmen
-        /// </summary>
-        void handleBridgeIp()
+        #region Benutzereingaben verarbeiten
+        private void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.lastBridgeIp))
+#if !DEBUG
+            var bridgeInfos = await m_Controller.ScanBridges();
+#else
+            var bridgeInfos = new BridgeInfo[1] { new BridgeInfo { Name = "MyBridge", BridgeId = "MyBridgeId", IpAddress = "255.255.255.255" } };
+#endif
+
+            if (bridgeInfos.Length > 0)
             {
-                txt_BridgeIp.Text = Properties.Settings.Default.lastBridgeIp;
-                btn_ConnectBridge.Enabled = true;
+                foreach (var info in bridgeInfos)
+                {
+                    var item = new ToolStripMenuItem()
+                    {
+                        Text = info.GetNameString(),
+                        Tag = info
+                    };
+                    item.Click += connectBridge;
+
+                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(item);
+                }
+                bridgeAuswahlToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Es konnte keine Hue Bridge im Netzwerk gefunden werden.\nStellen Sie sicher das sich die Hue Bridge im selben Netzwerk befindet.", "Keine Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
+
+
+        private async void connectBridge(object sender, EventArgs e)
+        {
+            if (bridgeAuswahlToolStripMenuItem.DropDownItems.Count > 1)
+                foreach (ToolStripMenuItem item in bridgeAuswahlToolStripMenuItem.DropDownItems)
+                    item.Checked = false;
+
+            var menuItem = (ToolStripMenuItem)sender;
+            menuItem.Checked = true;
+
+            if (await m_Controller.ConnectBridge(((BridgeInfo)menuItem.Tag).IpAddress))
+            {
+                toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + ((BridgeInfo)menuItem.Tag).IpAddress + ")";
+                Properties.Settings.Default.lastBridgeIp = ((BridgeInfo)menuItem.Tag).IpAddress;
+                Properties.Settings.Default.Save();
+                btn_ReadParameters.Enabled = true;
+            }
+        }
+
+        private void btn_ReadParameters_Click(object sender, EventArgs e)
+        {
+            m_Controller.ReadParameters(getSelectedParams(), getAnonymizeOptions());
+            
+            if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
+                "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                saveFileDialog.Title = "Parameter-Datei speichern";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
+            }
+            else //UNDONE: "Cancel" and "No" Handling!
+            {
+                //m_Controller.Parameters = null;
+            }
+
+            btn_ShowParameters.Enabled = true;
+        }
+
+        private void btn_ShowParameters_Click(object sender, EventArgs e)
+        {
+            m_Controller.VisualizeParameters();
+
+            //var paramView = new ParameterView();
+            //paramView.ApplyParameters(m_Controller.Parameters);
+
+            //paramView.ShowDialog();
+        }
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion Benutzereingaben verarbeiten
+
+        #region Hilfsfunktionen
         void setupParameterSelection()
         {
             //foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))
@@ -110,94 +197,6 @@ namespace Rca.Hue2Json
 
             return opts.ToArray();
         }
-
-        private async void btn_SearchBridge_Click(object sender, EventArgs e)
-        {
-            var bridgeInfos = await m_Controller.ScanBridges();
-
-            //Multibridge Handling
-            if (bridgeInfos.Length > 0)
-            {
-                foreach (var info in bridgeInfos)
-                    bridgeAuswahlToolStripMenuItem.DropDownItems.Add(info.GetNameString());
-
-                bridgeAuswahlToolStripMenuItem.Enabled = true;
-            }
-
-
-            if (bridgeInfos.Length == 1)
-            {
-                switch (MessageBox.Show("Es wurde im Netzwerk eine Bridge mit der IP " + bridgeInfos[0].IpAddress + " gefunden.\nSoll diese verbunden werden?",
-                    "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-                {
-                    case DialogResult.Yes:
-                        if (await m_Controller.ConnectBridge(bridgeInfos[0].IpAddress))
-                        {
-                            txt_BridgeIp.Text = bridgeInfos[0].IpAddress;
-                            Properties.Settings.Default.lastBridgeIp = bridgeInfos[0].IpAddress;
-                            Properties.Settings.Default.Save();
-                            btn_ConnectBridge.Enabled = false;
-                            btn_ReadParameters.Enabled = true;
-                        }
-                        break;
-                    case DialogResult.No:
-                        txt_BridgeIp.Text = bridgeInfos[0].IpAddress;
-                        btn_ConnectBridge.Enabled = true;
-                        break;
-                    default: //Cancel
-                        return;
-                }
-            }
-            else
-            {
-                //Meherere Bridges gefunden
-                throw new NotImplementedException();
-            }
-        }
-
-        private async void btn_ConnectBridge_Click(object sender, EventArgs e)
-        {
-            if (await m_Controller.ConnectBridge(txt_BridgeIp.Text))
-            {
-                Properties.Settings.Default.lastBridgeIp = txt_BridgeIp.Text;
-                Properties.Settings.Default.Save();
-                btn_ConnectBridge.Enabled = false;
-                btn_ReadParameters.Enabled = true;
-            }
-        }
-
-        private void btn_ReadParameters_Click(object sender, EventArgs e)
-        {
-            m_Controller.ReadParameters(getSelectedParams(), getAnonymizeOptions());
-            
-            if (MessageBox.Show("Parameter wurden erfolgreich ausgelesen.\nSollen diese in eine Datei gespeichert werden?",
-                "Bridge gefunden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                saveFileDialog.Title = "Parameter-Datei speichern";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    m_Controller.SaveParameterFile(saveFileDialog.FileName); //TODO: Ergebnis anzeigen
-            }
-            else //UNDONE: "Cancel" and "No" Handling!
-            {
-                //m_Controller.Parameters = null;
-            }
-
-            btn_ShowParameters.Enabled = true;
-        }
-
-        private void btn_ShowParameters_Click(object sender, EventArgs e)
-        {
-            m_Controller.VisualizeParameters();
-
-            //var paramView = new ParameterView();
-            //paramView.ApplyParameters(m_Controller.Parameters);
-
-            //paramView.ShowDialog();
-        }
-
-        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion Hilfsfunktionen
     }
 }

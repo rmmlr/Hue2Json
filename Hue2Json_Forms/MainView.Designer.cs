@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.clb_Parameter = new System.Windows.Forms.CheckedListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_SearchBridge = new System.Windows.Forms.Button();
-            this.btn_ConnectBridge = new System.Windows.Forms.Button();
-            this.txt_BridgeIp = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_ReadParameters = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -46,14 +42,16 @@
             this.tabPage_Backup = new System.Windows.Forms.TabPage();
             this.tabPage_Restore = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_Bridge = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.bridgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bridgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sucheBridgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bridgeAuswahlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabel_Bridge = new System.Windows.Forms.ToolStripStatusLabel();
+            this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
@@ -70,43 +68,6 @@
             this.clb_Parameter.Name = "clb_Parameter";
             this.clb_Parameter.Size = new System.Drawing.Size(195, 154);
             this.clb_Parameter.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(184, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Bridge IP";
-            // 
-            // btn_SearchBridge
-            // 
-            this.btn_SearchBridge.Location = new System.Drawing.Point(16, 46);
-            this.btn_SearchBridge.Name = "btn_SearchBridge";
-            this.btn_SearchBridge.Size = new System.Drawing.Size(157, 23);
-            this.btn_SearchBridge.TabIndex = 2;
-            this.btn_SearchBridge.Text = "Suche Bridge";
-            this.btn_SearchBridge.UseVisualStyleBackColor = true;
-            this.btn_SearchBridge.Click += new System.EventHandler(this.btn_SearchBridge_Click);
-            // 
-            // btn_ConnectBridge
-            // 
-            this.btn_ConnectBridge.Enabled = false;
-            this.btn_ConnectBridge.Location = new System.Drawing.Point(359, 46);
-            this.btn_ConnectBridge.Name = "btn_ConnectBridge";
-            this.btn_ConnectBridge.Size = new System.Drawing.Size(157, 23);
-            this.btn_ConnectBridge.TabIndex = 3;
-            this.btn_ConnectBridge.Text = "Verbinde Bridge";
-            this.btn_ConnectBridge.UseVisualStyleBackColor = true;
-            this.btn_ConnectBridge.Click += new System.EventHandler(this.btn_ConnectBridge_Click);
-            // 
-            // txt_BridgeIp
-            // 
-            this.txt_BridgeIp.Location = new System.Drawing.Point(244, 46);
-            this.txt_BridgeIp.Name = "txt_BridgeIp";
-            this.txt_BridgeIp.Size = new System.Drawing.Size(100, 20);
-            this.txt_BridgeIp.TabIndex = 4;
             // 
             // label2
             // 
@@ -223,7 +184,7 @@
             this.tabPage_Restore.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Restore.Name = "tabPage_Restore";
             this.tabPage_Restore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Restore.Size = new System.Drawing.Size(504, 372);
+            this.tabPage_Restore.Size = new System.Drawing.Size(511, 372);
             this.tabPage_Restore.TabIndex = 1;
             this.tabPage_Restore.Text = "Restore";
             this.tabPage_Restore.UseVisualStyleBackColor = true;
@@ -238,6 +199,12 @@
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel_Bridge
+            // 
+            this.toolStripStatusLabel_Bridge.Name = "toolStripStatusLabel_Bridge";
+            this.toolStripStatusLabel_Bridge.Size = new System.Drawing.Size(84, 17);
+            this.toolStripStatusLabel_Bridge.Text = "[Status Bridge]";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -250,6 +217,23 @@
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.beendenToolStripMenuItem});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "Datei";
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            // 
             // bridgeToolStripMenuItem
             // 
             this.bridgeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -259,32 +243,12 @@
             this.bridgeToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.bridgeToolStripMenuItem.Text = "Bridge";
             // 
-            // dateiToolStripMenuItem
-            // 
-            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.beendenToolStripMenuItem});
-            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.dateiToolStripMenuItem.Text = "Datei";
-            // 
-            // beendenToolStripMenuItem
-            // 
-            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.beendenToolStripMenuItem.Text = "Beenden";
-            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
-            // 
-            // überToolStripMenuItem
-            // 
-            this.überToolStripMenuItem.Name = "überToolStripMenuItem";
-            this.überToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.überToolStripMenuItem.Text = "Über";
-            // 
             // sucheBridgeToolStripMenuItem
             // 
             this.sucheBridgeToolStripMenuItem.Name = "sucheBridgeToolStripMenuItem";
             this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucheBridgeToolStripMenuItem.Text = "Suche Bridge";
+            this.sucheBridgeToolStripMenuItem.Click += new System.EventHandler(this.sucheBridgeToolStripMenuItem_Click);
             // 
             // bridgeAuswahlToolStripMenuItem
             // 
@@ -293,23 +257,30 @@
             this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bridgeAuswahlToolStripMenuItem.Text = "Bridge Auswahl";
             // 
-            // toolStripStatusLabel_Bridge
+            // überToolStripMenuItem
             // 
-            this.toolStripStatusLabel_Bridge.Name = "toolStripStatusLabel_Bridge";
-            this.toolStripStatusLabel_Bridge.Size = new System.Drawing.Size(84, 17);
-            this.toolStripStatusLabel_Bridge.Text = "[Status Bridge]";
+            this.überToolStripMenuItem.Name = "überToolStripMenuItem";
+            this.überToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.überToolStripMenuItem.Text = "Über";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen...";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 526);
-            this.Controls.Add(this.btn_SearchBridge);
-            this.Controls.Add(this.btn_ConnectBridge);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.txt_BridgeIp);
             this.Controls.Add(this.tabControl1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -333,10 +304,6 @@
         #endregion
 
         private System.Windows.Forms.CheckedListBox clb_Parameter;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_SearchBridge;
-        private System.Windows.Forms.Button btn_ConnectBridge;
-        private System.Windows.Forms.TextBox txt_BridgeIp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_ReadParameters;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
@@ -358,6 +325,8 @@
         private System.Windows.Forms.ToolStripMenuItem sucheBridgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bridgeAuswahlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem überToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
