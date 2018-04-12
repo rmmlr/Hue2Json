@@ -9,6 +9,9 @@ using Rca.Hue2Json.Remapping;
 
 namespace Hue2Json_Tests
 {
+	/// <summary>
+	/// Tests für das RemappingInfo-Objekt
+	/// </summary>
 	[TestClass]
 	public class RemappingInfo_Tests
 	{

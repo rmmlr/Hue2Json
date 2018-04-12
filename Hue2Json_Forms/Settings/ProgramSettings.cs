@@ -49,7 +49,7 @@ namespace Rca.Hue2Json.Settings
             try
             {
                 if (File.Exists(path))
-                    File.Move(path, path.Substring(0, path.Length - 7) + "bak");
+                    File.Move(path, path.Substring(0, path.Length - 6) + "bak");
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace Rca.Hue2Json.Settings
         /// <returns>ProgramSettings Objekt</returns>
         public static ProgramSettings FromFile(string path)
         {
-            if (File.Exists(path))
+            if (!File.Exists(path))
                 throw new FileNotFoundException("Die angegebene Einstellungsdatei (" + path + ") konnte nicht gefunden werden.");
 
             
