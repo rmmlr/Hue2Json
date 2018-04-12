@@ -53,6 +53,11 @@ namespace Rca.Hue2Json
         /// </summary>
         public bool DevMode { get; set; }
 
+        /// <summary>
+        /// Bridgesimulation aktiv
+        /// </summary>
+        public bool SimMode { get; set; }
+
         #endregion Properties
 
         #region Constructor
@@ -76,6 +81,9 @@ namespace Rca.Hue2Json
         /// <returns>IP Ardessen der gefunden Bridges</returns>
         public async Task<BridgeInfo[]> ScanBridges()
         {
+            if (SimMode)
+                return new BridgeInfo[1] { new BridgeInfo { Name = "Simulated Bridge", BridgeId = "simulation", IpAddress = "255.255.255.255" } };
+            
             var bridgeInfos = new List<BridgeInfo>();
 
             IBridgeLocator locator = new HttpBridgeLocator();

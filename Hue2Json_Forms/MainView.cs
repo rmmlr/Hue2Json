@@ -38,11 +38,6 @@ namespace Rca.Hue2Json
 
             this.Text = "Hue2Json - " + Application.ProductVersion;
 
-#if DEBUG
-            btn_ReadParameters.Enabled = true;
-            btn_ShowParameters.Enabled = true;
-#endif
-
 
             m_Controller = new Controller(settings);
         }
@@ -52,20 +47,21 @@ namespace Rca.Hue2Json
             if (args.Any(x => x.ToLower().Contains("devmode")))
             {
                 m_Controller.DevMode = true;
-                //m_Controller.LoadParameterFile(Properties.Settings.Default.DebugParameterPath);
+                btn_ReadParameters.Enabled = true;
                 btn_ShowParameters.Enabled = true;
+            }
+
+            if (args.Any(x => x.ToLower().Contains("sim")))
+            {
+                m_Controller.SimMode = true;
             }
         }
         #endregion Constructor
 
         #region Benutzereingaben verarbeiten
-        private void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-#if !DEBUG
             var bridgeInfos = await m_Controller.ScanBridges();
-#else
-            var bridgeInfos = new BridgeInfo[1] { new BridgeInfo { Name = "MyBridge", BridgeId = "MyBridgeId", IpAddress = "255.255.255.255" } };
-#endif
 
             if (bridgeInfos.Length > 0)
             {
