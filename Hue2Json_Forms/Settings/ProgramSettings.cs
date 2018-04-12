@@ -19,7 +19,7 @@ namespace Rca.Hue2Json.Settings
 
         #region Properties
 
-        public Version Version { get; set; }
+        public string Version { get; set; }
 
         public BridgeNameDisplayEnum BridgeNameDisplay { get; set; }
 
@@ -59,7 +59,7 @@ namespace Rca.Hue2Json.Settings
             using (FileStream fs = File.Create(path))
             {
                 //Aktuelle Version eintragen
-                Version = typeof(ProgramSettings).Assembly.GetName().Version;
+                Version = typeof(ProgramSettings).Assembly.GetName().Version.ToString();
 
                 var xs = new XmlSerializer(typeof(ProgramSettings));
 
@@ -91,7 +91,7 @@ namespace Rca.Hue2Json.Settings
         {
             return new ProgramSettings
             {
-                Version = typeof(ProgramSettings).Assembly.GetName().Version,
+                Version = typeof(ProgramSettings).Assembly.GetName().Version.ToString(),
                 BridgeNameDisplay = BridgeNameDisplayEnum.NameAndIp
             };
         }
