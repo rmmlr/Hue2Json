@@ -1,4 +1,5 @@
 ﻿using Q42.HueApi.Models.Bridge;
+using Rca.Hue2Json.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rca.Hue2Json
 {
-    public class BridgeInfo
+    public class BridgeInfo : PublicConfig
     {
         #region Member
 
@@ -16,20 +17,14 @@ namespace Rca.Hue2Json
 
         #region Properties
         /// <summary>
-        /// IP der Hue Bridge
-        /// </summary>
-        public string IpAddress { get; set; }
-
-        /// <summary>
-        /// eindeutige Hardware-ID der Hue Bridge
-        /// </summary>
-        public string BridgeId { get; set; }
-
-        /// <summary>
         /// Name der Hue Bridge
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// IP der Hue Bridge
+        /// </summary>
+        public string IpAddress { get; set; }
         #endregion Properties
 
         #region Constructor
@@ -41,12 +36,26 @@ namespace Rca.Hue2Json
 
         }
 
-        public BridgeInfo(LocatedBridge locatedBridge, string name = null)
+        public BridgeInfo(LocatedBridge locatedBridge)
         {
             IpAddress = locatedBridge.IpAddress;
             BridgeId = locatedBridge.BridgeId;
-            Name = name;
         }
+
+        public BridgeInfo(PublicConfig config)
+        {
+            Name = config.Name;
+            DataStoreVersion = config.DataStoreVersion;
+            SwVersion = config.SwVersion;
+            ApiVersion = config.ApiVersion;
+            Mac = config.Mac;
+            BridgeId = config.BridgeId;
+            FactoryNew = config.FactoryNew;
+            ReplacesBridgeId = config.ReplacesBridgeId;
+            ModelId = config.ModelId;
+            StarterKitId = config.StarterKitId;
+        }
+
 
         #endregion Constructor
 
