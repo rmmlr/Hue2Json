@@ -1,4 +1,5 @@
 ﻿using Rca.Hue2Json.Settings;
+using Rca.Hue2Json.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,8 @@ namespace Rca.Hue2Json
         #region Benutzereingaben verarbeiten
         private async void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
+
             var bridgeInfos = await m_Controller.ScanBridges();
 
             if (bridgeInfos.Length > 0)
@@ -82,6 +85,8 @@ namespace Rca.Hue2Json
             {
                 MessageBox.Show("Es konnte keine Hue Bridge im Netzwerk gefunden werden.\nStellen Sie sicher das sich die Hue Bridge im selben Netzwerk befindet.", "Keine Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            Cursor = DefaultCursor;
         }
 
 
@@ -95,12 +100,20 @@ namespace Rca.Hue2Json
             var menuItem = (ToolStripMenuItem)sender;
             menuItem.Checked = true;
 
-            if (await m_Controller.ConnectBridge(((BridgeInfo)menuItem.Tag).IpAddress))
+            switch (await m_Controller.ConnectBridge(((BridgeInfo)menuItem.Tag).IpAddress))
             {
-                toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + ((BridgeInfo)menuItem.Tag).IpAddress + ")";
-                Properties.Settings.Default.lastBridgeIp = ((BridgeInfo)menuItem.Tag).IpAddress;
-                Properties.Settings.Default.Save();
-                btn_ReadParameters.Enabled = true;
+                case BridgeResult.SuccessfulConnected:
+                    toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + ((BridgeInfo)menuItem.Tag).IpAddress + ")";
+                    Properties.Settings.Default.lastBridgeIp = ((BridgeInfo)menuItem.Tag).IpAddress;
+                    Properties.Settings.Default.Save();
+                    btn_ReadParameters.Enabled = true;
+                    break;
+                case BridgeResult.UnauthorizedUser:
+                    var pressButtonDlg = new BridgeButtonView();
+                    pressButtonDlg.ShowDialog();
+                    break;
+                default:
+                    throw new Exception("Fehler beim Verbinden der Hue Bridge.");
             }
         }
 

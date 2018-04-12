@@ -1,6 +1,8 @@
-﻿using Q42.HueApi;
+﻿using Newtonsoft.Json;
+using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
+using Rca.Hue2Json.Api.Models;
 using Rca.Hue2Json.HtmlConverter;
 using Rca.Hue2Json.Remapping;
 using Rca.Hue2Json.Settings;
@@ -9,9 +11,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml.Serialization;
 
 namespace Rca.Hue2Json
@@ -93,9 +97,32 @@ namespace Rca.Hue2Json
             foreach (LocatedBridge bridge in bridges)
             {
                 //TODO: friendlyName abfragen, per description.xml oder anonyme Anfrage auf api (http://<bridge-ip>/api/config)
-                string name = "";
+                try
+                {
+                    string json = string.Empty;
+                    string url = @"http://" + bridge.IpAddress + "/api/config";
 
-                LocatedBridges.Add(new BridgeInfo(bridge, name));
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Method = "GET";
+                    //request.AutomaticDecompression = DecompressionMethods.GZip;
+
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        json = reader.ReadToEnd();
+                    }
+
+                    var info = new BridgeInfo(JsonConvert.DeserializeObject<PublicConfig>(json));
+                    info.IpAddress = bridge.IpAddress;
+
+                    bridgeInfos.Add(info);
+                }
+                catch (Exception)
+                {
+                    //Ohne weitere Infos fortfahren
+                    bridgeInfos.Add(new BridgeInfo(bridge));
+                }
             }
 
             return bridgeInfos.ToArray();
@@ -105,8 +132,8 @@ namespace Rca.Hue2Json
         /// Verbindung zu einer bekannten Bridge herstellen
         /// </summary>
         /// <param name="bridgeIp">IP Adresse der zu verbindenden Bridge</param>
-        /// <returns>true: Erfolgreich verbunden; false: Verbindungsaufbau fehlgeschlagen</returns>
-        public async Task<bool> ConnectBridge(string bridgeIp)
+        /// <returns></returns>
+        public async Task<BridgeResult> ConnectBridge(string bridgeIp)
         {
             try
             {
@@ -120,17 +147,21 @@ namespace Rca.Hue2Json
                 }
                 m_HueClient.Initialize(appKey);
 
-                //return await m_Client.GetBridgeAsync();
+                return BridgeResult.SuccessfulConnected;
             }
             catch (Exception ex)
             {
-                //TODO: MsgBox: LinkButton drücken
-                throw ex;
+                if (ex.Message.Contains("Link button not pressed"))
+                    return BridgeResult.UnauthorizedUser;
+                else
+                    throw ex;
             }
-
-            return true;
         }
 
+        public BridgeResult CreateUser(string bridgeIp)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Parameter auslesen
