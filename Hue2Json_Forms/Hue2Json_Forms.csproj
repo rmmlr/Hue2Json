@@ -58,6 +58,7 @@
     <Compile Include="Api\Models\PublicConfig.cs" />
     <Compile Include="AppKeyManager.cs" />
     <Compile Include="BridgeInfo.cs" />
+    <Compile Include="BridgeResult.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="HtmlConverter\HtmlExtensions.cs" />
     <Compile Include="HueParameterEnum.cs" />
