@@ -8,5 +8,8 @@
     <Setting Name="DebugParameterPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\hue_params_elias.json</Value>
     </Setting>
+    <Setting Name="DefaultSettingsFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hue2json.config</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
