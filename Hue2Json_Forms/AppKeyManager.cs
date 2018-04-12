@@ -19,6 +19,8 @@ namespace Rca.Hue2Json
         #region Member
         string m_AppKey;
 
+        Dictionary<string, string> m_Keys;
+
         #endregion Member
 
         #region Properties
@@ -26,6 +28,7 @@ namespace Rca.Hue2Json
         /// Personal app key
         /// Returns null, when app key is not available
         /// </summary>
+        [Obsolete]
         public string AppKey
         {
             get
@@ -57,6 +60,8 @@ namespace Rca.Hue2Json
         /// </summary>
         public AppKeyManager()
         {
+            m_Keys = new Dictionary<string, string>();
+
             if (File.Exists(APPKEY_FILENAME))
                 loadAppKey();
         }
@@ -64,7 +69,42 @@ namespace Rca.Hue2Json
         #endregion Constructor
 
         #region Services
+        /// <summary>
+        /// Nimmt einen neuen Key auf 
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <param name="key">AppKey</param>
+        /// <param name="replaceKey">Vorhandenen Eintrag überschreiben</param>
+        /// <exception cref="ArgumentException">Key zur angegebenen Bridge schon vorhanden</exception>
+        public void AddKey(string bridgeId, string key, bool replaceKey)
+        {
+            if (replaceKey && m_Keys.ContainsKey(bridgeId.ToLower()))
+                m_Keys.Remove(bridgeId.ToLower());
 
+            m_Keys.Add(bridgeId.ToLower(), key);
+        }
+
+        /// <summary>
+        /// Gibt den AppKey zur angegebenen Bridge zurück
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <returns>AppKey</returns>
+        /// <exception cref="KeyNotFoundException">Kein AppKey zur angegebenen ID verfügbar</exception>
+        public string GetKey(string bridgeId)
+        {
+            return m_Keys[bridgeId.ToLower()];
+        }
+
+        /// <summary>
+        /// Versucht den AppKey zur angegebenen Bridge zurückzugeben
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <param name="key">AppKey</param>
+        /// <returns>AppKey gefunden</returns>
+        public bool TryGetKey(string bridgeId, out string key)
+        {
+            return m_Keys.TryGetValue(bridgeId.ToLower(), out key);
+        }
 
         #endregion Services
 
@@ -73,6 +113,7 @@ namespace Rca.Hue2Json
         /// Safe the app key to file
         /// </summary>
         /// <param name="appKey"></param>
+        [Obsolete]
         void safeAppKey(string appKey)
         {
             m_AppKey = appKey;
@@ -90,6 +131,7 @@ namespace Rca.Hue2Json
         /// Load the app key from file
         /// </summary>
         /// <returns>app key</returns>
+        [Obsolete]
         string loadAppKey()
         {
             if (!File.Exists(APPKEY_FILENAME))
