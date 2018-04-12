@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymizeOptions.cs" />
+    <Compile Include="Api\Models\PublicConfig.cs" />
     <Compile Include="AppKeyManager.cs" />
     <Compile Include="BridgeInfo.cs" />
     <Compile Include="Controller.cs" />
