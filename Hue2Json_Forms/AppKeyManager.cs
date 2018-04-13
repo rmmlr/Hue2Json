@@ -100,6 +100,9 @@ namespace Rca.Hue2Json
         #region Internal services
         string cleanBridgeId(string bridgeId)
         {
+            if (string.IsNullOrWhiteSpace(bridgeId))
+                throw new ArgumentException("Ungültiger AppKey, Key darf nicht leer sein");
+
             return bridgeId.Trim().ToLower();
         }
 
