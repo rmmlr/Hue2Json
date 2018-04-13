@@ -83,7 +83,8 @@ Unter [Contributors](https://github.com/rmmlr/Hue2Json/contributors) können wei
 ### Open Source Project Credits
 
 * [Q42.HueApi](https://github.com/Q42/Q42.HueApi) Bedienung der Hue-API
-* [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung
+* [Newtonsoft.Json](https://www.newtonsoft.com/json) Parameter-Serialisierung und Deserialisierung der Hue-API Antworten
+* [Newtonsoft.Json.Bson](https://www.newtonsoft.com/json) AppKey-Serialisierung
 * [UIkit](https://github.com/uikit/uikit) Parameter-Visualisierung
 
 ## License
