@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,6 +39,7 @@ namespace Rca.Hue2Json
 
             //Form initialisieren
             InitializeComponent();
+            devToolStripMenuItem1.Visible = false;
             setupParameterSelection();
             setAllParameters(true);
             toolStripStatusLabel_Bridge.Text = "keine Bridge verbunden";
@@ -51,6 +53,7 @@ namespace Rca.Hue2Json
             if (args.Any(x => x.ToLower().Contains("devmode")))
             {
                 m_Controller.DevMode = true;
+                devToolStripMenuItem1.Visible = true;
                 btn_ReadParameters.Enabled = true;
                 btn_ShowParameters.Enabled = true;
             }
@@ -104,6 +107,7 @@ namespace Rca.Hue2Json
             var menuItem = (ToolStripMenuItem)sender;
             menuItem.Checked = true;
 
+            
             switch (await m_Controller.ConnectBridge((BridgeInfo)menuItem.Tag))
             {
                 case BridgeResult.SuccessfulConnected:
@@ -114,8 +118,8 @@ namespace Rca.Hue2Json
                     break;
                 case BridgeResult.UnauthorizedUser:
                 case BridgeResult.MissingUser:
-                    var pressButtonDlg = new BridgeButtonView();
-                    pressButtonDlg.ShowDialog();
+                    //var pressButtonDlg = new BridgeButtonView();
+                    //pressButtonDlg.ShowDialog();
                     break;
                 default:
                     throw new Exception("Fehler beim Verbinden der Hue Bridge.");
@@ -211,6 +215,38 @@ namespace Rca.Hue2Json
 
             return opts.ToArray();
         }
+
+        void newUser(BridgeInfo bridge)
+        {
+            var source = new CancellationTokenSource();
+            var token = source.Token;
+
+            var pressButtonDlg = new BridgeButtonView(source);
+
+            var task = Task.Run(async () => {
+                while (true)
+                {
+                    if (token.IsCancellationRequested)
+                        break;
+
+                    System.Diagnostics.Debug.WriteLine("Is running");
+
+                    //if (await m_Controller.CreateUser(bridge) == BridgeResult.LinkButtonNotPressed)
+                    //    continue;
+
+                    Thread.Sleep(100);
+                }
+            }, token);
+
+
+            pressButtonDlg.ShowDialog();
+
+        }
         #endregion Hilfsfunktionen
+
+        private void newUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            newUser(null);
+        }
     }
 }
