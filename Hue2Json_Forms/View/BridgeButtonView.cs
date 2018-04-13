@@ -21,6 +21,7 @@ namespace Rca.Hue2Json.View
         #region Member
         CancellationTokenSource m_CancellationSource;
         int m_TimeoutCounter;
+        TimeSpan m_TimeToCancel;
         #endregion
 
         #region Properties
@@ -36,9 +37,12 @@ namespace Rca.Hue2Json.View
             m_CancellationSource = source;
             InitializeComponent();
 
-            //label1.Text = "1st line" + Environment.NewLine + "another line...";
+            this.Text = "Autorisierung erforderlich...";
+            lbl_Message.Text = "Die Autorisierung eines neuen Benutzers auf der Philips Hue Bridge erfordert eine Bestätigung." + Environment.NewLine
+                + "Dazu bitte den \"Link-Button\" an der Bridge betätigen.";
 
             Timeout = 60;
+            m_TimeToCancel = new TimeSpan(0, 0, Timeout);
             timer.Interval = TIMER_INTERVALL;
             timer.Start();
         }
@@ -49,6 +53,8 @@ namespace Rca.Hue2Json.View
         {
             timer.Stop();
             m_CancellationSource.Cancel();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -64,8 +70,12 @@ namespace Rca.Hue2Json.View
             {
                 timer.Stop();
                 m_CancellationSource.Cancel();
+                this.DialogResult = DialogResult.Abort;
             }
             progressBar.Value = progressValue;
+
+            m_TimeToCancel -= new TimeSpan(0, 0, 0, 0, TIMER_INTERVALL);
+            lbl_ProgressTime.Text = m_TimeToCancel.ToString(@"mm\:ss\,f");
         }
         #endregion
     }

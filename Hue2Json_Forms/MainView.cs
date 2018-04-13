@@ -106,20 +106,20 @@ namespace Rca.Hue2Json
 
             var menuItem = (ToolStripMenuItem)sender;
             menuItem.Checked = true;
+            var bridge = (BridgeInfo)menuItem.Tag;
 
-            
-            switch (await m_Controller.ConnectBridge((BridgeInfo)menuItem.Tag))
+
+            switch (await m_Controller.ConnectBridge(bridge))
             {
                 case BridgeResult.SuccessfulConnected:
-                    toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + ((BridgeInfo)menuItem.Tag).IpAddress + ")";
-                    Properties.Settings.Default.lastBridgeIp = ((BridgeInfo)menuItem.Tag).IpAddress;
+                    toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + (bridge).IpAddress + ")";
+                    Properties.Settings.Default.lastBridgeIp = bridge.IpAddress;
                     Properties.Settings.Default.Save();
                     btn_ReadParameters.Enabled = true;
                     break;
                 case BridgeResult.UnauthorizedUser:
                 case BridgeResult.MissingUser:
-                    //var pressButtonDlg = new BridgeButtonView();
-                    //pressButtonDlg.ShowDialog();
+                    newUser(bridge);
                     break;
                 default:
                     throw new Exception("Fehler beim Verbinden der Hue Bridge.");
@@ -216,8 +216,9 @@ namespace Rca.Hue2Json
             return opts.ToArray();
         }
 
-        void newUser(BridgeInfo bridge)
+        bool newUser(BridgeInfo bridge)
         {
+            var result = false;
             var source = new CancellationTokenSource();
             var token = source.Token;
 
@@ -226,13 +227,23 @@ namespace Rca.Hue2Json
             var task = Task.Run(async () => {
                 while (true)
                 {
-                    if (token.IsCancellationRequested)
+                    if (token.IsCancellationRequested || result)
                         break;
 
-                    System.Diagnostics.Debug.WriteLine("Is running");
+                    System.Diagnostics.Debug.WriteLine("Waiting for Link-Button");
 
-                    //if (await m_Controller.CreateUser(bridge) == BridgeResult.LinkButtonNotPressed)
-                    //    continue;
+                    switch (await m_Controller.CreateUser(bridge))
+                    {
+                        case BridgeResult.LinkButtonNotPressed:
+                            continue;
+                        case BridgeResult.UserAlreadyExists:
+                            throw new NotImplementedException();
+                        case BridgeResult.UserCreated:
+                            MessageBox.Show("Der neue Benutzer wurde erfolgreich auf der Hue Bridge angelegt.", "Autorisierung erfolgreich", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            result = true;
+                            break;
+                    }
+                        
 
                     Thread.Sleep(100);
                 }
@@ -241,6 +252,7 @@ namespace Rca.Hue2Json
 
             pressButtonDlg.ShowDialog();
 
+            return result;
         }
         #endregion Hilfsfunktionen
 
