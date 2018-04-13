@@ -82,7 +82,7 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Sucht im Netzwerk nach Bridges
         /// </summary>
-        /// <returns>IP Ardessen der gefunden Bridges</returns>
+        /// <returns>Gefundene Bridges</returns>
         public async Task<BridgeInfo[]> ScanBridges()
         {
             if (SimMode)
@@ -167,6 +167,11 @@ namespace Rca.Hue2Json
                 return BridgeResult.MissingUser;
         }
 
+        /// <summary>
+        /// Neuen User auf Bridge anlegen
+        /// </summary>
+        /// <param name="bridge">Bridge</param>
+        /// <returns></returns>
         public async Task<BridgeResult> CreateUser(BridgeInfo bridge)
         {
             if (await ConnectBridge(bridge) == BridgeResult.SuccessfulConnected)
