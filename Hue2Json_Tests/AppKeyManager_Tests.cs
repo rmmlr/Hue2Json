@@ -10,7 +10,7 @@ namespace Hue2Json_Tests
         [TestMethod, TestCategory("AppKeyManager")]
         public void Serialize()
         {
-            string bridgeName = "Test Brideg1";
+            string bridgeName = "Test Bridge1";
             var expectedResult = new AppKeyManager();
 
             expectedResult.AddKey(bridgeName, "TestKey-123");
