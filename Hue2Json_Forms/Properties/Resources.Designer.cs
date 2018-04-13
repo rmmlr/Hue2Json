@@ -59,5 +59,15 @@ namespace Rca.Hue2Json.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pushlink_bridgev2 {
+            get {
+                object obj = ResourceManager.GetObject("pushlink_bridgev2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
