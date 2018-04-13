@@ -10,27 +10,22 @@ using System.Threading.Tasks;
 namespace Rca.Hue2Json
 {
     /// <summary>
-    /// Manage the personal app key
+    /// Verwaltet die generierten AppKeys
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class AppKeyManager
     {
         #region Constants
-        const string APPKEY_FILENAME = "PersonalAppKeys";
+        const string APPKEY_FILENAME = "AppAuth";
         #endregion
 
         #region Member
-        [JsonProperty]
+        [JsonProperty(PropertyName = "Keys")]
         Dictionary<string, string> m_Keys;
 
         #endregion Member
 
         #region Properties
-
-        /// <summary>
-        /// App key is available
-        /// </summary>
-        public bool IsAvailable { get; set; }
 
         #endregion Properties
 
@@ -68,10 +63,12 @@ namespace Rca.Hue2Json
         /// <exception cref="ArgumentException">Key zur angegebenen Bridge schon vorhanden</exception>
         public void AddKey(string bridgeId, string key, bool replaceKey = false)
         {
-            if (replaceKey && m_Keys.ContainsKey(bridgeId.ToLower()))
-                m_Keys.Remove(bridgeId.ToLower());
+            var id = cleanBridgeId(bridgeId);
 
-            m_Keys.Add(bridgeId.ToLower(), key);
+            if (replaceKey && m_Keys.ContainsKey(id))
+                m_Keys.Remove(id);
+
+            m_Keys.Add(id, key);
 
             toBson();
         }
@@ -84,7 +81,7 @@ namespace Rca.Hue2Json
         /// <exception cref="KeyNotFoundException">Kein AppKey zur angegebenen ID verfügbar</exception>
         public string GetKey(string bridgeId)
         {
-            return m_Keys[bridgeId.ToLower()];
+            return m_Keys[cleanBridgeId(bridgeId)];
         }
 
         /// <summary>
@@ -95,12 +92,17 @@ namespace Rca.Hue2Json
         /// <returns>AppKey gefunden</returns>
         public bool TryGetKey(string bridgeId, out string key)
         {
-            return m_Keys.TryGetValue(bridgeId.ToLower(), out key);
+            return m_Keys.TryGetValue(cleanBridgeId(bridgeId), out key);
         }
 
         #endregion Services
 
         #region Internal services
+        string cleanBridgeId(string bridgeId)
+        {
+            return bridgeId.Trim().ToLower();
+        }
+
         /// <summary>
         /// Serialisieren
         /// </summary>
@@ -111,9 +113,6 @@ namespace Rca.Hue2Json
             {
                 var serializer = new JsonSerializer();
                 serializer.Serialize(writer, this);
-
-                fs.Flush();
-                fs.Close();
             }
         }
 
@@ -131,9 +130,6 @@ namespace Rca.Hue2Json
                 JsonSerializer serializer = new JsonSerializer();
                 var man = serializer.Deserialize<AppKeyManager>(reader);
                 m_Keys = man.m_Keys;
-
-                fs.Flush();
-                fs.Close();
             }
         }
 
