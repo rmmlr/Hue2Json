@@ -100,7 +100,7 @@ namespace Rca.Hue2Json
             var menuItem = (ToolStripMenuItem)sender;
             menuItem.Checked = true;
 
-            switch (await m_Controller.ConnectBridge(((BridgeInfo)menuItem.Tag).IpAddress))
+            switch (await m_Controller.ConnectBridge((BridgeInfo)menuItem.Tag))
             {
                 case BridgeResult.SuccessfulConnected:
                     toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + ((BridgeInfo)menuItem.Tag).IpAddress + ")";
@@ -109,6 +109,7 @@ namespace Rca.Hue2Json
                     btn_ReadParameters.Enabled = true;
                     break;
                 case BridgeResult.UnauthorizedUser:
+                case BridgeResult.MissingUser:
                     var pressButtonDlg = new BridgeButtonView();
                     pressButtonDlg.ShowDialog();
                     break;

@@ -11,6 +11,9 @@ namespace Rca.Hue2Json
         Error = -1,
         SuccessfulConnected,
         UnauthorizedUser,
-        LinkButtonNotPressed
+        MissingUser,
+        LinkButtonNotPressed,
+        UserCreated,
+        UserAlreadyExists
     }
 }

@@ -133,34 +133,65 @@ namespace Rca.Hue2Json
         /// </summary>
         /// <param name="bridgeIp">IP Adresse der zu verbindenden Bridge</param>
         /// <returns></returns>
-        public async Task<BridgeResult> ConnectBridge(string bridgeIp)
+        public async Task<BridgeResult> ConnectBridge(BridgeInfo bridge)
         {
+            var appKey = "";
+
+            if (m_AppKeyManager.TryGetKey(bridge.BridgeId, out appKey))
+            {
+                try
+                {
+                    m_HueClient = new LocalHueClient(bridge.IpAddress);
+                    m_HueClient.Initialize(appKey);
+
+                    //var appKey = m_AppKeyManager.AppKey;
+                    //if (String.IsNullOrEmpty(appKey))
+                    //{
+                    //    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
+                    //    m_AppKeyManager.AppKey = appKey;
+                    //}
+                    //
+
+                    return BridgeResult.SuccessfulConnected;
+                }
+                catch (Exception ex)
+                {
+                    //TODO: Antwort bei falschen AppKey?
+                    if (ex.Message.Contains("Link button not pressed"))
+                        return BridgeResult.UnauthorizedUser;
+                    else
+                        throw ex;
+                }
+            }
+            else
+                return BridgeResult.MissingUser;
+        }
+
+        public async Task<BridgeResult> CreateUser(BridgeInfo bridge)
+        {
+            if (await ConnectBridge(bridge) == BridgeResult.SuccessfulConnected)
+            {
+                //TODO Muss Client wieder getrennt werden?
+                return BridgeResult.UserAlreadyExists;
+            }
+
             try
             {
-                m_HueClient = new LocalHueClient(bridgeIp);
+                m_HueClient = new LocalHueClient(bridge.IpAddress);
 
-                //var appKey = m_AppKeyManager.AppKey;
-                //if (String.IsNullOrEmpty(appKey))
-                //{
-                //    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
-                //    m_AppKeyManager.AppKey = appKey;
-                //}
-                //m_HueClient.Initialize(appKey);
+                var appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
+                m_AppKeyManager.AddKey(bridge.BridgeId, appKey);
+                m_HueClient.Initialize(appKey);
 
-                return BridgeResult.SuccessfulConnected;
+                return BridgeResult.UserCreated;
             }
             catch (Exception ex)
             {
                 if (ex.Message.Contains("Link button not pressed"))
-                    return BridgeResult.UnauthorizedUser;
+                    return BridgeResult.LinkButtonNotPressed;
                 else
                     throw ex;
             }
-        }
-
-        public BridgeResult CreateUser(string bridgeIp)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
