@@ -20,31 +20,34 @@ namespace Rca.Hue2Json
         #endregion Member
 
         #region Constructor
-        public MainView()
+        public MainView(string[] args)
         {
-            //Einstellungen laden
+            //Pfad zur Konfigurationsdatei ermitteln
+            var configPath = Properties.Settings.Default.DefaultSettingsFileName;
+            if (args.Any(x => x.ToLower().Contains(".config")))
+            {
+                configPath = args.First(x => x.Contains(".config"));
+            }
+
+            //Konfigurationsdatei laden
             ProgramSettings settings = null;
-            if (File.Exists(Properties.Settings.Default.DefaultSettingsFileName))
-                settings = ProgramSettings.FromFile(Properties.Settings.Default.DefaultSettingsFileName);
+            if (File.Exists(configPath))
+                settings = ProgramSettings.FromFile(configPath);
             else
                 settings = ProgramSettings.CreateDefault();
 
-
-            #region Form initialisieren
+            //Form initialisieren
             InitializeComponent();
             setupParameterSelection();
             setAllParameters(true);
             toolStripStatusLabel_Bridge.Text = "keine Bridge verbunden";
-            #endregion
-
             this.Text = "Hue2Json - " + Application.ProductVersion;
 
-
+            //Controller initialisieren
             m_Controller = new Controller(settings);
-        }
 
-        public MainView(string[] args) : this()
-        {
+
+            //DevMode aktivieren
             if (args.Any(x => x.ToLower().Contains("devmode")))
             {
                 m_Controller.DevMode = true;
@@ -52,6 +55,7 @@ namespace Rca.Hue2Json
                 btn_ShowParameters.Enabled = true;
             }
 
+            //Bridge-Simulation aktivieren
             if (args.Any(x => x.ToLower().Contains("sim")))
             {
                 m_Controller.SimMode = true;

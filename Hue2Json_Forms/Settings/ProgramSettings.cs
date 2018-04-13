@@ -21,6 +21,9 @@ namespace Rca.Hue2Json.Settings
 
         public string Version { get; set; }
 
+        [XmlIgnore]
+        public string FilePath { get; private set; }
+
         public BridgeNameDisplayEnum BridgeNameDisplay { get; set; }
 
         #endregion Properties
@@ -41,8 +44,11 @@ namespace Rca.Hue2Json.Settings
         /// Serialisieren der Objektinstanz, als XML-Datei
         /// </summary>
         /// <param name="path">Dateipfad</param>
-        public void ToFile(string path)
+        public void ToFile(string path = null)
         {
+            if (string.IsNullOrWhiteSpace(path))
+                path = FilePath;
+
             if (!path.EndsWith(".config"))
                 throw new ArgumentException("Falsche Dateierweiterung der Einstellungsdatei, die Erweiterung muss *.config sein.");
 
@@ -55,16 +61,16 @@ namespace Rca.Hue2Json.Settings
             {
                 throw new ArgumentException("Vorhandene Einstellungsdatei kann nicht überschrieben werden.", ex);
             }
+
             //Neue Einstellungsdatei erzeugen
             using (FileStream fs = File.Create(path))
             {
                 //Aktuelle Version eintragen
                 Version = typeof(ProgramSettings).Assembly.GetName().Version.ToString();
+                FilePath = path;
 
                 var xs = new XmlSerializer(typeof(ProgramSettings));
-
                 xs.Serialize(fs, this);
-                fs.Close();
             }
         }
 
@@ -83,6 +89,8 @@ namespace Rca.Hue2Json.Settings
             var xs = new XmlSerializer(typeof(ProgramSettings));
 
             var settings = (ProgramSettings)xs.Deserialize(fs);
+
+            settings.FilePath = path;
 
             return settings;
         }
