@@ -67,7 +67,7 @@ namespace Rca.Hue2Json
         #endregion Constructor
 
         #region Benutzereingaben verarbeiten
-        private async void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
+        async void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
 
@@ -98,7 +98,7 @@ namespace Rca.Hue2Json
 
 
 
-        private async void connectBridge(object sender, EventArgs e)
+        void connectBridge(object sender, EventArgs e)
         {
             if (bridgeAuswahlToolStripMenuItem.DropDownItems.Count > 1)
                 foreach (ToolStripMenuItem item in bridgeAuswahlToolStripMenuItem.DropDownItems)
@@ -109,24 +109,24 @@ namespace Rca.Hue2Json
             var bridge = (BridgeInfo)menuItem.Tag;
 
 
-            switch (await m_Controller.ConnectBridge(bridge))
+            switch (m_Controller.ConnectBridge(bridge))
             {
                 case BridgeResult.SuccessfulConnected:
-                    toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + (bridge).IpAddress + ")";
-                    Properties.Settings.Default.lastBridgeIp = bridge.IpAddress;
-                    Properties.Settings.Default.Save();
-                    btn_ReadParameters.Enabled = true;
+                    bridgeConnected(bridge);
                     break;
                 case BridgeResult.UnauthorizedUser:
                 case BridgeResult.MissingUser:
-                    newUser(bridge);
+                    if (newUser(bridge))
+                        bridgeConnected(bridge);
+                    else
+                        throw new Exception("Fehler beim anlegen eines neuen Bridge-Benutzers.");
                     break;
                 default:
                     throw new Exception("Fehler beim Verbinden der Hue Bridge.");
             }
         }
 
-        private void btn_ReadParameters_Click(object sender, EventArgs e)
+        void btn_ReadParameters_Click(object sender, EventArgs e)
         {
             m_Controller.ReadParameters(getSelectedParams(), getAnonymizeOptions());
             
@@ -145,7 +145,7 @@ namespace Rca.Hue2Json
             btn_ShowParameters.Enabled = true;
         }
 
-        private void btn_ShowParameters_Click(object sender, EventArgs e)
+        void btn_ShowParameters_Click(object sender, EventArgs e)
         {
             m_Controller.VisualizeParameters();
 
@@ -155,9 +155,14 @@ namespace Rca.Hue2Json
             //paramView.ShowDialog();
         }
 
-        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        void beendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        void newUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            newUser(null);
         }
         #endregion Benutzereingaben verarbeiten
 
@@ -243,7 +248,7 @@ namespace Rca.Hue2Json
                             result = true;
                             break;
                     }
-                        
+
 
                     Thread.Sleep(100);
                 }
@@ -254,11 +259,15 @@ namespace Rca.Hue2Json
 
             return result;
         }
+
+        void bridgeConnected(BridgeInfo bridge)
+        {
+            toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + (bridge).IpAddress + ")";
+            Properties.Settings.Default.lastBridgeIp = bridge.IpAddress;
+            Properties.Settings.Default.Save();
+            btn_ReadParameters.Enabled = true;
+        }
         #endregion Hilfsfunktionen
 
-        private void newUserToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            newUser(null);
-        }
     }
 }

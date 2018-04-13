@@ -58,13 +58,14 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.Location = new System.Drawing.Point(282, 214);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancel.TabIndex = 4;
             this.btn_Cancel.Text = "Abbrechen";
             this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.btn_Cancel.Click += new System.EventHandler(this.cancelForm);
             // 
             // timer
             // 
@@ -102,6 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
             this.ClientSize = new System.Drawing.Size(369, 250);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_ProgressTime);
@@ -109,8 +111,13 @@
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(385, 288);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(385, 288);
             this.Name = "BridgeButtonView";
             this.Text = "Hue Bridge Button";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.cancelForm);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

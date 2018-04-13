@@ -133,7 +133,7 @@ namespace Rca.Hue2Json
         /// </summary>
         /// <param name="bridgeIp">IP Adresse der zu verbindenden Bridge</param>
         /// <returns></returns>
-        public async Task<BridgeResult> ConnectBridge(BridgeInfo bridge)
+        public BridgeResult ConnectBridge(BridgeInfo bridge)
         {
             var appKey = "";
 
@@ -143,14 +143,6 @@ namespace Rca.Hue2Json
                 {
                     m_HueClient = new LocalHueClient(bridge.IpAddress);
                     m_HueClient.Initialize(appKey);
-
-                    //var appKey = m_AppKeyManager.AppKey;
-                    //if (String.IsNullOrEmpty(appKey))
-                    //{
-                    //    appKey = await m_HueClient.RegisterAsync(APP_NAME, Environment.MachineName);
-                    //    m_AppKeyManager.AppKey = appKey;
-                    //}
-                    //
 
                     return BridgeResult.SuccessfulConnected;
                 }
@@ -174,7 +166,7 @@ namespace Rca.Hue2Json
         /// <returns></returns>
         public async Task<BridgeResult> CreateUser(BridgeInfo bridge)
         {
-            if (await ConnectBridge(bridge) == BridgeResult.SuccessfulConnected)
+            if (ConnectBridge(bridge) == BridgeResult.SuccessfulConnected)
             {
                 //TODO Muss Client wieder getrennt werden?
                 return BridgeResult.UserAlreadyExists;
@@ -311,7 +303,7 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Übertragen der Parameter auf die Bridge
         /// </summary>
-        public async void RestoreParameters()
+        public void RestoreParameters()
         {
             throw new NotImplementedException();
         }

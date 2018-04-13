@@ -17,11 +17,6 @@ namespace Rca.Hue2Json
 
         #region Properties
         /// <summary>
-        /// Name der Hue Bridge
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
         /// IP der Hue Bridge
         /// </summary>
         public string IpAddress { get; set; }

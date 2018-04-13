@@ -49,7 +49,7 @@ namespace Rca.Hue2Json.View
         #endregion
 
         #region Internal services
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void cancelForm(object sender, EventArgs e)
         {
             timer.Stop();
             m_CancellationSource.Cancel();
@@ -67,15 +67,13 @@ namespace Rca.Hue2Json.View
             int progressValue = (int)(m_TimeoutCounter / (double)(Timeout * 10 / TIMER_INTERVALL) );
 
             if (progressValue > 100)
+                cancelForm(sender, e);
+            else
             {
-                timer.Stop();
-                m_CancellationSource.Cancel();
-                this.DialogResult = DialogResult.Abort;
+                progressBar.Value = progressValue;
+                m_TimeToCancel -= new TimeSpan(0, 0, 0, 0, TIMER_INTERVALL);
+                lbl_ProgressTime.Text = m_TimeToCancel.ToString(@"mm\:ss\,f");
             }
-            progressBar.Value = progressValue;
-
-            m_TimeToCancel -= new TimeSpan(0, 0, 0, 0, TIMER_INTERVALL);
-            lbl_ProgressTime.Text = m_TimeToCancel.ToString(@"mm\:ss\,f");
         }
         #endregion
     }
