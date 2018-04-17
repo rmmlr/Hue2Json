@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Rca.Hue2Json.Logger;
 
 namespace Rca.Hue2Json
 {
@@ -167,6 +168,17 @@ namespace Rca.Hue2Json
         #endregion Benutzereingaben verarbeiten
 
         #region Hilfsfunktionen
+        void appendRestoreLogLine(string message)
+        {
+            if (this.InvokeRequired)
+            {
+                Action<string> del = appendRestoreLogLine;
+                BeginInvoke(del, message);
+            }
+            else
+                txt_RestoreOutput.AppendText(Environment.NewLine + message);
+        }
+
         void setupParameterSelection()
         {
             //foreach (HueParameterEnum param in Enum.GetValues(typeof(HueParameterEnum)))

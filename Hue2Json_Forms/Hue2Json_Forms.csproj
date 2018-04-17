@@ -67,6 +67,7 @@
     <Compile Include="HtmlConverter\HtmlExtensions.cs" />
     <Compile Include="HueParameterEnum.cs" />
     <Compile Include="HueParameters.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
