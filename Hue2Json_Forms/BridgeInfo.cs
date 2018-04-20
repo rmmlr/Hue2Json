@@ -63,11 +63,14 @@ namespace Rca.Hue2Json
             switch (Controller.GlobalSettings.BridgeNameDisplay)
             {
                 case Settings.BridgeNameDisplayEnum.IpOnly:
-                    throw new NotImplementedException();
+                    name = IpAddress;
+                    break;
                 case Settings.BridgeNameDisplayEnum.IpAndName:
-                    throw new NotImplementedException();
+                    name = String.Format("{0} ({1})", IpAddress, Name);
+                    break;
                 case Settings.BridgeNameDisplayEnum.IpAndId:
-                    throw new NotImplementedException();
+                    name = String.Format("{0} ({1})", IpAddress, BridgeId);
+                    break;
                 default: //NameAndIp
                     name = String.Format("{0} ({1})", Name, IpAddress);
                     break;

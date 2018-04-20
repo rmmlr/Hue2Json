@@ -88,12 +88,25 @@ namespace Rca.Hue2Json
                     bridgeAuswahlToolStripMenuItem.DropDownItems.Add(item);
                 }
                 bridgeAuswahlToolStripMenuItem.Enabled = true;
+
+                if (bridgeInfos.Length == 1)
+                {
+                    if (MessageBox.Show("Es wurde eine Philips Hue Bridge im Netzwerk gefunden werden.\nSoll zu dieser Bridge (" + bridgeInfos[0].Name + ") eine Verbindung hergestellt werden?",
+                        "Philips Hue Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        //Bridge verbinden
+                        var senderItem = new ToolStripMenuItem() { Tag = bridgeInfos[0] };
+                        connectBridge(senderItem, null);
+                    }
+                }
+                else //Mehr als eine Bridge gefunden
+                    MessageBox.Show("Es wurden " + bridgeInfos.Length + " Philips Hue Bridges im Netzwerk gefunden werden.\nÜber die Bridge-Auswahlliste kann eine Verbindung hergestellt werden.",
+                        "Philips Hue Bridges gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-            {
-                MessageBox.Show("Es konnte keine Hue Bridge im Netzwerk gefunden werden.\nStellen Sie sicher das sich die Hue Bridge im selben Netzwerk befindet.", "Keine Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
+                MessageBox.Show("Es konnte keine Philips Hue Bridge im Netzwerk gefunden werden.\nStellen Sie sicher das sich die Philips Hue Bridge im selben Netzwerk befindet.",
+                    "Keine Philips Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            
             Cursor = DefaultCursor;
         }
 
