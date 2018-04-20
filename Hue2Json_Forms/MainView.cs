@@ -91,12 +91,11 @@ namespace Rca.Hue2Json
 
                 if (bridgeInfos.Length == 1)
                 {
-                    if (MessageBox.Show("Es wurde eine Philips Hue Bridge im Netzwerk gefunden werden.\nSoll zu dieser Bridge (" + bridgeInfos[0].Name + ") eine Verbindung hergestellt werden?",
+                    if (MessageBox.Show("Es wurde eine Philips Hue Bridge im Netzwerk gefunden.\nSoll zu dieser Bridge (" + bridgeInfos[0].Name + ") eine Verbindung hergestellt werden?",
                         "Philips Hue Bridge gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         //Bridge verbinden
-                        var senderItem = new ToolStripMenuItem() { Tag = bridgeInfos[0] };
-                        connectBridge(senderItem, null);
+                        connectBridge(bridgeAuswahlToolStripMenuItem.DropDownItems[0], null);
                     }
                 }
                 else //Mehr als eine Bridge gefunden

@@ -135,6 +135,9 @@ namespace Rca.Hue2Json
         /// <returns></returns>
         public BridgeResult ConnectBridge(BridgeInfo bridge)
         {
+            if (SimMode)
+                return BridgeResult.SuccessfulConnected;
+
             var appKey = "";
 
             if (m_AppKeyManager.TryGetKey(bridge.BridgeId, out appKey))
