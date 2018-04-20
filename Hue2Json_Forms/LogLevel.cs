@@ -27,6 +27,10 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Anzeigemeldung
         /// </summary>
-        DisplayMessage = 1
+        DisplayMessage = 1,
+        /// <summary>
+        /// Simulationsbetrieb
+        /// </summary>
+        Simulation = 10,
     }
 }

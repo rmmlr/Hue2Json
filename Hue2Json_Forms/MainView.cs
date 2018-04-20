@@ -180,15 +180,18 @@ namespace Rca.Hue2Json
         #endregion Benutzereingaben verarbeiten
 
         #region Hilfsfunktionen
-        void appendRestoreLogLine(string message)
+        void appendRestoreLogLine(string message, LogLevel level)
         {
             if (this.InvokeRequired)
             {
-                Action<string> del = appendRestoreLogLine;
-                BeginInvoke(del, message);
+                LogMessageEventHandler del = appendRestoreLogLine;
+                BeginInvoke(del, message, level);
             }
             else
-                txt_RestoreOutput.AppendText(Environment.NewLine + message);
+            {
+                if (level == LogLevel.DisplayMessage)
+                    txt_RestoreOutput.AppendText(Environment.NewLine + message);
+            }
         }
 
         void setupParameterSelection()

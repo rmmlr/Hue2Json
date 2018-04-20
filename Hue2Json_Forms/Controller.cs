@@ -136,8 +136,10 @@ namespace Rca.Hue2Json
         public BridgeResult ConnectBridge(BridgeInfo bridge)
         {
             if (SimMode)
+            {
+                Logger.WriteToLog("Bridge-Verbindung wurde simuliert", LogLevel.Simulation);
                 return BridgeResult.SuccessfulConnected;
-
+            }
             var appKey = "";
 
             if (m_AppKeyManager.TryGetKey(bridge.BridgeId, out appKey))

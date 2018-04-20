@@ -35,7 +35,7 @@ namespace Rca.Hue2Json
 
         public static void WriteToLog(string message, LogLevel level = LogLevel.Info)
         {
-            LogMessageEvent?.Invoke(message);
+            LogMessageEvent?.Invoke(message, level);
 
             appendLogMessage(message, level);
         }
@@ -77,7 +77,7 @@ namespace Rca.Hue2Json
         #endregion Internal services
 
         #region Events
-        public delegate void LogMessageEventHandler(string str);
+        public delegate void LogMessageEventHandler(string message, LogLevel level);
         public static event LogMessageEventHandler LogMessageEvent;
 
         #endregion Events
