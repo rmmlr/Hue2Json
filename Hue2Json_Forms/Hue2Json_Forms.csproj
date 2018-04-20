@@ -68,6 +68,7 @@
     <Compile Include="HueParameterEnum.cs" />
     <Compile Include="HueParameters.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="LogLevel.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
