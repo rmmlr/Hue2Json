@@ -24,19 +24,28 @@ namespace Rca.Hue2Json
         #region Constructor
         public MainView(string[] args)
         {
+            Logger.WriteToLog("Programmstart", LogLevel.Info);
+
             //Pfad zur Konfigurationsdatei ermitteln
             var configPath = Properties.Settings.Default.DefaultSettingsFileName;
             if (args.Any(x => x.ToLower().Contains(".config")))
             {
                 configPath = args.First(x => x.Contains(".config"));
+                Logger.WriteToLog("Spezifische Konfiguration: " + configPath, LogLevel.Info);
             }
 
             //Konfigurationsdatei laden
             ProgramSettings settings = null;
             if (File.Exists(configPath))
+            {
                 settings = ProgramSettings.FromFile(configPath);
+                Logger.WriteToLog("Konfiguration geladen", LogLevel.Info);
+            }
             else
+            {
                 settings = ProgramSettings.CreateDefault();
+                Logger.WriteToLog("Standard Konfiguration erzeugt und geladen", LogLevel.Info);
+            }
 
             //Form initialisieren
             InitializeComponent();
@@ -48,11 +57,13 @@ namespace Rca.Hue2Json
 
             //Controller initialisieren
             m_Controller = new Controller(settings);
+            Logger.WriteToLog("Controller initialisiert", LogLevel.Info);
 
 
             //DevMode aktivieren
             if (args.Any(x => x.ToLower().Contains("devmode")))
             {
+                Logger.WriteToLog("DevMode wird aktiviert", LogLevel.Info);
                 m_Controller.DevMode = true;
                 devToolStripMenuItem1.Visible = true;
                 btn_ReadParameters.Enabled = true;
@@ -62,6 +73,7 @@ namespace Rca.Hue2Json
             //Bridge-Simulation aktivieren
             if (args.Any(x => x.ToLower().Contains("sim")))
             {
+                Logger.WriteToLog("SimMode wird aktiviert", LogLevel.Info);
                 m_Controller.SimMode = true;
             }
         }
@@ -70,6 +82,7 @@ namespace Rca.Hue2Json
         #region Benutzereingaben verarbeiten
         async void sucheBridgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Logger.WriteToLog("Bridge-Suche gestartet", LogLevel.Info);
             Cursor = Cursors.WaitCursor;
 
             var bridgeInfos = await m_Controller.ScanBridges();
@@ -78,6 +91,7 @@ namespace Rca.Hue2Json
             {
                 foreach (var info in bridgeInfos)
                 {
+                    Logger.WriteToLog("Gefundene Bridge: IP = " + info.IpAddress + "; Name = " + info.Name, LogLevel.Info);
                     var item = new ToolStripMenuItem()
                     {
                         Text = info.GetNameString(),
@@ -103,9 +117,11 @@ namespace Rca.Hue2Json
                         "Philips Hue Bridges gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
+            {
+                Logger.WriteToLog("Keine Bridge/s gefunden", LogLevel.Warning);
                 MessageBox.Show("Es konnte keine Philips Hue Bridge im Netzwerk gefunden werden.\nStellen Sie sicher das sich die Philips Hue Bridge im selben Netzwerk befindet.",
                     "Keine Philips Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            
+            }
             Cursor = DefaultCursor;
         }
 
@@ -121,6 +137,7 @@ namespace Rca.Hue2Json
             menuItem.Checked = true;
             var bridge = (BridgeInfo)menuItem.Tag;
 
+            Logger.WriteToLog("Start Verbindungsaufbau zu Bridge mit IP = " + bridge.IpAddress, LogLevel.Info);
 
             switch (m_Controller.ConnectBridge(bridge))
             {
