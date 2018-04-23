@@ -202,9 +202,12 @@ namespace Rca.Hue2Json
             newUser(null);
         }
 
-        private void speicherbelegungToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void speicherbelegungToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_Controller.ShowCapabilities();
+            var capa = await m_Controller.ShowCapabilities();
+            var capaView = new CapabilityView(capa);
+
+            capaView.Show();
         }
         #endregion Benutzereingaben verarbeiten
 

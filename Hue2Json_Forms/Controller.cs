@@ -322,10 +322,26 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Anzeige der Speicherauslastung der aktuell verbundenen Bridge
         /// </summary>
-        public void ShowCapabilities()
+        public async Task<HueCapabilities> ShowCapabilities()
         {
             if (m_HueClient == null)
                 throw new ArgumentNullException("Keine Bridge verbunden");
+
+            var rules = await m_HueClient.GetRulesAsync();
+            var capabilities = await m_HueClient.GetCapabilitiesAsync();
+
+
+            var hueCapabilities = new HueCapabilities();
+
+            hueCapabilities.RulesInUse.Count = rules.Count();
+            hueCapabilities.RulesInUse.Actions = rules.Sum(x => x.Actions.Count());
+            hueCapabilities.RulesInUse.Conditions = rules.Sum(x => x.Conditions.Count());
+
+            hueCapabilities.RulesAvailable.Count = capabilities.Rules.Available + hueCapabilities.RulesInUse.Count;
+            hueCapabilities.RulesAvailable.Actions = capabilities.Rules.Actions.Available + hueCapabilities.RulesInUse.Actions;
+            hueCapabilities.RulesAvailable.Conditions = capabilities.Rules.Conditions.Available + hueCapabilities.RulesInUse.Conditions;
+
+            return hueCapabilities;
         }
 
         /// <summary>
