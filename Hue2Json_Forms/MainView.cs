@@ -68,6 +68,11 @@ namespace Rca.Hue2Json
                 devToolStripMenuItem1.Visible = true;
                 btn_ReadParameters.Enabled = true;
                 btn_ShowParameters.Enabled = true;
+
+                btn_OpenBackupFile.Enabled = true;
+                btn_ReadConfig.Enabled = true;
+                btn_Remapping.Enabled = true;
+                btn_Restore.Enabled = true;
             }
 
             //Bridge-Simulation aktivieren
@@ -76,6 +81,8 @@ namespace Rca.Hue2Json
                 Logger.WriteToLog("SimMode wird aktiviert", LogLevel.Info);
                 m_Controller.SimMode = true;
             }
+
+            Logger.LogMessageEvent += appendRestoreLogLine;
         }
         #endregion Constructor
 
@@ -194,6 +201,11 @@ namespace Rca.Hue2Json
         {
             newUser(null);
         }
+
+        private void speicherbelegungToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_Controller.ShowCapabilities();
+        }
         #endregion Benutzereingaben verarbeiten
 
         #region Hilfsfunktionen
@@ -206,7 +218,7 @@ namespace Rca.Hue2Json
             }
             else
             {
-                if (level == LogLevel.DisplayMessage)
+                if (level == LogLevel.RestoreInfo)
                     txt_RestoreOutput.AppendText(Environment.NewLine + message);
             }
         }
@@ -313,5 +325,36 @@ namespace Rca.Hue2Json
         }
         #endregion Hilfsfunktionen
 
+        private void btn_OpenBackupFile_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "Backup-Datei öffnen";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Logger.WriteToLog("Backup-Datei laden (" + openFileDialog1.FileName + ")", LogLevel.RestoreInfo);
+
+
+                cbx_ReadConfig.Checked = true;
+            }
+            else
+            {
+                Logger.WriteToLog("Öffnen der Backup-Datei wurde abbgebrochen", LogLevel.Error);
+            }
+        }
+
+        private void btn_ReadConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Remapping_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Restore_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

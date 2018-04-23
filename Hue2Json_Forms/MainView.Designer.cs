@@ -40,7 +40,19 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_Backup = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_FullBackup = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabPage_Restore = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_RestoreOutput = new System.Windows.Forms.TextBox();
+            this.cbx_ReadConfig = new System.Windows.Forms.CheckBox();
+            this.cbx_Remapping = new System.Windows.Forms.CheckBox();
+            this.cbx_Restore = new System.Windows.Forms.CheckBox();
+            this.cbx_LoadBackup = new System.Windows.Forms.CheckBox();
+            this.btn_Restore = new System.Windows.Forms.Button();
+            this.btn_Remapping = new System.Windows.Forms.Button();
+            this.btn_ReadConfig = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Bridge = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -52,30 +64,19 @@
             this.sucheBridgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bridgeAuswahlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.überToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.devToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_ReadConfig = new System.Windows.Forms.Button();
-            this.btn_Remapping = new System.Windows.Forms.Button();
-            this.btn_Restore = new System.Windows.Forms.Button();
-            this.cbx_LoadBackup = new System.Windows.Forms.CheckBox();
-            this.cbx_Restore = new System.Windows.Forms.CheckBox();
-            this.cbx_Remapping = new System.Windows.Forms.CheckBox();
-            this.cbx_ReadConfig = new System.Windows.Forms.CheckBox();
-            this.überToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_FullBackup = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txt_RestoreOutput = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.speicherbelegungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage_Restore.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // clb_Parameter
@@ -164,6 +165,7 @@
             this.btn_OpenBackupFile.TabIndex = 9;
             this.btn_OpenBackupFile.Text = "Backup-Datei öffnen...";
             this.btn_OpenBackupFile.UseVisualStyleBackColor = true;
+            this.btn_OpenBackupFile.Click += new System.EventHandler(this.btn_OpenBackupFile_Click);
             // 
             // openFileDialog1
             // 
@@ -193,6 +195,40 @@
             this.tabPage_Backup.Text = "Backup";
             this.tabPage_Backup.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btn_FullBackup);
+            this.groupBox3.Location = new System.Drawing.Point(20, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(250, 100);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Vollständiges Backup";
+            // 
+            // btn_FullBackup
+            // 
+            this.btn_FullBackup.Enabled = false;
+            this.btn_FullBackup.Location = new System.Drawing.Point(27, 41);
+            this.btn_FullBackup.Name = "btn_FullBackup";
+            this.btn_FullBackup.Size = new System.Drawing.Size(195, 23);
+            this.btn_FullBackup.TabIndex = 9;
+            this.btn_FullBackup.Text = "Backup erstellen";
+            this.btn_FullBackup.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.clb_Parameter);
+            this.groupBox2.Controls.Add(this.btn_ShowParameters);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.btn_ReadParameters);
+            this.groupBox2.Controls.Add(this.groupBox1);
+            this.groupBox2.Location = new System.Drawing.Point(289, 16);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(250, 389);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Selektives Backup";
+            // 
             // tabPage_Restore
             // 
             this.tabPage_Restore.Controls.Add(this.label1);
@@ -212,6 +248,96 @@
             this.tabPage_Restore.TabIndex = 1;
             this.tabPage_Restore.Text = "Restore";
             this.tabPage_Restore.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 258);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Ausgabe";
+            // 
+            // txt_RestoreOutput
+            // 
+            this.txt_RestoreOutput.Location = new System.Drawing.Point(20, 274);
+            this.txt_RestoreOutput.Multiline = true;
+            this.txt_RestoreOutput.Name = "txt_RestoreOutput";
+            this.txt_RestoreOutput.Size = new System.Drawing.Size(517, 128);
+            this.txt_RestoreOutput.TabIndex = 17;
+            // 
+            // cbx_ReadConfig
+            // 
+            this.cbx_ReadConfig.AutoSize = true;
+            this.cbx_ReadConfig.Enabled = false;
+            this.cbx_ReadConfig.Location = new System.Drawing.Point(20, 80);
+            this.cbx_ReadConfig.Name = "cbx_ReadConfig";
+            this.cbx_ReadConfig.Size = new System.Drawing.Size(15, 14);
+            this.cbx_ReadConfig.TabIndex = 16;
+            this.cbx_ReadConfig.UseVisualStyleBackColor = true;
+            // 
+            // cbx_Remapping
+            // 
+            this.cbx_Remapping.AutoSize = true;
+            this.cbx_Remapping.Enabled = false;
+            this.cbx_Remapping.Location = new System.Drawing.Point(20, 121);
+            this.cbx_Remapping.Name = "cbx_Remapping";
+            this.cbx_Remapping.Size = new System.Drawing.Size(15, 14);
+            this.cbx_Remapping.TabIndex = 15;
+            this.cbx_Remapping.UseVisualStyleBackColor = true;
+            // 
+            // cbx_Restore
+            // 
+            this.cbx_Restore.AutoSize = true;
+            this.cbx_Restore.Enabled = false;
+            this.cbx_Restore.Location = new System.Drawing.Point(20, 163);
+            this.cbx_Restore.Name = "cbx_Restore";
+            this.cbx_Restore.Size = new System.Drawing.Size(15, 14);
+            this.cbx_Restore.TabIndex = 14;
+            this.cbx_Restore.UseVisualStyleBackColor = true;
+            // 
+            // cbx_LoadBackup
+            // 
+            this.cbx_LoadBackup.AutoSize = true;
+            this.cbx_LoadBackup.Enabled = false;
+            this.cbx_LoadBackup.Location = new System.Drawing.Point(20, 42);
+            this.cbx_LoadBackup.Name = "cbx_LoadBackup";
+            this.cbx_LoadBackup.Size = new System.Drawing.Size(15, 14);
+            this.cbx_LoadBackup.TabIndex = 13;
+            this.cbx_LoadBackup.UseVisualStyleBackColor = true;
+            // 
+            // btn_Restore
+            // 
+            this.btn_Restore.Enabled = false;
+            this.btn_Restore.Location = new System.Drawing.Point(54, 158);
+            this.btn_Restore.Name = "btn_Restore";
+            this.btn_Restore.Size = new System.Drawing.Size(195, 23);
+            this.btn_Restore.TabIndex = 12;
+            this.btn_Restore.Text = "Restore";
+            this.btn_Restore.UseVisualStyleBackColor = true;
+            this.btn_Restore.Click += new System.EventHandler(this.btn_Restore_Click);
+            // 
+            // btn_Remapping
+            // 
+            this.btn_Remapping.Enabled = false;
+            this.btn_Remapping.Location = new System.Drawing.Point(54, 116);
+            this.btn_Remapping.Name = "btn_Remapping";
+            this.btn_Remapping.Size = new System.Drawing.Size(195, 23);
+            this.btn_Remapping.TabIndex = 11;
+            this.btn_Remapping.Text = "Remapping";
+            this.btn_Remapping.UseVisualStyleBackColor = true;
+            this.btn_Remapping.Click += new System.EventHandler(this.btn_Remapping_Click);
+            // 
+            // btn_ReadConfig
+            // 
+            this.btn_ReadConfig.Enabled = false;
+            this.btn_ReadConfig.Location = new System.Drawing.Point(54, 75);
+            this.btn_ReadConfig.Name = "btn_ReadConfig";
+            this.btn_ReadConfig.Size = new System.Drawing.Size(195, 23);
+            this.btn_ReadConfig.TabIndex = 10;
+            this.btn_ReadConfig.Text = "Konfiguration auslesen";
+            this.btn_ReadConfig.UseVisualStyleBackColor = true;
+            this.btn_ReadConfig.Click += new System.EventHandler(this.btn_ReadConfig_Click);
             // 
             // statusStrip1
             // 
@@ -274,7 +400,8 @@
             // 
             this.bridgeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sucheBridgeToolStripMenuItem,
-            this.bridgeAuswahlToolStripMenuItem});
+            this.bridgeAuswahlToolStripMenuItem,
+            this.speicherbelegungToolStripMenuItem});
             this.bridgeToolStripMenuItem.Name = "bridgeToolStripMenuItem";
             this.bridgeToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.bridgeToolStripMenuItem.Text = "Bridge";
@@ -282,7 +409,7 @@
             // sucheBridgeToolStripMenuItem
             // 
             this.sucheBridgeToolStripMenuItem.Name = "sucheBridgeToolStripMenuItem";
-            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.sucheBridgeToolStripMenuItem.Text = "Suche Bridge";
             this.sucheBridgeToolStripMenuItem.Click += new System.EventHandler(this.sucheBridgeToolStripMenuItem_Click);
             // 
@@ -290,7 +417,7 @@
             // 
             this.bridgeAuswahlToolStripMenuItem.Enabled = false;
             this.bridgeAuswahlToolStripMenuItem.Name = "bridgeAuswahlToolStripMenuItem";
-            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.bridgeAuswahlToolStripMenuItem.Text = "Bridge Auswahl";
             // 
             // überToolStripMenuItem
@@ -300,6 +427,12 @@
             this.überToolStripMenuItem.Name = "überToolStripMenuItem";
             this.überToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.überToolStripMenuItem.Text = "Hilfe";
+            // 
+            // überToolStripMenuItem1
+            // 
+            this.überToolStripMenuItem1.Name = "überToolStripMenuItem1";
+            this.überToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.überToolStripMenuItem1.Text = "Über";
             // 
             // devToolStripMenuItem1
             // 
@@ -323,132 +456,12 @@
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // btn_ReadConfig
+            // speicherbelegungToolStripMenuItem
             // 
-            this.btn_ReadConfig.Enabled = false;
-            this.btn_ReadConfig.Location = new System.Drawing.Point(54, 75);
-            this.btn_ReadConfig.Name = "btn_ReadConfig";
-            this.btn_ReadConfig.Size = new System.Drawing.Size(195, 23);
-            this.btn_ReadConfig.TabIndex = 10;
-            this.btn_ReadConfig.Text = "Konfiguration auslesen";
-            this.btn_ReadConfig.UseVisualStyleBackColor = true;
-            // 
-            // btn_Remapping
-            // 
-            this.btn_Remapping.Enabled = false;
-            this.btn_Remapping.Location = new System.Drawing.Point(54, 116);
-            this.btn_Remapping.Name = "btn_Remapping";
-            this.btn_Remapping.Size = new System.Drawing.Size(195, 23);
-            this.btn_Remapping.TabIndex = 11;
-            this.btn_Remapping.Text = "Remapping";
-            this.btn_Remapping.UseVisualStyleBackColor = true;
-            // 
-            // btn_Restore
-            // 
-            this.btn_Restore.Enabled = false;
-            this.btn_Restore.Location = new System.Drawing.Point(54, 158);
-            this.btn_Restore.Name = "btn_Restore";
-            this.btn_Restore.Size = new System.Drawing.Size(195, 23);
-            this.btn_Restore.TabIndex = 12;
-            this.btn_Restore.Text = "Restore";
-            this.btn_Restore.UseVisualStyleBackColor = true;
-            // 
-            // cbx_LoadBackup
-            // 
-            this.cbx_LoadBackup.AutoSize = true;
-            this.cbx_LoadBackup.Enabled = false;
-            this.cbx_LoadBackup.Location = new System.Drawing.Point(20, 42);
-            this.cbx_LoadBackup.Name = "cbx_LoadBackup";
-            this.cbx_LoadBackup.Size = new System.Drawing.Size(15, 14);
-            this.cbx_LoadBackup.TabIndex = 13;
-            this.cbx_LoadBackup.UseVisualStyleBackColor = true;
-            // 
-            // cbx_Restore
-            // 
-            this.cbx_Restore.AutoSize = true;
-            this.cbx_Restore.Enabled = false;
-            this.cbx_Restore.Location = new System.Drawing.Point(20, 163);
-            this.cbx_Restore.Name = "cbx_Restore";
-            this.cbx_Restore.Size = new System.Drawing.Size(15, 14);
-            this.cbx_Restore.TabIndex = 14;
-            this.cbx_Restore.UseVisualStyleBackColor = true;
-            // 
-            // cbx_Remapping
-            // 
-            this.cbx_Remapping.AutoSize = true;
-            this.cbx_Remapping.Enabled = false;
-            this.cbx_Remapping.Location = new System.Drawing.Point(20, 121);
-            this.cbx_Remapping.Name = "cbx_Remapping";
-            this.cbx_Remapping.Size = new System.Drawing.Size(15, 14);
-            this.cbx_Remapping.TabIndex = 15;
-            this.cbx_Remapping.UseVisualStyleBackColor = true;
-            // 
-            // cbx_ReadConfig
-            // 
-            this.cbx_ReadConfig.AutoSize = true;
-            this.cbx_ReadConfig.Enabled = false;
-            this.cbx_ReadConfig.Location = new System.Drawing.Point(20, 80);
-            this.cbx_ReadConfig.Name = "cbx_ReadConfig";
-            this.cbx_ReadConfig.Size = new System.Drawing.Size(15, 14);
-            this.cbx_ReadConfig.TabIndex = 16;
-            this.cbx_ReadConfig.UseVisualStyleBackColor = true;
-            // 
-            // überToolStripMenuItem1
-            // 
-            this.überToolStripMenuItem1.Name = "überToolStripMenuItem1";
-            this.überToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.überToolStripMenuItem1.Text = "Über";
-            // 
-            // btn_FullBackup
-            // 
-            this.btn_FullBackup.Enabled = false;
-            this.btn_FullBackup.Location = new System.Drawing.Point(27, 41);
-            this.btn_FullBackup.Name = "btn_FullBackup";
-            this.btn_FullBackup.Size = new System.Drawing.Size(195, 23);
-            this.btn_FullBackup.TabIndex = 9;
-            this.btn_FullBackup.Text = "Backup erstellen";
-            this.btn_FullBackup.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.clb_Parameter);
-            this.groupBox2.Controls.Add(this.btn_ShowParameters);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.btn_ReadParameters);
-            this.groupBox2.Controls.Add(this.groupBox1);
-            this.groupBox2.Location = new System.Drawing.Point(289, 16);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(250, 389);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Selektives Backup";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btn_FullBackup);
-            this.groupBox3.Location = new System.Drawing.Point(20, 16);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(250, 100);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Vollständiges Backup";
-            // 
-            // txt_RestoreOutput
-            // 
-            this.txt_RestoreOutput.Location = new System.Drawing.Point(20, 274);
-            this.txt_RestoreOutput.Multiline = true;
-            this.txt_RestoreOutput.Name = "txt_RestoreOutput";
-            this.txt_RestoreOutput.Size = new System.Drawing.Size(517, 128);
-            this.txt_RestoreOutput.TabIndex = 17;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 258);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Ausgabe";
+            this.speicherbelegungToolStripMenuItem.Name = "speicherbelegungToolStripMenuItem";
+            this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.speicherbelegungToolStripMenuItem.Text = "Speicherbelegung";
+            this.speicherbelegungToolStripMenuItem.Click += new System.EventHandler(this.speicherbelegungToolStripMenuItem_Click);
             // 
             // MainView
             // 
@@ -466,15 +479,15 @@
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage_Backup.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabPage_Restore.ResumeLayout(false);
             this.tabPage_Restore.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -522,6 +535,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_RestoreOutput;
+        private System.Windows.Forms.ToolStripMenuItem speicherbelegungToolStripMenuItem;
     }
 }
 

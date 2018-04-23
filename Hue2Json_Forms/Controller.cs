@@ -209,6 +209,13 @@ namespace Rca.Hue2Json
         /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
         public async void ReadParameters(HueParameterGroupEnum selGroups, AnonymizeOptions[] options = null)
         {
+            if (SimMode)
+            {
+                Parameters = HueParameters.FromJson(@"F:/dummy_params.json");
+
+                return;
+            }
+
             int? bridgesCount = null;
             if (LocatedBridges?.Count > 0)
                 bridgesCount = LocatedBridges.Count;
@@ -310,6 +317,15 @@ namespace Rca.Hue2Json
             }
 
             Parameters = paras;
+        }
+
+        /// <summary>
+        /// Anzeige der Speicherauslastung der aktuell verbundenen Bridge
+        /// </summary>
+        public void ShowCapabilities()
+        {
+            if (m_HueClient == null)
+                throw new ArgumentNullException("Keine Bridge verbunden");
         }
 
         /// <summary>
