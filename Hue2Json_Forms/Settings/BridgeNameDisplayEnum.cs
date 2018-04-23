@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rca.Hue2Json.Settings
 {
-    public enum BridgeNameDisplayEnum
+    public enum BridgeNameDisplay
     {
         IpOnly = 1,
         IpAndName,

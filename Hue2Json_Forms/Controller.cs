@@ -85,9 +85,13 @@ namespace Rca.Hue2Json
         /// <returns>Gefundene Bridges</returns>
         public async Task<BridgeInfo[]> ScanBridges()
         {
+            Logger.WriteToLog("Bridge-Suche gestartet", LogLevel.Info);
+
             if (SimMode)
+            {
+                Logger.WriteToLog("Bridge-Simulation", LogLevel.Simulation);
                 return new BridgeInfo[1] { new BridgeInfo { Name = "Simulated Bridge", BridgeId = "simulation", IpAddress = "255.255.255.255" } };
-            
+            }
             var bridgeInfos = new List<BridgeInfo>();
 
             IBridgeLocator locator = new HttpBridgeLocator();
@@ -96,7 +100,6 @@ namespace Rca.Hue2Json
 
             foreach (LocatedBridge bridge in bridges)
             {
-                //TODO: friendlyName abfragen, per description.xml oder anonyme Anfrage auf api (http://<bridge-ip>/api/config)
                 try
                 {
                     string json = string.Empty;
@@ -116,12 +119,16 @@ namespace Rca.Hue2Json
                     var info = new BridgeInfo(JsonConvert.DeserializeObject<PublicConfig>(json));
                     info.IpAddress = bridge.IpAddress;
 
+                    Logger.WriteToLog("Gefundene Bridge: " + info.GetNameString(BridgeNameDisplay.IpAndName), LogLevel.Info);
+
                     bridgeInfos.Add(info);
                 }
                 catch (Exception)
                 {
                     //Ohne weitere Infos fortfahren
                     bridgeInfos.Add(new BridgeInfo(bridge));
+
+                    Logger.WriteToLog("Erweiterete Bridge-Info (description.xml) für Bridge (" + bridge.IpAddress + ") nicht verfügbar", LogLevel.Error);
                 }
             }
 

@@ -24,7 +24,7 @@ namespace Rca.Hue2Json.Settings
         [XmlIgnore]
         public string FilePath { get; private set; }
 
-        public BridgeNameDisplayEnum BridgeNameDisplay { get; set; }
+        public BridgeNameDisplay BridgeNameDisplay { get; set; }
 
         #endregion Properties
 
@@ -100,7 +100,7 @@ namespace Rca.Hue2Json.Settings
             return new ProgramSettings
             {
                 Version = typeof(ProgramSettings).Assembly.GetName().Version.ToString(),
-                BridgeNameDisplay = BridgeNameDisplayEnum.NameAndIp
+                BridgeNameDisplay = BridgeNameDisplay.NameAndIp
             };
         }
 

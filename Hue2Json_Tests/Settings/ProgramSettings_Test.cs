@@ -23,7 +23,7 @@ namespace Hue2Json_Tests
 
             var expectedResult = new ProgramSettings
             {
-                BridgeNameDisplay = BridgeNameDisplayEnum.IpOnly
+                BridgeNameDisplay = BridgeNameDisplay.IpOnly
             };
 
             //Serialisierung

@@ -55,20 +55,19 @@ namespace Rca.Hue2Json
         #endregion Constructor
 
         #region Services
-        public string GetNameString()
+        public string GetNameString(Settings.BridgeNameDisplay format)
         {
-            string name = "TODO";
+            string name;
 
-            //TODO Name nach Settings ausgeben
-            switch (Controller.GlobalSettings.BridgeNameDisplay)
+            switch (format)
             {
-                case Settings.BridgeNameDisplayEnum.IpOnly:
+                case Settings.BridgeNameDisplay.IpOnly:
                     name = IpAddress;
                     break;
-                case Settings.BridgeNameDisplayEnum.IpAndName:
+                case Settings.BridgeNameDisplay.IpAndName:
                     name = String.Format("{0} ({1})", IpAddress, Name);
                     break;
-                case Settings.BridgeNameDisplayEnum.IpAndId:
+                case Settings.BridgeNameDisplay.IpAndId:
                     name = String.Format("{0} ({1})", IpAddress, BridgeId);
                     break;
                 default: //NameAndIp
@@ -77,6 +76,11 @@ namespace Rca.Hue2Json
             }
 
             return name;
+        }
+
+        public string GetNameString()
+        {
+            return GetNameString(Controller.GlobalSettings.BridgeNameDisplay);
         }
 
         #endregion Services
