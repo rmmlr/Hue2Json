@@ -10,6 +10,10 @@ namespace Rca.Hue2Json
 {
     public class Logger
     {
+
+        const int COLUMNWITH_LEVEL = 14;
+        const int COLUMNWITH_MESSAGE = 128;
+
         #region Member
         static StreamWriter logStream;
 
@@ -53,14 +57,18 @@ namespace Rca.Hue2Json
             if (File.Exists(filename))
                 filename = filename.Insert(15, "_1"); //Maximal 2 Log-Files je Sekunde
 
-            logStream = new StreamWriter(filename);
+            string levelHeader = "Level".PadRight(COLUMNWITH_LEVEL, ' ');
+            string messageHeader = "Message".PadRight(COLUMNWITH_MESSAGE, ' ');
+            var levelSep = new string('-', COLUMNWITH_LEVEL);
+            var messageSep = new string('-', COLUMNWITH_MESSAGE);
 
+            logStream = new StreamWriter(filename);
             logStream.WriteLine("# Hue2Json LogFile");
             logStream.WriteLine("");
             logStream.WriteLine("Version: " + Application.ProductVersion);
             logStream.WriteLine("");
-            logStream.WriteLine("| TimeStamp | Level | Message |");
-            logStream.WriteLine("| --------- | ----- | ------- |");
+            logStream.WriteLine("| TimeStamp    | {0} | {1} |", levelHeader, messageHeader);
+            logStream.WriteLine("| ------------ | {0} | {1} |", levelSep, messageSep);
 
             logStream.Flush();
         }
@@ -70,7 +78,10 @@ namespace Rca.Hue2Json
             if (logStream == null)
                 generateNewLogfile();
 
-            logStream.WriteLine("| {0:H:mm:ss.fff} | {1} | {2} |", DateTime.Now, level, message);
+            string levelStr = level.ToString().PadRight(COLUMNWITH_LEVEL, ' ');
+            message = message.PadRight(COLUMNWITH_MESSAGE, ' ');
+
+            logStream.WriteLine("| {0:H:mm:ss.fff} | {1} | {2} |", DateTime.Now, levelStr, message);
             logStream.Flush();
         }
 
