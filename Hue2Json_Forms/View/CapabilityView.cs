@@ -36,6 +36,31 @@ namespace Rca.Hue2Json.View
             cat_Capabilities.ChartAreas[0].AxisY.Maximum = 100;
             cat_Capabilities.ChartAreas[0].AxisY.Title = "Belegung in %";
 
+
+            cat_Capabilities.Series.Add("lights");
+            cat_Capabilities.Series["lights"].Points.AddY(Capabilities.Lights.InUsePercent);
+            cat_Capabilities.Series["lights"].IsVisibleInLegend = false;
+            cat_Capabilities.Series["lights"].Label = "Leuchtmittel";
+            cat_Capabilities.Series["lights"]["MinPixelPointWidth"] = "220";
+
+            cat_Capabilities.Series.Add("sensors");
+            cat_Capabilities.Series["sensors"].Points.AddY(Capabilities.Sensors.InUsePercent);
+            cat_Capabilities.Series["sensors"].IsVisibleInLegend = false;
+            cat_Capabilities.Series["sensors"].Label = "Sensoren";
+            cat_Capabilities.Series["sensors"]["MinPixelPointWidth"] = "220";
+
+            cat_Capabilities.Series.Add("groups");
+            cat_Capabilities.Series["groups"].Points.AddY(Capabilities.Groups.InUsePercent);
+            cat_Capabilities.Series["groups"].IsVisibleInLegend = false;
+            cat_Capabilities.Series["groups"].Label = "Gruppen";
+            cat_Capabilities.Series["groups"]["MinPixelPointWidth"] = "220";
+
+            cat_Capabilities.Series.Add("schedules");
+            cat_Capabilities.Series["schedules"].Points.AddY(Capabilities.Schedules.InUsePercent);
+            cat_Capabilities.Series["schedules"].IsVisibleInLegend = false;
+            cat_Capabilities.Series["schedules"].Label = "Timer";
+            cat_Capabilities.Series["schedules"]["MinPixelPointWidth"] = "220";
+
             cat_Capabilities.Series.Add("rules");
             cat_Capabilities.Series["rules"].Points.AddY(Capabilities.RulesInUsePercent.Count);
             cat_Capabilities.Series["rules"].IsVisibleInLegend = false;
@@ -44,45 +69,15 @@ namespace Rca.Hue2Json.View
             //cat_Capabilities.Series["rules"].SetCustomProperty("MinPixelPointWidth", "80");
             cat_Capabilities.Series["rules"]["MinPixelPointWidth"] = "220";
 
-            cat_Capabilities.Series.Add("actions");
-            cat_Capabilities.Series["actions"].Points.AddY(Capabilities.RulesInUsePercent.Actions);
-            cat_Capabilities.Series["actions"].IsVisibleInLegend = false;
-            cat_Capabilities.Series["actions"].Label = "Aktionen";
-            //cat_Capabilities.Series["actions"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["actions"]["MinPixelPointWidth"] = "220";
-
-            cat_Capabilities.Series.Add("conditions");
-            cat_Capabilities.Series["conditions"].Points.AddY(Capabilities.RulesInUsePercent.Conditions);
-            cat_Capabilities.Series["conditions"].IsVisibleInLegend = false;
-            cat_Capabilities.Series["conditions"].Label = "Bedingungen";
-            //cat_Capabilities.Series["conditions"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["conditions"]["MinPixelPointWidth"] = "220";
 
             cat_Capabilities.Update();
             cat_Capabilities.PerformLayout();
 
+            lbl_Lights.Text = Capabilities.Lights.ToString();
+            lbl_Sensors.Text = Capabilities.Sensors.ToString();
+            lbl_Groups.Text = Capabilities.Groups.ToString();
+            lbl_Schedules.Text = Capabilities.Schedules.ToString();
             lbl_Rules.Text = Capabilities.RulesInUse.Count + "/" + Capabilities.RulesAvailable.Count + " (" + Capabilities.RulesInUsePercent.Count.ToString("F1") + " %)";
-            lbl_Conditions.Text = Capabilities.RulesInUse.Conditions + "/" + Capabilities.RulesAvailable.Conditions + " (" + Capabilities.RulesInUsePercent.Conditions.ToString("F1") + " %)";
-            lbl_Actions.Text = Capabilities.RulesInUse.Actions + "/" + Capabilities.RulesAvailable.Actions + " (" + Capabilities.RulesInUsePercent.Actions.ToString("F1") + " %)";
-
-            lbl_ActionsPerRule.Text = Capabilities.MeanActions.ToString("F2");
-            lbl_ConditionsPerRule.Text = Capabilities.MeanConditions.ToString("F2");
-
-            double maxValue = Capabilities.RulesInUsePercent.Count;
-            string freeSpaceText = (Capabilities.RulesAvailable.Count - Capabilities.RulesInUse.Count) + " Regeln (Regellimit)";
-            if (Capabilities.RulesInUsePercent.Conditions > maxValue)
-            {
-                maxValue = Capabilities.RulesInUsePercent.Conditions;
-                freeSpaceText = (Capabilities.RulesAvailable.Conditions - Capabilities.RulesInUse.Conditions) + " Regeln (Bedingungslimit)";
-            }
-            if (Capabilities.RulesInUsePercent.Actions > maxValue)
-                freeSpaceText = (Capabilities.RulesAvailable.Actions - Capabilities.RulesInUse.Actions) + " Regeln (Aktionslimit)";
-            
-
-            lbl_FreeSpace.Text = freeSpaceText;
         }
-
-
-
     }
 }

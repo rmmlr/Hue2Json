@@ -28,215 +28,174 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cat_Capabilities = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbl_Conditions = new System.Windows.Forms.Label();
-            this.lbl_Actions = new System.Windows.Forms.Label();
+            this.lbl_Sensors = new System.Windows.Forms.Label();
+            this.lbl_Groups = new System.Windows.Forms.Label();
+            this.lbl_Lights = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbl_Schedules = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.lbl_Rules = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbl_ActionsPerRule = new System.Windows.Forms.Label();
-            this.lbl_FreeSpace = new System.Windows.Forms.Label();
-            this.lbl_ConditionsPerRule = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_DetailsRules = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cat_Capabilities)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cat_Capabilities
             // 
-            chartArea2.Name = "ChartArea1";
-            this.cat_Capabilities.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.cat_Capabilities.ChartAreas.Add(chartArea1);
             this.cat_Capabilities.Location = new System.Drawing.Point(12, 12);
             this.cat_Capabilities.Name = "cat_Capabilities";
             this.cat_Capabilities.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.cat_Capabilities.Series.Add(series2);
-            this.cat_Capabilities.Size = new System.Drawing.Size(345, 300);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.cat_Capabilities.Series.Add(series1);
+            this.cat_Capabilities.Size = new System.Drawing.Size(572, 300);
             this.cat_Capabilities.TabIndex = 0;
             this.cat_Capabilities.Text = "chart1";
             // 
-            // label1
+            // lbl_Sensors
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Regeln:";
+            this.lbl_Sensors.AutoSize = true;
+            this.lbl_Sensors.Location = new System.Drawing.Point(213, 418);
+            this.lbl_Sensors.Name = "lbl_Sensors";
+            this.lbl_Sensors.Size = new System.Drawing.Size(61, 13);
+            this.lbl_Sensors.TabIndex = 5;
+            this.lbl_Sensors.Text = "lbl_Sensors";
             // 
-            // label2
+            // lbl_Groups
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Bedingungen:";
+            this.lbl_Groups.AutoSize = true;
+            this.lbl_Groups.Location = new System.Drawing.Point(213, 444);
+            this.lbl_Groups.Name = "lbl_Groups";
+            this.lbl_Groups.Size = new System.Drawing.Size(57, 13);
+            this.lbl_Groups.TabIndex = 6;
+            this.lbl_Groups.Text = "lbl_Groups";
             // 
-            // label3
+            // lbl_Lights
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Aktionen:";
+            this.lbl_Lights.AutoSize = true;
+            this.lbl_Lights.Location = new System.Drawing.Point(213, 392);
+            this.lbl_Lights.Name = "lbl_Lights";
+            this.lbl_Lights.Size = new System.Drawing.Size(51, 13);
+            this.lbl_Lights.TabIndex = 4;
+            this.lbl_Lights.Text = "lbl_Lights";
             // 
-            // groupBox1
+            // label10
             // 
-            this.groupBox1.Controls.Add(this.lbl_Conditions);
-            this.groupBox1.Controls.Add(this.lbl_Actions);
-            this.groupBox1.Controls.Add(this.lbl_Rules);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 335);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(345, 113);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bridge-Belegung";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(38, 418);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Sensoren:";
             // 
-            // lbl_Conditions
+            // label11
             // 
-            this.lbl_Conditions.AutoSize = true;
-            this.lbl_Conditions.Location = new System.Drawing.Point(191, 53);
-            this.lbl_Conditions.Name = "lbl_Conditions";
-            this.lbl_Conditions.Size = new System.Drawing.Size(72, 13);
-            this.lbl_Conditions.TabIndex = 5;
-            this.lbl_Conditions.Text = "lbl_Conditions";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 444);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Gruppen:";
             // 
-            // lbl_Actions
+            // label12
             // 
-            this.lbl_Actions.AutoSize = true;
-            this.lbl_Actions.Location = new System.Drawing.Point(191, 79);
-            this.lbl_Actions.Name = "lbl_Actions";
-            this.lbl_Actions.Size = new System.Drawing.Size(58, 13);
-            this.lbl_Actions.TabIndex = 6;
-            this.lbl_Actions.Text = "lbl_Actions";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(38, 392);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Leuchtmittel:";
+            // 
+            // lbl_Schedules
+            // 
+            this.lbl_Schedules.AutoSize = true;
+            this.lbl_Schedules.Location = new System.Drawing.Point(213, 471);
+            this.lbl_Schedules.Name = "lbl_Schedules";
+            this.lbl_Schedules.Size = new System.Drawing.Size(73, 13);
+            this.lbl_Schedules.TabIndex = 10;
+            this.lbl_Schedules.Text = "lbl_Schedules";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(38, 471);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 13);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Timer:";
             // 
             // lbl_Rules
             // 
             this.lbl_Rules.AutoSize = true;
-            this.lbl_Rules.Location = new System.Drawing.Point(191, 27);
+            this.lbl_Rules.Location = new System.Drawing.Point(213, 498);
             this.lbl_Rules.Name = "lbl_Rules";
             this.lbl_Rules.Size = new System.Drawing.Size(50, 13);
-            this.lbl_Rules.TabIndex = 4;
+            this.lbl_Rules.TabIndex = 8;
             this.lbl_Rules.Text = "lbl_Rules";
             // 
-            // groupBox2
+            // label5
             // 
-            this.groupBox2.Controls.Add(this.lbl_ActionsPerRule);
-            this.groupBox2.Controls.Add(this.lbl_FreeSpace);
-            this.groupBox2.Controls.Add(this.lbl_ConditionsPerRule);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(13, 456);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(345, 113);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Durchschnittswerte";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(38, 498);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Regeln:";
             // 
-            // lbl_ActionsPerRule
+            // btn_DetailsRules
             // 
-            this.lbl_ActionsPerRule.AutoSize = true;
-            this.lbl_ActionsPerRule.Location = new System.Drawing.Point(190, 53);
-            this.lbl_ActionsPerRule.Name = "lbl_ActionsPerRule";
-            this.lbl_ActionsPerRule.Size = new System.Drawing.Size(96, 13);
-            this.lbl_ActionsPerRule.TabIndex = 5;
-            this.lbl_ActionsPerRule.Text = "lbl_ActionsPerRule";
-            // 
-            // lbl_FreeSpace
-            // 
-            this.lbl_FreeSpace.AutoSize = true;
-            this.lbl_FreeSpace.Location = new System.Drawing.Point(190, 79);
-            this.lbl_FreeSpace.Name = "lbl_FreeSpace";
-            this.lbl_FreeSpace.Size = new System.Drawing.Size(75, 13);
-            this.lbl_FreeSpace.TabIndex = 6;
-            this.lbl_FreeSpace.Text = "lbl_FreeSpace";
-            // 
-            // lbl_ConditionsPerRule
-            // 
-            this.lbl_ConditionsPerRule.AutoSize = true;
-            this.lbl_ConditionsPerRule.Location = new System.Drawing.Point(190, 27);
-            this.lbl_ConditionsPerRule.Name = "lbl_ConditionsPerRule";
-            this.lbl_ConditionsPerRule.Size = new System.Drawing.Size(110, 13);
-            this.lbl_ConditionsPerRule.TabIndex = 4;
-            this.lbl_ConditionsPerRule.Text = "lbl_ConditionsPerRule";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Aktionen je Regel:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 79);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(169, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Verfügbarer Speicher (Prognosse):";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 27);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(115, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Bedingungen je Regel:";
+            this.btn_DetailsRules.Location = new System.Drawing.Point(359, 498);
+            this.btn_DetailsRules.Name = "btn_DetailsRules";
+            this.btn_DetailsRules.Size = new System.Drawing.Size(121, 23);
+            this.btn_DetailsRules.TabIndex = 11;
+            this.btn_DetailsRules.Text = "Details Regeln";
+            this.btn_DetailsRules.UseVisualStyleBackColor = true;
             // 
             // CapabilityView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 581);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(598, 559);
+            this.Controls.Add(this.btn_DetailsRules);
+            this.Controls.Add(this.lbl_Rules);
+            this.Controls.Add(this.lbl_Schedules);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.lbl_Sensors);
+            this.Controls.Add(this.lbl_Groups);
+            this.Controls.Add(this.lbl_Lights);
             this.Controls.Add(this.cat_Capabilities);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
             this.Name = "CapabilityView";
-            this.Text = "CapabilityView - Rules";
+            this.Text = "CapabilityView";
             ((System.ComponentModel.ISupportInitialize)(this.cat_Capabilities)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart cat_Capabilities;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lbl_Conditions;
-        private System.Windows.Forms.Label lbl_Actions;
+        private System.Windows.Forms.Label lbl_Sensors;
+        private System.Windows.Forms.Label lbl_Groups;
+        private System.Windows.Forms.Label lbl_Lights;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbl_Schedules;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lbl_Rules;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label lbl_ActionsPerRule;
-        private System.Windows.Forms.Label lbl_FreeSpace;
-        private System.Windows.Forms.Label lbl_ConditionsPerRule;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_DetailsRules;
     }
 }
