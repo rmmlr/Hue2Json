@@ -148,12 +148,12 @@ namespace Rca.Hue2Json.View
             switch (m_Controller.ConnectBridge(bridge))
             {
                 case BridgeResult.SuccessfulConnected:
-                    bridgeConnected(bridge);
+                    connectedBridgeStatus(bridge);
                     break;
                 case BridgeResult.UnauthorizedUser:
                 case BridgeResult.MissingUser:
                     if (newUser(bridge))
-                        bridgeConnected(bridge);
+                        connectedBridgeStatus(bridge);
                     else
                         throw new Exception("Fehler beim anlegen eines neuen Bridge-Benutzers.");
                     break;
@@ -203,7 +203,7 @@ namespace Rca.Hue2Json.View
 
         private async void speicherbelegungToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var capa = await m_Controller.ShowCapabilities();
+            var capa = await m_Controller.ReadCapabilities();
             var capaView = new CapabilityView(capa);
 
             capaView.Show();
@@ -293,16 +293,19 @@ namespace Rca.Hue2Json.View
                     if (token.IsCancellationRequested || result)
                         break;
 
-                    System.Diagnostics.Debug.WriteLine("Waiting for Link-Button");
+                    Logger.WriteToLog("Warten auf Link-Button", LogLevel.Info);
 
                     switch (await m_Controller.CreateUser(bridge))
                     {
                         case BridgeResult.LinkButtonNotPressed:
                             continue;
                         case BridgeResult.UserAlreadyExists:
+                            Logger.WriteToLog("Benutzer bereist vorhanden", LogLevel.Error);
                             throw new NotImplementedException();
                         case BridgeResult.UserCreated:
+                            pressButtonDlg.Close();
                             MessageBox.Show("Der neue Benutzer wurde erfolgreich auf der Hue Bridge angelegt.", "Autorisierung erfolgreich", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Logger.WriteToLog("Neuer Benutzer erfolgreich angelegt", LogLevel.DisplayMessage);
                             result = true;
                             break;
                     }
@@ -318,7 +321,7 @@ namespace Rca.Hue2Json.View
             return result;
         }
 
-        void bridgeConnected(BridgeInfo bridge)
+        void connectedBridgeStatus(BridgeInfo bridge)
         {
             toolStripStatusLabel_Bridge.Text = "Bridge verbunden (" + (bridge).IpAddress + ")";
             Properties.Settings.Default.lastBridgeIp = bridge.IpAddress;
@@ -357,6 +360,17 @@ namespace Rca.Hue2Json.View
         private void btn_Restore_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dlg = new EnterIpAddressView("Bei Reset der Philips Hue Bridge (" + m_Controller.ConnectedBridge.IpAddress + ") werden alle vorgenommenen Einstellungen (verbundene Leuchtmittel, Gruppen, Regeln, etc.) unwiederruflich gelöscht."
+                + Environment.NewLine + Environment.NewLine + "Reset-Vorgang durch Eingabe der IP-Adresse bestätigen:", "Reset der Philips Hue Bridge", SystemIcons.Warning);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                m_Controller.ResetBridge(dlg.IpAddress);
+            }
         }
     }
 }

@@ -71,6 +71,18 @@
     <Compile Include="HueParameters.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="View\CapabilityRuleDetailsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CapabilityRuleDetailsView.Designer.cs">
+      <DependentUpon>CapabilityRuleDetailsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EnterIpAddressView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EnterIpAddressView.Designer.cs">
+      <DependentUpon>EnterIpAddressView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +106,9 @@
     <EmbeddedResource Include="View\BridgeButtonView.resx">
       <DependentUpon>BridgeButtonView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\CapabilityRuleDetailsView.resx">
+      <DependentUpon>CapabilityRuleDetailsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CapabilityView.resx">
       <DependentUpon>CapabilityView.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +130,9 @@
     <Compile Include="Remapping\IdPair.cs" />
     <Compile Include="Remapping\RemappingExceptions.cs" />
     <Compile Include="Remapping\RemappingInfo.cs" />
+    <EmbeddedResource Include="View\EnterIpAddressView.resx">
+      <DependentUpon>EnterIpAddressView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

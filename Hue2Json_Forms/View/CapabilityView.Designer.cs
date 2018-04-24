@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.cat_Capabilities = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lbl_Sensors = new System.Windows.Forms.Label();
             this.lbl_Groups = new System.Windows.Forms.Label();
@@ -47,14 +47,14 @@
             // 
             // cat_Capabilities
             // 
-            chartArea1.Name = "ChartArea1";
-            this.cat_Capabilities.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.cat_Capabilities.ChartAreas.Add(chartArea2);
             this.cat_Capabilities.Location = new System.Drawing.Point(12, 12);
             this.cat_Capabilities.Name = "cat_Capabilities";
             this.cat_Capabilities.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series1.ChartArea = "ChartArea1";
-            series1.Name = "Series1";
-            this.cat_Capabilities.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.cat_Capabilities.Series.Add(series2);
             this.cat_Capabilities.Size = new System.Drawing.Size(572, 300);
             this.cat_Capabilities.TabIndex = 0;
             this.cat_Capabilities.Text = "chart1";
@@ -157,6 +157,7 @@
             this.btn_DetailsRules.TabIndex = 11;
             this.btn_DetailsRules.Text = "Details Regeln";
             this.btn_DetailsRules.UseVisualStyleBackColor = true;
+            this.btn_DetailsRules.Click += new System.EventHandler(this.btn_DetailsRules_Click);
             // 
             // CapabilityView
             // 

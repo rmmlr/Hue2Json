@@ -39,11 +39,6 @@ namespace Rca.Hue2Json
         public bool IsAnonymized { get; private set; }
 
         /// <summary>
-        /// Anzahl der im Netzwerk gefundenen Hue Bridges
-        /// </summary>
-        public int? BridgesCount { get; set; }
-
-        /// <summary>
         /// Sammler für Leuchtmittel
         /// </summary>
         public List<Light> Lights { get; set; }
@@ -118,15 +113,6 @@ namespace Rca.Hue2Json
             ResourceLinks = new List<ResourceLink>();
             WhiteList = new List< WhiteList>();
             Users = new Hashtable();
-        }
-
-        /// <summary>
-        /// Initialisierung aller Properties
-        /// </summary>
-        /// <param name="bridgesCount">Anzahl der im Netzwerk gefundenen Hue Bridges</param>
-        public HueParameters(int? bridgesCount) : this()
-        {
-            BridgesCount = bridgesCount;
         }
 
         #endregion Constructor

@@ -42,7 +42,7 @@ namespace Rca.Hue2Json
         /// <summary>
         /// Gefundene Bridges
         /// </summary>
-        public List<BridgeInfo> LocatedBridges { get; set; }
+        //public List<BridgeInfo> LocatedBridges { get; set; }
 
         /// <summary>
         /// Hue Parameter
@@ -63,6 +63,8 @@ namespace Rca.Hue2Json
         /// </summary>
         public bool SimMode { get; set; }
 
+        public BridgeInfo ConnectedBridge { private set; get; }
+
         #endregion Properties
 
         #region Constructor
@@ -71,7 +73,7 @@ namespace Rca.Hue2Json
         /// </summary>
         public Controller(ProgramSettings settings)
         {
-            LocatedBridges = new List<BridgeInfo>();
+            //LocatedBridges = new List<BridgeInfo>();
             m_AppKeyManager = new AppKeyManager(true); //BSON deserialisieren
 
             GlobalSettings = settings;
@@ -157,6 +159,8 @@ namespace Rca.Hue2Json
                     m_HueClient = new LocalHueClient(bridge.IpAddress);
                     m_HueClient.Initialize(appKey);
 
+                    ConnectedBridge = bridge;
+
                     return BridgeResult.SuccessfulConnected;
                 }
                 catch (Exception ex)
@@ -217,11 +221,7 @@ namespace Rca.Hue2Json
                 return;
             }
 
-            int? bridgesCount = null;
-            if (LocatedBridges?.Count > 0)
-                bridgesCount = LocatedBridges.Count;
-
-            var paras = new HueParameters(bridgesCount);
+            var paras = new HueParameters();
 
             if (selGroups.HasFlag(HueParameterGroupEnum.Scenes | HueParameterGroupEnum.Rules | HueParameterGroupEnum.ResourceLinks | HueParameterGroupEnum.WhiteList))
             {
@@ -321,41 +321,47 @@ namespace Rca.Hue2Json
         }
 
         /// <summary>
-        /// Anzeige der Speicherauslastung der aktuell verbundenen Bridge
+        /// Speicherauslastung der aktuell verbundenen Bridge auslesen
         /// </summary>
-        public async Task<HueCapabilities> ShowCapabilities()
+        public async Task<HueCapabilities> ReadCapabilities()
         {
             if (m_HueClient == null)
                 throw new ArgumentNullException("Keine Bridge verbunden");
 
-            var rules = await m_HueClient.GetRulesAsync();
-            var sensors = await m_HueClient.GetSensorsAsync();
-            var lights = await m_HueClient.GetLightsAsync();
-            var groups = await m_HueClient.GetGroupsAsync();
-            var schedules = await m_HueClient.GetSchedulesAsync();
-            var capabilities = await m_HueClient.GetCapabilitiesAsync();
-
-
             var hueCapabilities = new HueCapabilities();
 
-            hueCapabilities.Lights.InUse = lights.Count();
-            hueCapabilities.Lights.Available = capabilities.Lights.Available + hueCapabilities.Lights.InUse;
-            hueCapabilities.Sensors.InUse = sensors.Count(); //TODO: Prüfen ob nur HW Sensoren erfasst werden!
-            hueCapabilities.Sensors.Available = capabilities.Sensors.Available + hueCapabilities.Sensors.InUse;
-            hueCapabilities.Groups.InUse = groups.Count();
-            hueCapabilities.Groups.Available = capabilities.Groups.Available + hueCapabilities.Groups.InUse;
-            hueCapabilities.Schedules.InUse = schedules.Count();
-            hueCapabilities.Schedules.Available = capabilities.Schedules.Available + hueCapabilities.Schedules.InUse;
+            try
+            {
+                var rules = await m_HueClient.GetRulesAsync();
+                var sensors = await m_HueClient.GetSensorsAsync();
+                var lights = await m_HueClient.GetLightsAsync();
+                var groups = await m_HueClient.GetGroupsAsync();
+                var schedules = await m_HueClient.GetSchedulesAsync();
+                var capabilities = await m_HueClient.GetCapabilitiesAsync();
 
-            #region Regeln
-            hueCapabilities.RulesInUse.Count = rules.Count();
-            hueCapabilities.RulesInUse.Actions = rules.Sum(x => x.Actions.Count());
-            hueCapabilities.RulesInUse.Conditions = rules.Sum(x => x.Conditions.Count());
+                hueCapabilities.Lights.InUse = lights.Count();
+                hueCapabilities.Lights.Available = capabilities.Lights.Available + hueCapabilities.Lights.InUse;
+                hueCapabilities.Sensors.InUse = sensors.Count(); //TODO: Prüfen ob nur HW Sensoren erfasst werden!
+                hueCapabilities.Sensors.Available = capabilities.Sensors.Available + hueCapabilities.Sensors.InUse;
+                hueCapabilities.Groups.InUse = groups.Count();
+                hueCapabilities.Groups.Available = capabilities.Groups.Available + hueCapabilities.Groups.InUse;
+                hueCapabilities.Schedules.InUse = schedules.Count();
+                hueCapabilities.Schedules.Available = capabilities.Schedules.Available + hueCapabilities.Schedules.InUse;
 
-            hueCapabilities.RulesAvailable.Count = capabilities.Rules.Available + hueCapabilities.RulesInUse.Count;
-            hueCapabilities.RulesAvailable.Actions = capabilities.Rules.Actions.Available + hueCapabilities.RulesInUse.Actions;
-            hueCapabilities.RulesAvailable.Conditions = capabilities.Rules.Conditions.Available + hueCapabilities.RulesInUse.Conditions;
-            #endregion Regeln
+                #region Regeln
+                hueCapabilities.RulesInUse.Count = rules.Count();
+                hueCapabilities.RulesInUse.Actions = rules.Sum(x => x.Actions.Count());
+                hueCapabilities.RulesInUse.Conditions = rules.Sum(x => x.Conditions.Count());
+
+                hueCapabilities.RulesAvailable.Count = capabilities.Rules.Available + hueCapabilities.RulesInUse.Count;
+                hueCapabilities.RulesAvailable.Actions = capabilities.Rules.Actions.Available + hueCapabilities.RulesInUse.Actions;
+                hueCapabilities.RulesAvailable.Conditions = capabilities.Rules.Conditions.Available + hueCapabilities.RulesInUse.Conditions;
+                #endregion Regeln
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteToLog("Fehler beim auslesen der Speicherbelegung: " + ex.Message, LogLevel.Error);
+            }
 
             return hueCapabilities;
         }
@@ -371,6 +377,15 @@ namespace Rca.Hue2Json
         public void VisualizeParameters()
         {
             var html = Parameters.Lights[0].ToHtml(HtmlOutputFormat.UnsortetList);
+        }
+
+        /// <summary>
+        /// Vollständiger Reset der aktuell verbunden Bridge
+        /// </summary>
+        /// <param name="ip">IP der Bridge, muss mit der IP der aktuell verbunden Bridge übereinstimmen</param>
+        internal void ResetBridge(string ip)
+        {
+            //throw new NotImplementedException();
         }
 
         /// <summary>

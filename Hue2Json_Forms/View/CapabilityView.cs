@@ -79,5 +79,11 @@ namespace Rca.Hue2Json.View
             lbl_Schedules.Text = Capabilities.Schedules.ToString();
             lbl_Rules.Text = Capabilities.RulesInUse.Count + "/" + Capabilities.RulesAvailable.Count + " (" + Capabilities.RulesInUsePercent.Count.ToString("F1") + " %)";
         }
+
+        private void btn_DetailsRules_Click(object sender, EventArgs e)
+        {
+            var ruleDetailsView = new CapabilityRuleDetailsView(Capabilities);
+            ruleDetailsView.Show();
+        }
     }
 }
