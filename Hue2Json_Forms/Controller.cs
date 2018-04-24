@@ -366,6 +366,11 @@ namespace Rca.Hue2Json
             return hueCapabilities;
         }
 
+        public void RemapParameters(HueParameters backup)
+        {
+            var remap = RemappingInfo.Create(backup, Parameters);
+        }
+
         /// <summary>
         /// Übertragen der Parameter auf die Bridge
         /// </summary>

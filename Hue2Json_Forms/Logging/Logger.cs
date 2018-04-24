@@ -10,6 +10,7 @@ namespace Rca.Hue2Json.Logging
 {
     public class Logger
     {
+        const string LOG_PATH = @"log/";
         const int COLUMNWITH_LEVEL = 14;
         const int COLUMNWITH_MESSAGE = 128;
 
@@ -68,7 +69,7 @@ namespace Rca.Hue2Json.Logging
             var levelSep = new string('-', COLUMNWITH_LEVEL);
             var messageSep = new string('-', COLUMNWITH_MESSAGE);
 
-            logStream = new StreamWriter(currentLogFileName);
+            logStream = new StreamWriter(LOG_PATH + currentLogFileName);
             logStream.WriteLine("# Hue2Json LogFile");
             logStream.WriteLine("");
             logStream.WriteLine("Version: " + Application.ProductVersion);

@@ -246,8 +246,11 @@ namespace Rca.Hue2Json.View
             //        clb_Parameter.Items.Add(param.DisplayName());
 
             foreach (HueParameterGroupEnum param in Enum.GetValues(typeof(HueParameterGroupEnum)))
-                clb_Parameter.Items.Add(new HueParameterGroup(param));
-
+            {
+                var paramObj = new HueParameterGroup(param);
+                if (!paramObj.Hide)
+                    clb_Parameter.Items.Add(new HueParameterGroup(param));
+            }
             clb_Parameter.DisplayMember = "DisplayName";
             clb_Parameter.ValueMember = "Value";
         }
@@ -344,6 +347,8 @@ namespace Rca.Hue2Json.View
         }
         #endregion Hilfsfunktionen
 
+        HueParameters backup;
+
         private void btn_OpenBackupFile_Click(object sender, EventArgs e)
         {
             openFileDialog1.Title = "Backup-Datei öffnen";
@@ -352,8 +357,18 @@ namespace Rca.Hue2Json.View
             {
                 Logger.WriteToLog("Backup-Datei laden (" + openFileDialog1.FileName + ")", LogLevel.RestoreInfo);
 
-
+                try
+                {
+                    backup = HueParameters.FromJson(openFileDialog1.FileName);
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteToLog("Fehler beim lesen der Backup-Datei: " + ex.Message, LogLevel.Error);
+                    throw ex;
+                }
+                Logger.WriteToLog("Backup-Datei erfolgreich gelesen", LogLevel.RestoreInfo);
                 cbx_ReadConfig.Checked = true;
+                btn_ReadConfig.Enabled = true;
             }
             else
             {
@@ -363,12 +378,15 @@ namespace Rca.Hue2Json.View
 
         private void btn_ReadConfig_Click(object sender, EventArgs e)
         {
-
+            m_Controller.ReadParameters(HueParameterGroupEnum.All);
+            Logger.WriteToLog("Aktuelle Konfiguration eingelesen", LogLevel.RestoreInfo);
+            cbx_ReadConfig.Checked = true;
+            btn_Remapping.Enabled = true;
         }
 
         private void btn_Remapping_Click(object sender, EventArgs e)
         {
-
+            m_Controller.RemapParameters(backup);
         }
 
         private void btn_Restore_Click(object sender, EventArgs e)

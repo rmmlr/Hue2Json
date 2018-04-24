@@ -79,10 +79,7 @@ namespace Rca.Hue2Json
         /// <param name="bridgeId">ID der Bridge</param>
         /// <returns>AppKey</returns>
         /// <exception cref="KeyNotFoundException">Kein AppKey zur angegebenen ID verfügbar</exception>
-        public string GetKey(string bridgeId)
-        {
-            return m_Keys[cleanBridgeId(bridgeId)];
-        }
+        public string GetKey(string bridgeId) => m_Keys[cleanBridgeId(bridgeId)];
 
         /// <summary>
         /// Versucht den AppKey zur angegebenen Bridge zurückzugeben
@@ -90,10 +87,7 @@ namespace Rca.Hue2Json
         /// <param name="bridgeId">ID der Bridge</param>
         /// <param name="key">AppKey</param>
         /// <returns>AppKey gefunden</returns>
-        public bool TryGetKey(string bridgeId, out string key)
-        {
-            return m_Keys.TryGetValue(cleanBridgeId(bridgeId), out key);
-        }
+        public bool TryGetKey(string bridgeId, out string key) => m_Keys.TryGetValue(cleanBridgeId(bridgeId), out key);
 
         #endregion Services
 
