@@ -69,12 +69,12 @@
     <Compile Include="HueCapabilities.cs" />
     <Compile Include="HueParameterEnum.cs" />
     <Compile Include="HueParameters.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="LogLevel.cs" />
-    <Compile Include="MainView.cs">
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
+    <Compile Include="View\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\BridgeNameDisplayEnum.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Remapping\IdPair.cs" />
     <Compile Include="Remapping\RemappingExceptions.cs" />
     <Compile Include="Remapping\RemappingInfo.cs" />
-    <EmbeddedResource Include="MainView.resx">
+    <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParameterView.resx">

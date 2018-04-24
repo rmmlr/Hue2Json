@@ -45,7 +45,7 @@ namespace Rca.Hue2Json
         /// Konstruiert ein neues PersonalAppKey Objekt
         /// </summary>
         /// <param name="restore">ggf. gespeicherte Daten deserialisieren</param>
-        public AppKeyManager(bool restore) : base()
+        public AppKeyManager(bool restore)
         {
             if (restore && File.Exists(APPKEY_FILENAME))
                 fromBson();

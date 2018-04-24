@@ -4,6 +4,7 @@ using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
 using Rca.Hue2Json.Api.Models;
 using Rca.Hue2Json.HtmlConverter;
+using Rca.Hue2Json.Logging;
 using Rca.Hue2Json.Remapping;
 using Rca.Hue2Json.Settings;
 using System;
@@ -71,7 +72,7 @@ namespace Rca.Hue2Json
         public Controller(ProgramSettings settings)
         {
             LocatedBridges = new List<BridgeInfo>();
-            m_AppKeyManager = new AppKeyManager();
+            m_AppKeyManager = new AppKeyManager(true); //BSON deserialisieren
 
             GlobalSettings = settings;
         }

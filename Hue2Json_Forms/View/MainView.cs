@@ -1,5 +1,5 @@
-﻿using Rca.Hue2Json.Settings;
-using Rca.Hue2Json.View;
+﻿using Rca.Hue2Json.Logging;
+using Rca.Hue2Json.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +11,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Rca.Hue2Json.Logger;
 
-namespace Rca.Hue2Json
+namespace Rca.Hue2Json.View
 {
     public partial class MainView : Form
     {
@@ -216,7 +215,7 @@ namespace Rca.Hue2Json
         {
             if (this.InvokeRequired)
             {
-                LogMessageEventHandler del = appendRestoreLogLine;
+                Logger.LogMessageEventHandler del = appendRestoreLogLine;
                 BeginInvoke(del, message, level);
             }
             else

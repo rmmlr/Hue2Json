@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rca.Hue2Json
+namespace Rca.Hue2Json.Logging
 {
     public class Logger
     {

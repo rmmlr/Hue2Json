@@ -1,4 +1,4 @@
-﻿namespace Rca.Hue2Json
+﻿namespace Rca.Hue2Json.View
 {
     partial class MainView
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rca.Hue2Json
+namespace Rca.Hue2Json.Logging
 {
     public enum LogLevel
     {
