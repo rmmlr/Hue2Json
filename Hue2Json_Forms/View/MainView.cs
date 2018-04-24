@@ -191,15 +191,9 @@ namespace Rca.Hue2Json.View
             //paramView.ShowDialog();
         }
 
-        void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        void beendenToolStripMenuItem_Click(object sender, EventArgs e) => Close();
 
-        void newUserToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            newUser(null);
-        }
+        void newUserToolStripMenuItem1_Click(object sender, EventArgs e) => newUser(null);
 
         private async void speicherbelegungToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -208,6 +202,26 @@ namespace Rca.Hue2Json.View
 
             capaView.Show();
         }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dlg = new EnterIpAddressView("Bei Reset der Philips Hue Bridge (" + m_Controller.ConnectedBridge.IpAddress + ") werden alle vorgenommenen Einstellungen (verbundene Leuchtmittel, Gruppen, Regeln, etc.) unwiederruflich gelöscht."
+                + Environment.NewLine + Environment.NewLine + "Reset-Vorgang durch Eingabe der IP-Adresse bestätigen:", "Reset der Philips Hue Bridge", SystemIcons.Warning);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                m_Controller.ResetBridge(dlg.IpAddress);
+            }
+        }
+
+        private void überToolStripMenuItem1_Click(object sender, EventArgs e) => MessageBox.Show(
+                "Hue2Json" + Environment.NewLine + Environment.NewLine +
+                "Version: " + Application.ProductVersion + Environment.NewLine +
+                "Autor: Ruemmler, Elias",
+                "Hue2Json",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
         #endregion Benutzereingaben verarbeiten
 
         #region Hilfsfunktionen
@@ -360,17 +374,6 @@ namespace Rca.Hue2Json.View
         private void btn_Restore_Click(object sender, EventArgs e)
         {
             
-        }
-
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var dlg = new EnterIpAddressView("Bei Reset der Philips Hue Bridge (" + m_Controller.ConnectedBridge.IpAddress + ") werden alle vorgenommenen Einstellungen (verbundene Leuchtmittel, Gruppen, Regeln, etc.) unwiederruflich gelöscht."
-                + Environment.NewLine + Environment.NewLine + "Reset-Vorgang durch Eingabe der IP-Adresse bestätigen:", "Reset der Philips Hue Bridge", SystemIcons.Warning);
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                m_Controller.ResetBridge(dlg.IpAddress);
-            }
         }
     }
 }

@@ -440,8 +440,9 @@
             // überToolStripMenuItem1
             // 
             this.überToolStripMenuItem1.Name = "überToolStripMenuItem1";
-            this.überToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.überToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.überToolStripMenuItem1.Text = "Über";
+            this.überToolStripMenuItem1.Click += new System.EventHandler(this.überToolStripMenuItem1_Click);
             // 
             // devToolStripMenuItem1
             // 

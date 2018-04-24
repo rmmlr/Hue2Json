@@ -10,7 +10,6 @@ namespace Rca.Hue2Json.Logging
 {
     public class Logger
     {
-
         const int COLUMNWITH_LEVEL = 14;
         const int COLUMNWITH_MESSAGE = 128;
 
