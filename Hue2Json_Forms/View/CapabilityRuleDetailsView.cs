@@ -42,21 +42,21 @@ namespace Rca.Hue2Json.View
             cat_Capabilities.Series["rules"].Label = "Regeln";
             //cat_Capabilities.Series["rules"].CustomProperties = "MinPixelPointWidth=150";
             //cat_Capabilities.Series["rules"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["rules"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["rules"]["MinPixelPointWidth"] = "230";
 
             cat_Capabilities.Series.Add("actions");
             cat_Capabilities.Series["actions"].Points.AddY(Capabilities.RulesInUsePercent.Actions);
             cat_Capabilities.Series["actions"].IsVisibleInLegend = false;
             cat_Capabilities.Series["actions"].Label = "Aktionen";
             //cat_Capabilities.Series["actions"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["actions"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["actions"]["MinPixelPointWidth"] = "230";
 
             cat_Capabilities.Series.Add("conditions");
             cat_Capabilities.Series["conditions"].Points.AddY(Capabilities.RulesInUsePercent.Conditions);
             cat_Capabilities.Series["conditions"].IsVisibleInLegend = false;
             cat_Capabilities.Series["conditions"].Label = "Bedingungen";
             //cat_Capabilities.Series["conditions"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["conditions"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["conditions"]["MinPixelPointWidth"] = "230";
 
             cat_Capabilities.Update();
             cat_Capabilities.PerformLayout();

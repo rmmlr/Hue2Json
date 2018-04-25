@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Q42.HueApi;
 using Q42.HueApi.Models;
 using Q42.HueApi.Models.Groups;
+using Rca.Hue2Json.Logging;
 using Rca.Hue2Json.Remapping;
 using System;
 using System.Collections;
@@ -19,7 +20,6 @@ namespace Rca.Hue2Json
     /// Klasse zur Aufnahme aller Hue-Parameter
     /// </summary>
     [Serializable]
-    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class HueParameters
     {
         #region Member
@@ -143,6 +143,7 @@ namespace Rca.Hue2Json
         /// </summary>
         public void AnonymizeSerials()
         {
+            Logger.WriteToLog("Seriennummern anonymisieren...");
             if (Lights?.Count > 0)
                 foreach (var light in Lights)
                 {
@@ -171,6 +172,7 @@ namespace Rca.Hue2Json
 
         public void AnonymizeNames()
         {
+            Logger.WriteToLog("Namen anonymisieren...");
             if (Lights?.Count > 0)
                 foreach (var light in Lights)
                     light.Name = "Light " + light.Id;

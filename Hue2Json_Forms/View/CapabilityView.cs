@@ -41,33 +41,31 @@ namespace Rca.Hue2Json.View
             cat_Capabilities.Series["lights"].Points.AddY(Capabilities.Lights.InUsePercent);
             cat_Capabilities.Series["lights"].IsVisibleInLegend = false;
             cat_Capabilities.Series["lights"].Label = "Leuchtmittel";
-            cat_Capabilities.Series["lights"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["lights"]["MinPixelPointWidth"] = "420";
 
             cat_Capabilities.Series.Add("sensors");
             cat_Capabilities.Series["sensors"].Points.AddY(Capabilities.Sensors.InUsePercent);
             cat_Capabilities.Series["sensors"].IsVisibleInLegend = false;
             cat_Capabilities.Series["sensors"].Label = "Sensoren";
-            cat_Capabilities.Series["sensors"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["sensors"]["MinPixelPointWidth"] = "420";
 
             cat_Capabilities.Series.Add("groups");
             cat_Capabilities.Series["groups"].Points.AddY(Capabilities.Groups.InUsePercent);
             cat_Capabilities.Series["groups"].IsVisibleInLegend = false;
             cat_Capabilities.Series["groups"].Label = "Gruppen";
-            cat_Capabilities.Series["groups"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["groups"]["MinPixelPointWidth"] = "420";
 
             cat_Capabilities.Series.Add("schedules");
             cat_Capabilities.Series["schedules"].Points.AddY(Capabilities.Schedules.InUsePercent);
             cat_Capabilities.Series["schedules"].IsVisibleInLegend = false;
             cat_Capabilities.Series["schedules"].Label = "Timer";
-            cat_Capabilities.Series["schedules"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["schedules"]["MinPixelPointWidth"] = "420";
 
             cat_Capabilities.Series.Add("rules");
             cat_Capabilities.Series["rules"].Points.AddY(Capabilities.RulesInUsePercent.Count);
             cat_Capabilities.Series["rules"].IsVisibleInLegend = false;
             cat_Capabilities.Series["rules"].Label = "Regeln";
-            //cat_Capabilities.Series["rules"].CustomProperties = "MinPixelPointWidth=150";
-            //cat_Capabilities.Series["rules"].SetCustomProperty("MinPixelPointWidth", "80");
-            cat_Capabilities.Series["rules"]["MinPixelPointWidth"] = "220";
+            cat_Capabilities.Series["rules"]["MinPixelPointWidth"] = "420";
 
 
             cat_Capabilities.Update();
@@ -77,10 +75,11 @@ namespace Rca.Hue2Json.View
             lbl_Sensors.Text = Capabilities.Sensors.ToString();
             lbl_Groups.Text = Capabilities.Groups.ToString();
             lbl_Schedules.Text = Capabilities.Schedules.ToString();
-            lbl_Rules.Text = Capabilities.RulesInUse.Count + "/" + Capabilities.RulesAvailable.Count + " (" + Capabilities.RulesInUsePercent.Count.ToString("F1") + " %)";
+            llb_Rules.Text = Capabilities.RulesInUse.Count + "/" + Capabilities.RulesAvailable.Count + " (" + Capabilities.RulesInUsePercent.Count.ToString("F1") + " %)";
+            lbl_Resourcelinks.Text = Capabilities.Resourcelinks.ToString();
         }
 
-        private void btn_DetailsRules_Click(object sender, EventArgs e)
+        private void llb_Rules_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var ruleDetailsView = new CapabilityRuleDetailsView(Capabilities);
             ruleDetailsView.Show();

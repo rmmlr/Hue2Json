@@ -156,7 +156,10 @@ namespace Rca.Hue2Json
             {
                 try
                 {
+                    Logger.WriteToLog("Verbindungsaufbau zu Bridge (" + bridge.IpAddress + ") initiieren");
                     m_HueClient = new LocalHueClient(bridge.IpAddress);
+                    if (DevMode)
+                        Logger.WriteToLog("AppKey = " + appKey);
                     m_HueClient.Initialize(appKey);
 
                     ConnectedBridge = bridge;
@@ -214,6 +217,9 @@ namespace Rca.Hue2Json
         /// <param name="selGroups">Auswahl der zu lesenden Parameter</param>
         public async void ReadParameters(HueParameterGroupEnum selGroups, AnonymizeOptions[] options = null)
         {
+            //TODO: Exception abfangen. Kann zB bei falscher API Version auftreten
+            Logger.WriteToLog("Parameter auslesen gestartet");
+
             if (SimMode)
             {
                 Parameters = HueParameters.FromJson(@"F:/dummy_params.json");
@@ -338,6 +344,7 @@ namespace Rca.Hue2Json
                 var groups = await m_HueClient.GetGroupsAsync();
                 var schedules = await m_HueClient.GetSchedulesAsync();
                 var capabilities = await m_HueClient.GetCapabilitiesAsync();
+                var resourcelinks = await m_HueClient.GetResourceLinksAsync();
 
                 hueCapabilities.Lights.InUse = lights.Count();
                 hueCapabilities.Lights.Available = capabilities.Lights.Available + hueCapabilities.Lights.InUse;
@@ -347,6 +354,8 @@ namespace Rca.Hue2Json
                 hueCapabilities.Groups.Available = capabilities.Groups.Available + hueCapabilities.Groups.InUse;
                 hueCapabilities.Schedules.InUse = schedules.Count();
                 hueCapabilities.Schedules.Available = capabilities.Schedules.Available + hueCapabilities.Schedules.InUse;
+                hueCapabilities.Resourcelinks.InUse = resourcelinks.Count();
+                hueCapabilities.Resourcelinks.Available = capabilities.Resourcelinks.Available + hueCapabilities.Resourcelinks.InUse;
 
                 #region Regeln
                 hueCapabilities.RulesInUse.Count = rules.Count();
@@ -399,6 +408,8 @@ namespace Rca.Hue2Json
         /// <param name="path">Pfad zur Datei</param>
         public void SaveParameterFile(string path)
         {
+            Logger.WriteToLog("Parameter in JSON-Datei schreiben gestartet");
+
             var fs = new FileStream(path, FileMode.Create);
 
             Parameters.ToJson().WriteTo(fs);

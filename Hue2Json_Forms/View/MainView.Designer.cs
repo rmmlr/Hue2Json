@@ -64,12 +64,12 @@
             this.sucheBridgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bridgeAuswahlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speicherbelegungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.überToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.überToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.devToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
@@ -228,7 +228,7 @@
             this.groupBox2.Size = new System.Drawing.Size(250, 389);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Selektives Backup";
+            this.groupBox2.Text = "JSON Export";
             // 
             // tabPage_Restore
             // 
@@ -411,7 +411,7 @@
             // sucheBridgeToolStripMenuItem
             // 
             this.sucheBridgeToolStripMenuItem.Name = "sucheBridgeToolStripMenuItem";
-            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.sucheBridgeToolStripMenuItem.Text = "Suche Bridge";
             this.sucheBridgeToolStripMenuItem.Click += new System.EventHandler(this.sucheBridgeToolStripMenuItem_Click);
             // 
@@ -419,15 +419,24 @@
             // 
             this.bridgeAuswahlToolStripMenuItem.Enabled = false;
             this.bridgeAuswahlToolStripMenuItem.Name = "bridgeAuswahlToolStripMenuItem";
-            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.bridgeAuswahlToolStripMenuItem.Text = "Bridge Auswahl";
             // 
             // speicherbelegungToolStripMenuItem
             // 
+            this.speicherbelegungToolStripMenuItem.Enabled = false;
             this.speicherbelegungToolStripMenuItem.Name = "speicherbelegungToolStripMenuItem";
             this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.speicherbelegungToolStripMenuItem.Text = "Speicherbelegung";
             this.speicherbelegungToolStripMenuItem.Click += new System.EventHandler(this.speicherbelegungToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Enabled = false;
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // überToolStripMenuItem
             // 
@@ -440,7 +449,7 @@
             // überToolStripMenuItem1
             // 
             this.überToolStripMenuItem1.Name = "überToolStripMenuItem1";
-            this.überToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.überToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.überToolStripMenuItem1.Text = "Über";
             this.überToolStripMenuItem1.Click += new System.EventHandler(this.überToolStripMenuItem1_Click);
             // 
@@ -465,13 +474,6 @@
             // 
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // MainView
             // 

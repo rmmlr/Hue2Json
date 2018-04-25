@@ -48,6 +48,21 @@ namespace Rca.Hue2Json.View
         }
         #endregion
 
+        #region Services
+
+
+        public void KillForm()
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                // close the form on the forms thread
+                this.Close();
+                this.Visible = false;
+            });
+        }
+
+        #endregion Services
+
         #region Internal services
         private void cancelForm(object sender, EventArgs e)
         {

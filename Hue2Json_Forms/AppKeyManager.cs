@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
+using Rca.Hue2Json.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +38,6 @@ namespace Rca.Hue2Json
         public AppKeyManager()
         {
             m_Keys = new Dictionary<string, string>();
-
         }
 
 
@@ -45,7 +45,7 @@ namespace Rca.Hue2Json
         /// Konstruiert ein neues PersonalAppKey Objekt
         /// </summary>
         /// <param name="restore">ggf. gespeicherte Daten deserialisieren</param>
-        public AppKeyManager(bool restore)
+        public AppKeyManager(bool restore) : this()
         {
             if (restore && File.Exists(APPKEY_FILENAME))
                 fromBson();
@@ -128,6 +128,11 @@ namespace Rca.Hue2Json
                 var man = serializer.Deserialize<AppKeyManager>(reader);
                 m_Keys = man.m_Keys;
             }
+
+            if (m_Keys.Count == 1)
+                Logger.WriteToLog("AppKey eingelesen");
+            else if (m_Keys.Count > 1)
+                Logger.WriteToLog("AppKeys (" + m_Keys.Count + ") eingelesen");
         }
 
         #endregion Internal services

@@ -59,9 +59,12 @@ namespace Rca.Hue2Json.Logging
             if (path != null)
                 throw new NotImplementedException();
 
+            if (!Directory.Exists(LOG_PATH))
+                Directory.CreateDirectory(LOG_PATH);
+
             currentLogFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".log";
 
-            if (File.Exists(currentLogFileName))
+            if (File.Exists(LOG_PATH + currentLogFileName))
                 currentLogFileName = currentLogFileName.Insert(15, "_1"); //Maximal 2 Log-Files je Sekunde
 
             string levelHeader = "Level".PadRight(COLUMNWITH_LEVEL, ' ');

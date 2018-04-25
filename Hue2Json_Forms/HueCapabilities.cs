@@ -26,6 +26,8 @@ namespace Rca.Hue2Json
 
         public Capability Schedules { get; set; }
 
+        public Capability Resourcelinks { get; set; }
+
         #region Regeln
         public RulesCapability RulesInUse { get; set; }
         public RulesCapability RulesAvailable { get; set; }
@@ -71,6 +73,7 @@ namespace Rca.Hue2Json
             Sensors = new Capability();
             Groups = new Capability();
             Schedules = new Capability();
+            Resourcelinks = new Capability();
 
             RulesInUse = new RulesCapability();
             RulesAvailable = new RulesCapability();
