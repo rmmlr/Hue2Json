@@ -71,7 +71,7 @@
             // 
             this.lbl_Message.Location = new System.Drawing.Point(66, 29);
             this.lbl_Message.Name = "lbl_Message";
-            this.lbl_Message.Size = new System.Drawing.Size(323, 64);
+            this.lbl_Message.Size = new System.Drawing.Size(323, 94);
             this.lbl_Message.TabIndex = 3;
             this.lbl_Message.Text = "label1";
             // 

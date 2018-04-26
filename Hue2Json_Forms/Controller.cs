@@ -191,6 +191,7 @@ namespace Rca.Hue2Json
                     m_HueClient.Initialize(appKey);
 
                     ConnectedBridge = bridge;
+                    ConnectedBridge.CurrentAppKey = appKey;
 
                     return BridgeResult.SuccessfulConnected;
                 }
@@ -427,63 +428,67 @@ namespace Rca.Hue2Json
         /// <param name="ip">IP der Bridge, muss mit der IP der aktuell verbunden Bridge übereinstimmen</param>
         public async void ResetBridge(string ip)
         {
+            //TODO: Check IP
+
             Logger.WriteToLog("Bridge-Reset gestartet");
 
             var lights = await m_HueClient.GetLightsAsync();
             foreach (var light in lights)
             {
                 var result = await m_HueClient.DeleteLightAsync(light.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var groups = await m_HueClient.GetGroupsAsync();
             foreach (var group in groups)
             {
                 var result = await m_HueClient.DeleteGroupAsync(group.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var schedules = await m_HueClient.GetSchedulesAsync();
             foreach (var schedule in schedules)
             {
                 var result = await m_HueClient.DeleteScheduleAsync(schedule.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var scenes = await m_HueClient.GetScenesAsync();
             foreach (var scene in scenes)
             {
                 var result = await m_HueClient.DeleteSceneAsync(scene.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var sensors = await m_HueClient.GetSensorsAsync();
             foreach (var sensor in sensors)
             {
                 var result = await m_HueClient.DeleteSensorAsync(sensor.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                if (result?.First().Success != null)
+                    Logger.WriteToLog("API response: " + result?.First().Success);
+                else
+                    Logger.WriteToLog("Fehler beim Löschen von Resource: " + result?.First().Error.Description, LogLevel.Error);
             }
 
             var rules = await m_HueClient.GetRulesAsync();
             foreach (var rule in rules)
             {
                 var result = await m_HueClient.DeleteRule(rule.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var links = await m_HueClient.GetResourceLinksAsync();
             foreach (var link in links)
             {
                 var result = await m_HueClient.DeleteResourceLinkAsync(link.Id);
-                Logger.WriteToLog("API response: " + result.First().Success);
+                Logger.WriteToLog("API response: " + result?.First().Success);
             }
 
             var users = await m_HueClient.GetWhiteListAsync();
             foreach (var user in users)
             {
-                //TODO: Eigenen User nicht löschen!
-                var result = await m_HueClient.DeleteWhiteListEntryAsync(user.Id);
-                Logger.WriteToLog("User (" + user.Name + ") erfolgreich gelöscht");
+                if (user.Id != ConnectedBridge.CurrentAppKey && await m_HueClient.DeleteWhiteListEntryAsync(user.Id))
+                    Logger.WriteToLog("User (" + user.Name + ") erfolgreich gelöscht");
             }
         }
 

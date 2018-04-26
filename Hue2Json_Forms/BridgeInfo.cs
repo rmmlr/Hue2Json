@@ -20,6 +20,11 @@ namespace Rca.Hue2Json
         /// IP der Hue Bridge
         /// </summary>
         public string IpAddress { get; set; }
+
+        /// <summary>
+        /// Aktueller AppKey
+        /// </summary>
+        public string CurrentAppKey { get; set; }
         #endregion Properties
 
         #region Constructor
