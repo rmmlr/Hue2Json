@@ -25,6 +25,7 @@ namespace Rca.Hue2Json
     {
         #region Constants
         const string APP_NAME = "Hue2Json";
+        const string API_VERSION_MIN = "1.22";
 
         #endregion
 
@@ -131,7 +132,7 @@ namespace Rca.Hue2Json
                     //Ohne weitere Infos fortfahren
                     bridgeInfos.Add(new BridgeInfo(bridge));
 
-                    Logger.WriteToLog("Erweiterete Bridge-Info (description.xml) für Bridge (" + bridge.IpAddress + ") nicht verfügbar", LogLevel.Error);
+                    Logger.WriteToLog("Erweiterete Bridge-Info (description.xml) für Bridge (" + bridge.IpAddress + ") nicht verfügbar", LogLevel.Warning);
                 }
             }
 
@@ -150,9 +151,36 @@ namespace Rca.Hue2Json
                 Logger.WriteToLog("Bridge-Verbindung wurde simuliert", LogLevel.Simulation);
                 return BridgeResult.SuccessfulConnected;
             }
-            var appKey = "";
+            else
+                Logger.WriteToLog("Verbindungsaufbau mit Bridge (" + bridge.IpAddress + ")");
 
-            if (m_AppKeyManager.TryGetKey(bridge.BridgeId, out appKey))
+            Version apiVersion;
+            if (String.IsNullOrWhiteSpace(bridge.ApiVersion))
+            {
+                Logger.WriteToLog("API-Version unbekannt", LogLevel.Warning);
+                return BridgeResult.Error;
+            }
+            else
+            {
+                if (!Version.TryParse(bridge.ApiVersion, out apiVersion))
+                {
+                    Logger.WriteToLog("API-Version unbekannt; Versionsstring (" + bridge.ApiVersion + ") kann nicht geparst werden", LogLevel.Error);
+                    return BridgeResult.Error;
+                }
+            }
+
+            if (apiVersion < new Version(API_VERSION_MIN))
+            {
+                Logger.WriteToLog("API-Version (" + apiVersion.ToString() + ") nicht unterstützt; Es wird eine Version ab " + API_VERSION_MIN + " benötigt", LogLevel.Error);
+                return BridgeResult.Error;
+            }
+
+
+            Logger.WriteToLog("API-Version = " + apiVersion.ToString());
+
+
+
+            if (m_AppKeyManager.TryGetKey(bridge.BridgeId, out string appKey))
             {
                 try
                 {
