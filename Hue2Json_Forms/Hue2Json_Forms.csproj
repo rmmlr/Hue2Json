@@ -112,9 +112,7 @@
     <EmbeddedResource Include="View\CapabilityView.resx">
       <DependentUpon>CapabilityView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="hue2json.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="hue2json.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

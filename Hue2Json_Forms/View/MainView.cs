@@ -43,6 +43,7 @@ namespace Rca.Hue2Json.View
             else
             {
                 settings = ProgramSettings.CreateDefault();
+                settings.ToFile();
                 Logger.WriteToLog("Standard Konfiguration erzeugt und geladen", LogLevel.Info);
             }
 
