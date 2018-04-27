@@ -28,8 +28,9 @@ namespace Rca.Hue2Json.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CapabilityRuleDetailsView));
             this.cat_Capabilities = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,14 +53,14 @@ namespace Rca.Hue2Json.View
             // 
             // cat_Capabilities
             // 
-            chartArea2.Name = "ChartArea1";
-            this.cat_Capabilities.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.cat_Capabilities.ChartAreas.Add(chartArea1);
             this.cat_Capabilities.Location = new System.Drawing.Point(12, 12);
             this.cat_Capabilities.Name = "cat_Capabilities";
             this.cat_Capabilities.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.cat_Capabilities.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.cat_Capabilities.Series.Add(series1);
             this.cat_Capabilities.Size = new System.Drawing.Size(345, 300);
             this.cat_Capabilities.TabIndex = 0;
             this.cat_Capabilities.Text = "chart1";
@@ -202,7 +203,7 @@ namespace Rca.Hue2Json.View
             this.label9.TabIndex = 1;
             this.label9.Text = "Bedingungen je Regel:";
             // 
-            // CapabilityView
+            // CapabilityRuleDetailsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -210,7 +211,13 @@ namespace Rca.Hue2Json.View
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cat_Capabilities);
-            this.Name = "CapabilityView";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(386, 619);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(386, 619);
+            this.Name = "CapabilityRuleDetailsView";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "CapabilityView - Rules";
             ((System.ComponentModel.ISupportInitialize)(this.cat_Capabilities)).EndInit();
             this.groupBox1.ResumeLayout(false);

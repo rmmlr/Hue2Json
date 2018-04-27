@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.clb_Parameter = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_ReadParameters = new System.Windows.Forms.Button();
@@ -69,8 +70,8 @@
             this.überToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.devToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
@@ -384,7 +385,7 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen...";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
@@ -470,21 +471,21 @@
             // newUserToolStripMenuItem1
             // 
             this.newUserToolStripMenuItem1.Name = "newUserToolStripMenuItem1";
-            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
             this.newUserToolStripMenuItem1.Text = "NewUser";
             this.newUserToolStripMenuItem1.Click += new System.EventHandler(this.newUserToolStripMenuItem1_Click);
+            // 
+            // resetTestToolStripMenuItem
+            // 
+            this.resetTestToolStripMenuItem.Name = "resetTestToolStripMenuItem";
+            this.resetTestToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.resetTestToolStripMenuItem.Text = "Reset Test";
+            this.resetTestToolStripMenuItem.Click += new System.EventHandler(this.resetTestToolStripMenuItem_Click);
             // 
             // newUserToolStripMenuItem
             // 
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // resetTestToolStripMenuItem
-            // 
-            this.resetTestToolStripMenuItem.Name = "resetTestToolStripMenuItem";
-            this.resetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetTestToolStripMenuItem.Text = "Reset Test";
-            this.resetTestToolStripMenuItem.Click += new System.EventHandler(this.resetTestToolStripMenuItem_Click);
             // 
             // MainView
             // 
@@ -494,6 +495,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainView";

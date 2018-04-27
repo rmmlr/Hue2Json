@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CapabilityView));
             this.cat_Capabilities = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lbl_Sensors = new System.Windows.Forms.Label();
             this.lbl_Groups = new System.Windows.Forms.Label();
@@ -41,23 +42,23 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.llb_Rules = new System.Windows.Forms.LinkLabel();
             this.lbl_Resourcelinks = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.llb_Rules = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.cat_Capabilities)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cat_Capabilities
             // 
-            chartArea2.Name = "ChartArea1";
-            this.cat_Capabilities.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.cat_Capabilities.ChartAreas.Add(chartArea1);
             this.cat_Capabilities.Location = new System.Drawing.Point(12, 12);
             this.cat_Capabilities.Name = "cat_Capabilities";
             this.cat_Capabilities.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.cat_Capabilities.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.cat_Capabilities.Series.Add(series1);
             this.cat_Capabilities.Size = new System.Drawing.Size(572, 300);
             this.cat_Capabilities.TabIndex = 0;
             this.cat_Capabilities.Text = "chart1";
@@ -164,6 +165,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bridge-Belegung";
             // 
+            // llb_Rules
+            // 
+            this.llb_Rules.AutoSize = true;
+            this.llb_Rules.Location = new System.Drawing.Point(403, 60);
+            this.llb_Rules.Name = "llb_Rules";
+            this.llb_Rules.Size = new System.Drawing.Size(50, 13);
+            this.llb_Rules.TabIndex = 14;
+            this.llb_Rules.TabStop = true;
+            this.llb_Rules.Text = "llb_Rules";
+            this.llb_Rules.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_Rules_LinkClicked);
+            // 
             // lbl_Resourcelinks
             // 
             this.lbl_Resourcelinks.AutoSize = true;
@@ -182,17 +194,6 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Links:";
             // 
-            // llb_Rules
-            // 
-            this.llb_Rules.AutoSize = true;
-            this.llb_Rules.Location = new System.Drawing.Point(403, 60);
-            this.llb_Rules.Name = "llb_Rules";
-            this.llb_Rules.Size = new System.Drawing.Size(50, 13);
-            this.llb_Rules.TabIndex = 14;
-            this.llb_Rules.TabStop = true;
-            this.llb_Rules.Text = "llb_Rules";
-            this.llb_Rules.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_Rules_LinkClicked);
-            // 
             // CapabilityView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,7 +201,13 @@
             this.ClientSize = new System.Drawing.Size(598, 468);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cat_Capabilities);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(614, 506);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(614, 506);
             this.Name = "CapabilityView";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "CapabilityView";
             ((System.ComponentModel.ISupportInitialize)(this.cat_Capabilities)).EndInit();
             this.groupBox1.ResumeLayout(false);

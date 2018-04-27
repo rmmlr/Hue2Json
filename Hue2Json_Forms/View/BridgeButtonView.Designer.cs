@@ -104,7 +104,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(369, 249);
+            this.ClientSize = new System.Drawing.Size(369, 250);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_ProgressTime);
             this.Controls.Add(this.lbl_Message);
@@ -116,6 +116,8 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(385, 288);
             this.Name = "BridgeButtonView";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Hue Bridge Button";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.cancelForm);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
