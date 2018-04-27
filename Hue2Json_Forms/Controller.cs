@@ -78,6 +78,10 @@ namespace Rca.Hue2Json
             m_AppKeyManager = new AppKeyManager(true); //BSON deserialisieren
 
             GlobalSettings = settings;
+
+            //Hack Newtonsoft.Json
+            JsonSerializer serializer = new JsonSerializer();
+
         }
 
         #endregion Constructor

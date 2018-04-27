@@ -12,6 +12,12 @@ namespace Rca.Hue2Json.Settings
     [Serializable]
     public class ProgramSettings
     {
+        #region Constants
+        public const string SETTINGS_FILE_NAME = "hue2json";
+        public const string SETTINGS_FILE_EXTENSION = ".config";
+
+        #endregion Constants
+
         #region Member
 
 
@@ -47,10 +53,10 @@ namespace Rca.Hue2Json.Settings
         public void ToFile(string path = null)
         {
             if (string.IsNullOrWhiteSpace(path))
-                path = FilePath;
+                path = SETTINGS_FILE_NAME + SETTINGS_FILE_EXTENSION;
 
-            if (!path.EndsWith(".config"))
-                throw new ArgumentException("Falsche Dateierweiterung der Einstellungsdatei, die Erweiterung muss *.config sein.");
+            if (!path.EndsWith(SETTINGS_FILE_EXTENSION))
+                throw new ArgumentException("Falsche Dateierweiterung der Einstellungsdatei, die Erweiterung muss " + SETTINGS_FILE_EXTENSION + " sein.");
 
             try
             {
