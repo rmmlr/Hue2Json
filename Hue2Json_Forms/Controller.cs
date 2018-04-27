@@ -78,6 +78,10 @@ namespace Rca.Hue2Json
             m_AppKeyManager = new AppKeyManager(true); //BSON deserialisieren
 
             GlobalSettings = settings;
+
+            //Hack Newtonsoft.Json
+            JsonSerializer serializer = new JsonSerializer();
+
         }
 
         #endregion Constructor
@@ -539,10 +543,7 @@ namespace Rca.Hue2Json
         /// <param name="propName">Name of changed property</param>
         protected void PropChanged([CallerMemberName] string propName = null)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         /// <summary>
