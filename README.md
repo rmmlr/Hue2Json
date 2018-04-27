@@ -7,7 +7,8 @@ Das Projekt befindet sich aktuell (27.04.2018) in einem frühen Entwicklungsstad
 # Hue to Json
 
 ## Description
-Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen. Zudem werden einige nützliche [Utilities](https://github.com/rmmlr/Hue2Json#utilities) bereit gestellt.
+Hauptfunktion der Software __Hue to JSON__ ist das sichern der Parameter/Konfiguration einer _Philips Hue Bridge_ im JSON-Format. Die erstellten Backup-Dateien können zu einem späteren Zeitpunkt oder auf einer anderen Bridge wieder eingeladen werden.  
+Aufgrund der fehlenden Möglichkeit, per API neue Geräte an die Bridge zu Koppeln, bietet __Hue to JSON__ eine sogennante [Remapping](https://github.com/rmmlr/Hue2Json#remapping) Funktionalität, somit kann mit wenigen Klicks eine fehlerhafte Konfiguration wiederhergestellt, bzw. eine neue Bridge konfiguriert werden. Zudem werden einige nützliche [Utilities](https://github.com/rmmlr/Hue2Json#utilities) bereit gestellt.
 
 
 ## Installation
@@ -50,6 +51,7 @@ Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration wer
 Alle ausgelesenen Beschreibungen und Namen einschließlich Gerätenamen werden anonymisiert.
 
 ### Utilities
+Neben den Sichern und Wiederherstellen der Bridge Konfiguration bietet __Hue to JSON__ verschiedenen kleine Dienstfunktionen.
 
 #### Bridge Reset
 Löschen aller Einstellungen und Konfigurationen welche auf der Bridge hinterlegt sind. Nach einem Reset ist die Bridge "leer" lediglich ein User-Eintrag bleibt erhalten. Diese Funktion unterscheidet sich maßgeblich  vom Reset der Bridge per "Reset-Button". Da hier die jeweilige Werkseinstellung wieder hergestellt wird, was eigentlich nicht mit einem Reset gleich zusetzen ist. Kommt die Bridge zum Beispiel aus einem Starterset, werden hier auch die Leuchtmittel und Sensoren aus dem Set wieder eingetragen.
