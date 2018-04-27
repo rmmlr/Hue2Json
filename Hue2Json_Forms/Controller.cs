@@ -149,6 +149,7 @@ namespace Rca.Hue2Json
             if (SimMode)
             {
                 Logger.WriteToLog("Bridge-Verbindung wurde simuliert", LogLevel.Simulation);
+                ConnectedBridge = bridge;
                 return BridgeResult.SuccessfulConnected;
             }
             else
@@ -426,7 +427,7 @@ namespace Rca.Hue2Json
         /// Vollständiger Reset der aktuell verbunden Bridge
         /// </summary>
         /// <param name="ip">IP der Bridge, muss mit der IP der aktuell verbunden Bridge übereinstimmen</param>
-        public async void ResetBridge(string ip)
+        public async void ResetBridge(IPAddress ip)
         {
             //TODO: Check IP
 

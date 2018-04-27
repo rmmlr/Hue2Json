@@ -70,6 +70,7 @@
             this.devToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
@@ -426,7 +427,7 @@
             // 
             this.speicherbelegungToolStripMenuItem.Enabled = false;
             this.speicherbelegungToolStripMenuItem.Name = "speicherbelegungToolStripMenuItem";
-            this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.speicherbelegungToolStripMenuItem.Text = "Speicherbelegung";
             this.speicherbelegungToolStripMenuItem.Click += new System.EventHandler(this.speicherbelegungToolStripMenuItem_Click);
             // 
@@ -434,7 +435,7 @@
             // 
             this.resetToolStripMenuItem.Enabled = false;
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
@@ -457,7 +458,8 @@
             // 
             this.devToolStripMenuItem1.BackColor = System.Drawing.Color.Violet;
             this.devToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newUserToolStripMenuItem1});
+            this.newUserToolStripMenuItem1,
+            this.resetTestToolStripMenuItem});
             this.devToolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.devToolStripMenuItem1.Name = "devToolStripMenuItem1";
             this.devToolStripMenuItem1.Size = new System.Drawing.Size(39, 20);
@@ -466,7 +468,7 @@
             // newUserToolStripMenuItem1
             // 
             this.newUserToolStripMenuItem1.Name = "newUserToolStripMenuItem1";
-            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.newUserToolStripMenuItem1.Text = "NewUser";
             this.newUserToolStripMenuItem1.Click += new System.EventHandler(this.newUserToolStripMenuItem1_Click);
             // 
@@ -474,6 +476,13 @@
             // 
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // resetTestToolStripMenuItem
+            // 
+            this.resetTestToolStripMenuItem.Name = "resetTestToolStripMenuItem";
+            this.resetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetTestToolStripMenuItem.Text = "Reset Test";
+            this.resetTestToolStripMenuItem.Click += new System.EventHandler(this.resetTestToolStripMenuItem_Click);
             // 
             // MainView
             // 
@@ -549,6 +558,7 @@
         private System.Windows.Forms.TextBox txt_RestoreOutput;
         private System.Windows.Forms.ToolStripMenuItem speicherbelegungToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetTestToolStripMenuItem;
     }
 }
 

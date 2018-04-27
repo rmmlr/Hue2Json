@@ -41,16 +41,16 @@
             this.txt_IpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txt_IpAddress.Location = new System.Drawing.Point(69, 126);
             this.txt_IpAddress.Name = "txt_IpAddress";
-            this.txt_IpAddress.Size = new System.Drawing.Size(320, 20);
+            this.txt_IpAddress.Size = new System.Drawing.Size(341, 20);
             this.txt_IpAddress.TabIndex = 0;
             // 
             // btn_Cancel
             // 
             this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancel.Location = new System.Drawing.Point(233, 177);
+            this.btn_Cancel.Location = new System.Drawing.Point(220, 181);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancel.Size = new System.Drawing.Size(92, 26);
             this.btn_Cancel.TabIndex = 2;
             this.btn_Cancel.Text = "Abbrechen";
             this.btn_Cancel.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@
             // btn_Accept
             // 
             this.btn_Accept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Accept.Location = new System.Drawing.Point(314, 177);
+            this.btn_Accept.Location = new System.Drawing.Point(318, 181);
             this.btn_Accept.Name = "btn_Accept";
-            this.btn_Accept.Size = new System.Drawing.Size(75, 23);
+            this.btn_Accept.Size = new System.Drawing.Size(92, 26);
             this.btn_Accept.TabIndex = 1;
             this.btn_Accept.Text = "OK";
             this.btn_Accept.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             // 
             this.lbl_Message.Location = new System.Drawing.Point(66, 29);
             this.lbl_Message.Name = "lbl_Message";
-            this.lbl_Message.Size = new System.Drawing.Size(323, 94);
+            this.lbl_Message.Size = new System.Drawing.Size(344, 94);
             this.lbl_Message.TabIndex = 3;
             this.lbl_Message.Text = "label1";
             // 
@@ -82,7 +82,7 @@
             this.panel1.Controls.Add(this.lbl_Message);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(401, 166);
+            this.panel1.Size = new System.Drawing.Size(423, 166);
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -92,15 +92,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(401, 212);
+            this.ClientSize = new System.Drawing.Size(422, 219);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Accept);
             this.Controls.Add(this.btn_Cancel);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(438, 257);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(438, 257);
             this.Name = "EnterIpAddressView";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "EnterIpAddressView";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

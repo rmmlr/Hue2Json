@@ -131,8 +131,6 @@ namespace Rca.Hue2Json.View
             Cursor = DefaultCursor;
         }
 
-
-
         void connectBridge(object sender, EventArgs e)
         {
             if (bridgeAuswahlToolStripMenuItem.DropDownItems.Count > 1)
@@ -208,7 +206,11 @@ namespace Rca.Hue2Json.View
             if (m_Controller.ConnectedBridge == null)
                 throw new ArgumentNullException("Keine Bridge verbunden");
 
-            var dlg = new EnterIpAddressView("Bei Reset der Philips Hue Bridge (" + m_Controller.ConnectedBridge.IpAddress + ") werden alle vorgenommenen Einstellungen (verbundene Leuchtmittel, Gruppen, Regeln, etc.) unwiederruflich gelöscht." + Environment.NewLine + "Reset-Vorgang durch Eingabe der IP-Adresse bestätigen:", "Reset der Philips Hue Bridge", SystemIcons.Warning);
+            var dlg = new EnterIpAddressView("Beim Reset der Philips Hue Bridge (" + m_Controller.ConnectedBridge.Name
+                + ") werden alle vorgenommenen Einstellungen, wie verbundene Leuchtmittel, Gruppen, Regeln und Weitere, unwiederruflich gelöscht."
+                + Environment.NewLine + Environment.NewLine + "IP-Adresse der verbunden Bridge: " + m_Controller.ConnectedBridge.IpAddress
+                + Environment.NewLine + Environment.NewLine + "Reset-Vorgang durch Eingabe der IP-Adresse bestätigen.", "Reset der Philips Hue Bridge",
+                SystemIcons.Warning) { ExpectedIp = m_Controller.ConnectedBridge.IpAddress };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -352,6 +354,8 @@ namespace Rca.Hue2Json.View
         }
         #endregion Hilfsfunktionen
 
+
+        #region Restore
         HueParameters backup;
 
         private void btn_OpenBackupFile_Click(object sender, EventArgs e)
@@ -397,6 +401,13 @@ namespace Rca.Hue2Json.View
         private void btn_Restore_Click(object sender, EventArgs e)
         {
             
+        }
+
+        #endregion Restore
+
+        private void resetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resetToolStripMenuItem_Click(null, null);
         }
     }
 }
