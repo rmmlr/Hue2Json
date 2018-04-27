@@ -52,9 +52,9 @@ Alle ausgelesenen Beschreibungen und Namen einschließlich Gerätenamen werden a
 ### Programm
 Hauptfenster:
 
-![MainView 0.2a - Screenshot][MainView_0_2a]
+![MainView 1.0.67 - Screenshot][MainView_1_0_67]
 
-[MainView_0_2a]: docs/img/MainView_0.2a-2.png "MainView 0.2a - Screenshot"
+[MainView_1_0_67]: docs/img/MainView_1.0.67.png "MainView 1.0.67 - Screenshot"
 
 
 ## Releases
