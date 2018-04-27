@@ -67,11 +67,16 @@ namespace Rca.Hue2Json.View
                 devToolStripMenuItem1.Visible = true;
                 btn_ReadParameters.Enabled = true;
                 btn_ShowParameters.Enabled = true;
+                btn_FullBackup.Enabled = true;
 
                 btn_OpenBackupFile.Enabled = true;
                 btn_ReadConfig.Enabled = true;
                 btn_Remapping.Enabled = true;
                 btn_Restore.Enabled = true;
+            }
+            else
+            {
+                tabControl.TabPages.RemoveAt(1);
             }
 
             //Bridge-Simulation aktivieren
@@ -349,6 +354,7 @@ namespace Rca.Hue2Json.View
             Properties.Settings.Default.lastBridgeIp = bridge.IpAddress;
             Properties.Settings.Default.Save();
             btn_ReadParameters.Enabled = true;
+            btn_FullBackup.Enabled = true;
             resetToolStripMenuItem.Enabled = true;
             speicherbelegungToolStripMenuItem.Enabled = true;
         }
@@ -408,6 +414,19 @@ namespace Rca.Hue2Json.View
         private void resetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             resetToolStripMenuItem_Click(null, null);
+        }
+
+        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Directory.GetCurrentDirectory();
+
+            MessageBox.Show("Einstellungen können direkt in der Konfigurationsdatei vorgenommen werden:" + Environment.NewLine
+                + path + "\\" + Controller.GlobalSettings.FilePath, "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btn_FullBackup_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Backup-Funktionalität wird in dieser Version noch nicht unterstützt!", "Noch nicht unterstützt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

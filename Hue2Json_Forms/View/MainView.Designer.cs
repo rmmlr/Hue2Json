@@ -38,7 +38,7 @@
             this.btn_ShowParameters = new System.Windows.Forms.Button();
             this.btn_OpenBackupFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage_Backup = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_FullBackup = new System.Windows.Forms.Button();
@@ -72,7 +72,7 @@
             this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -174,16 +174,16 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "JSON Datei|*.json";
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage_Backup);
-            this.tabControl1.Controls.Add(this.tabPage_Restore);
-            this.tabControl1.Location = new System.Drawing.Point(12, 40);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(567, 448);
-            this.tabControl1.TabIndex = 11;
+            this.tabControl.Controls.Add(this.tabPage_Backup);
+            this.tabControl.Controls.Add(this.tabPage_Restore);
+            this.tabControl.Location = new System.Drawing.Point(12, 40);
+            this.tabControl.Multiline = true;
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(567, 448);
+            this.tabControl.TabIndex = 11;
             // 
             // tabPage_Backup
             // 
@@ -216,6 +216,7 @@
             this.btn_FullBackup.TabIndex = 9;
             this.btn_FullBackup.Text = "Backup erstellen";
             this.btn_FullBackup.UseVisualStyleBackColor = true;
+            this.btn_FullBackup.Click += new System.EventHandler(this.btn_FullBackup_Click);
             // 
             // groupBox2
             // 
@@ -383,8 +384,9 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen...";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -491,14 +493,14 @@
             this.ClientSize = new System.Drawing.Size(604, 526);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainView";
             this.Text = "Hue2Json";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabPage_Backup.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -526,7 +528,7 @@
         private System.Windows.Forms.Button btn_ShowParameters;
         private System.Windows.Forms.Button btn_OpenBackupFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage_Backup;
         private System.Windows.Forms.TabPage tabPage_Restore;
         private System.Windows.Forms.StatusStrip statusStrip1;
