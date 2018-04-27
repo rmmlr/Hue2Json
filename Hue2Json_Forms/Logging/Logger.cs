@@ -16,16 +16,16 @@ namespace Rca.Hue2Json.Logging
 
         #region Member
         static StreamWriter logStream;
-        static string currentLogFileName;
+        static string currentLogFilePath;
 
         #endregion Member
 
         #region Properties
-        public static string CurrentLogFileName
+        public static string CurrentLogFilePath
         {
             get
             {
-                return currentLogFileName;
+                return currentLogFilePath;
             }
         }
 
@@ -62,17 +62,19 @@ namespace Rca.Hue2Json.Logging
             if (!Directory.Exists(LOG_PATH))
                 Directory.CreateDirectory(LOG_PATH);
 
-            currentLogFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".log";
+            string currentLogFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".log";
 
             if (File.Exists(LOG_PATH + currentLogFileName))
                 currentLogFileName = currentLogFileName.Insert(15, "_1"); //Maximal 2 Log-Files je Sekunde
+
+            currentLogFilePath = LOG_PATH + currentLogFileName;
 
             string levelHeader = "Level".PadRight(COLUMNWITH_LEVEL, ' ');
             string messageHeader = "Message".PadRight(COLUMNWITH_MESSAGE, ' ');
             var levelSep = new string('-', COLUMNWITH_LEVEL);
             var messageSep = new string('-', COLUMNWITH_MESSAGE);
 
-            logStream = new StreamWriter(LOG_PATH + currentLogFileName);
+            logStream = new StreamWriter(currentLogFilePath);
             logStream.WriteLine("# Hue2Json LogFile");
             logStream.WriteLine("");
             logStream.WriteLine("Version: " + Application.ProductVersion);

@@ -14,7 +14,7 @@ namespace Hue2Json_Tests
         {
             Logger.WriteToLog("test");
 
-            Assert.IsTrue(File.Exists(Logger.CurrentLogFileName));
+            Assert.IsTrue(File.Exists(Logger.CurrentLogFilePath));
         }
     }
 }
