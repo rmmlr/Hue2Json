@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +106,25 @@ namespace Rca.Hue2Json.Remapping
         public string GetCurrentSensorId(string backupId)
         {
             return getCurrentId(backupId, Sensors);
+        }
+
+        public MemoryStream ToJson()
+        {
+            var stream = new MemoryStream();
+            var sw = new StreamWriter(stream);
+
+            sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
+            sw.Flush();
+
+            return stream;
+        }
+
+        public static RemappingInfo FromJson(string path)
+        {
+            var sr = new StreamReader(path);
+            var info = JsonConvert.DeserializeObject<RemappingInfo>(sr.ReadToEnd());
+
+            return info;
         }
 
         #endregion Services

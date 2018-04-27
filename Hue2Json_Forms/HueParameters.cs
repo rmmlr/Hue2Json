@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Q42.HueApi;
 using Q42.HueApi.Models;
 using Q42.HueApi.Models.Groups;
+using Rca.Hue2Json.Logging;
 using Rca.Hue2Json.Remapping;
 using System;
 using System.Collections;
@@ -19,7 +20,6 @@ namespace Rca.Hue2Json
     /// Klasse zur Aufnahme aller Hue-Parameter
     /// </summary>
     [Serializable]
-    [TypeConverter(typeof(ExpandableObjectConverter))]
     public class HueParameters
     {
         #region Member
@@ -34,9 +34,9 @@ namespace Rca.Hue2Json
         public DateTime CreationDate { get; set; }
 
         /// <summary>
-        /// Anzahl der im Netzwerk gefundenen Hue Bridges
+        /// Parameter sind Anonymisiert, Restore nicht mehr möglich
         /// </summary>
-        public int? BridgesCount { get; set; }
+        public bool IsAnonymized { get; private set; }
 
         /// <summary>
         /// Sammler für Leuchtmittel
@@ -115,15 +115,6 @@ namespace Rca.Hue2Json
             Users = new Hashtable();
         }
 
-        /// <summary>
-        /// Initialisierung aller Properties
-        /// </summary>
-        /// <param name="bridgesCount">Anzahl der im Netzwerk gefundenen Hue Bridges</param>
-        public HueParameters(int? bridgesCount) : this()
-        {
-            BridgesCount = bridgesCount;
-        }
-
         #endregion Constructor
 
         #region Services
@@ -148,56 +139,11 @@ namespace Rca.Hue2Json
         }
 
         /// <summary>
-        /// Remapping der IDs, auf Basis der UniqueIDs
-        /// </summary>
-        /// <param name="currentParams">Parameter-Objekt mit den neuen IDs des aktuellen Systems</param>
-        public void RemapIds(HueParameters currentParams)
-        {
-            #region IDs extrahieren
-
-            var backupIds = new Dictionary<string, string>();
-            foreach (var light in this.Lights)
-                backupIds.Add(light.UniqueId, light.Id);
-
-            var currentIds = new Dictionary<string, string>();
-            foreach (var light in currentParams.Lights)
-                currentIds.Add(light.UniqueId, light.Id);
-
-            var idMap = new Dictionary<string, string>();
-            foreach (var kvp in backupIds)
-                idMap.Add(kvp.Value, currentIds[kvp.Key]);
-
-
-
-
-
-
-
-
-
-
-            //var lightIds = new Dictionary<string, IdPair>();
-            //var sensorIds = new Dictionary<string, IdPair>();
-
-            ////TODO: Ungetetstet!
-            //foreach (var light in currentParams.Lights)
-            //    lightIds.Add(light.UniqueId, new IdPair() { CurrentId = light.Id, BackupId = Lights.FirstOrDefault(x => x.UniqueId == light.UniqueId).Id,
-            //        Category = DeviceCategory.Light });
-            //foreach (var sensor in currentParams.Sensors)
-            //    lightIds.Add(sensor.UniqueId, new IdPair() { CurrentId = sensor.Id, BackupId = Sensors.FirstOrDefault(x => x.UniqueId == sensor.UniqueId).Id,
-            //        Category = DeviceCategory.Sensor });
-
-            //TODO: Ermitteln von nicht zuordnungsbarer IDs
-
-
-            #endregion
-        }
-
-        /// <summary>
         /// Anonymisieren der in den Parametern enthaltenen Serien-Nummern
         /// </summary>
         public void AnonymizeSerials()
         {
+            Logger.WriteToLog("Seriennummern anonymisieren...");
             if (Lights?.Count > 0)
                 foreach (var light in Lights)
                 {
@@ -220,10 +166,13 @@ namespace Rca.Hue2Json
                 Configuration.StarterKitId = null;
                 Configuration.ZigbeeChannel = 0;
             }
+
+            IsAnonymized = true;
         }
 
         public void AnonymizeNames()
         {
+            Logger.WriteToLog("Namen anonymisieren...");
             if (Lights?.Count > 0)
                 foreach (var light in Lights)
                     light.Name = "Light " + light.Id;
@@ -267,6 +216,8 @@ namespace Rca.Hue2Json
                     if (WhiteList[i].Name.Contains('#'))
                         WhiteList[i].Name = WhiteList[i].Name.Split('#')[0] + "#User" + (i + 1);
                 }
+
+            IsAnonymized = true;
         }
 
         /// <summary>

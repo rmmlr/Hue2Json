@@ -46,5 +46,17 @@ namespace Rca.Hue2Json.Properties {
                 this["DebugParameterPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("hue2json.config")]
+        public string DefaultSettingsFileName {
+            get {
+                return ((string)(this["DefaultSettingsFileName"]));
+            }
+            set {
+                this["DefaultSettingsFileName"] = value;
+            }
+        }
     }
 }

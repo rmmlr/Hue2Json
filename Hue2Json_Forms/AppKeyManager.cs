@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
+using Rca.Hue2Json.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,101 +11,128 @@ using System.Threading.Tasks;
 namespace Rca.Hue2Json
 {
     /// <summary>
-    /// Manage the personal app key
+    /// Verwaltet die generierten AppKeys
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public class AppKeyManager
     {
         #region Constants
-        const string APPKEY_FILENAME = "PersonalAppKey";
+        const string APPKEY_FILENAME = "AppAuth";
         #endregion
 
         #region Member
-        string m_AppKey;
+        [JsonProperty(PropertyName = "Keys")]
+        Dictionary<string, string> m_Keys;
 
         #endregion Member
 
         #region Properties
-        /// <summary>
-        /// Personal app key
-        /// Returns null, when app key is not available
-        /// </summary>
-        public string AppKey
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(m_AppKey))
-                    return null;
-                else
-                    return m_AppKey;
-            }
-            set
-            {
-                if (m_AppKey != value)
-                {
-                    safeAppKey(value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// App key is available
-        /// </summary>
-        public bool IsAvailable { get; set; }
 
         #endregion Properties
 
         #region Constructor
         /// <summary>
-        /// Empty constructor for PersonalAppKey
+        /// Konstruiert ein neues PersonalAppKey Objekt
         /// </summary>
+        [JsonConstructor]
         public AppKeyManager()
         {
-            if (File.Exists(APPKEY_FILENAME))
-                loadAppKey();
+            m_Keys = new Dictionary<string, string>();
+        }
+
+
+        /// <summary>
+        /// Konstruiert ein neues PersonalAppKey Objekt
+        /// </summary>
+        /// <param name="restore">ggf. gespeicherte Daten deserialisieren</param>
+        public AppKeyManager(bool restore) : this()
+        {
+            if (restore && File.Exists(APPKEY_FILENAME))
+                fromBson();
         }
 
         #endregion Constructor
 
         #region Services
+        /// <summary>
+        /// Nimmt einen neuen Key auf 
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <param name="key">AppKey</param>
+        /// <param name="replaceKey">Vorhandenen Eintrag überschreiben</param>
+        /// <exception cref="ArgumentException">Key zur angegebenen Bridge schon vorhanden</exception>
+        public void AddKey(string bridgeId, string key, bool replaceKey = false)
+        {
+            var id = cleanBridgeId(bridgeId);
 
+            if (replaceKey && m_Keys.ContainsKey(id))
+                m_Keys.Remove(id);
+
+            m_Keys.Add(id, key);
+
+            toBson();
+        }
+
+        /// <summary>
+        /// Gibt den AppKey zur angegebenen Bridge zurück
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <returns>AppKey</returns>
+        /// <exception cref="KeyNotFoundException">Kein AppKey zur angegebenen ID verfügbar</exception>
+        public string GetKey(string bridgeId) => m_Keys[cleanBridgeId(bridgeId)];
+
+        /// <summary>
+        /// Versucht den AppKey zur angegebenen Bridge zurückzugeben
+        /// </summary>
+        /// <param name="bridgeId">ID der Bridge</param>
+        /// <param name="key">AppKey</param>
+        /// <returns>AppKey gefunden</returns>
+        public bool TryGetKey(string bridgeId, out string key) => m_Keys.TryGetValue(cleanBridgeId(bridgeId), out key);
 
         #endregion Services
 
         #region Internal services
-        /// <summary>
-        /// Safe the app key to file
-        /// </summary>
-        /// <param name="appKey"></param>
-        void safeAppKey(string appKey)
+        string cleanBridgeId(string bridgeId)
         {
-            m_AppKey = appKey;
+            if (string.IsNullOrWhiteSpace(bridgeId))
+                throw new ArgumentException("Ungültiger AppKey, Key darf nicht leer sein");
 
-            if (File.Exists(APPKEY_FILENAME))
-                File.Delete(APPKEY_FILENAME);
-
-            var sw = new StreamWriter(APPKEY_FILENAME);
-            sw.Write(appKey);
-            sw.Flush();
-            sw.Close();
+            return bridgeId.Trim().ToLower();
         }
 
         /// <summary>
-        /// Load the app key from file
+        /// Serialisieren
         /// </summary>
-        /// <returns>app key</returns>
-        string loadAppKey()
+        void toBson()
+        {
+            using (var fs = new FileStream(APPKEY_FILENAME, FileMode.Create))
+            using (var writer = new BsonDataWriter(fs))
+            {
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, this);
+            }
+        }
+
+        /// <summary>
+        /// Deserialisieren
+        /// </summary>
+        private void fromBson()
         {
             if (!File.Exists(APPKEY_FILENAME))
-                throw new FileNotFoundException("No personal app key file found.");
+                throw new FileNotFoundException("AppKey Datei nicht gefunden");
+            
+            using (var fs = new FileStream(APPKEY_FILENAME, FileMode.Open))
+            using (var reader = new BsonDataReader(fs))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                var man = serializer.Deserialize<AppKeyManager>(reader);
+                m_Keys = man.m_Keys;
+            }
 
-            var sr = new StreamReader(APPKEY_FILENAME);
-            string appKey = sr.ReadToEnd();
-            sr.Close();
-
-            m_AppKey = appKey.Trim();
-            IsAvailable = true;
-
-            return m_AppKey;
+            if (m_Keys.Count == 1)
+                Logger.WriteToLog("AppKey eingelesen");
+            else if (m_Keys.Count > 1)
+                Logger.WriteToLog("AppKeys (" + m_Keys.Count + ") eingelesen");
         }
 
         #endregion Internal services

@@ -9,6 +9,9 @@ using Rca.Hue2Json.Remapping;
 
 namespace Hue2Json_Tests
 {
+	/// <summary>
+	/// Tests für das RemappingInfo-Objekt
+	/// </summary>
 	[TestClass]
 	public class RemappingInfo_Tests
 	{
@@ -207,9 +210,9 @@ namespace Hue2Json_Tests
 				Lights = new List<Light>
 				{
 					new Light {Id = "1", UniqueId = "uid001"},
-                    new Light {Id = "2", UniqueId = "uid002" },
-                    new Light {Id = "2", UniqueId = "uid002_duplicate" },
-                    new Light {Id = "3", UniqueId = "uid003" }
+					new Light {Id = "2", UniqueId = "uid002" },
+					new Light {Id = "2", UniqueId = "uid002_duplicate" },
+					new Light {Id = "3", UniqueId = "uid003" }
 				}
 			};
 
@@ -233,7 +236,7 @@ namespace Hue2Json_Tests
 
 
 			Assert.ThrowsException<RemappingException>(() => testObj.GetCurrentLightId("2"), "Doppelte Light-Backup-ID nicht gefunden.");
-            Assert.AreEqual("4", testObj.GetCurrentLightId("3"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (3) gefunden");
-        }
+			Assert.AreEqual("4", testObj.GetCurrentLightId("3"), true, "Falsche Light-ID zur gegebenen Light-Backup-Id (3) gefunden");
+		}
 	}
 }

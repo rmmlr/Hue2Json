@@ -14,6 +14,11 @@ namespace Rca.Hue2Json
     public enum HueParameterGroupEnum
     {
         /// <summary>
+        /// Alle Parameter
+        /// </summary>
+        [Display(Hide = true)]
+        All = 1,
+        /// <summary>
         /// Leuchtmittel
         /// </summary>
         [Display(Name = "Leuchtmittel")]
@@ -79,6 +84,17 @@ namespace Rca.Hue2Json
         }
 
         /// <summary>
+        /// Element nicht anzeigen
+        /// </summary>
+        public bool Hide
+        {
+            get
+            {
+                return Value.Hide();
+            }
+        }
+
+        /// <summary>
         /// Enum-Wert
         /// </summary>
         public HueParameterGroupEnum Value { get; private set; }
@@ -97,6 +113,11 @@ namespace Rca.Hue2Json
         /// Menschenlesbarer Name
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Element nicht anzeigen
+        /// </summary>
+        public bool Hide { get; set; }
     }
 
     public static class DisplayExtensions
@@ -112,6 +133,19 @@ namespace Rca.Hue2Json
             var attribute = Attribute.GetCustomAttribute(field, typeof(DisplayAttribute)) as DisplayAttribute;
 
             return attribute == null ? value.ToString() : attribute.Name;
+        }
+
+        /// <summary>
+        /// Fragt ab ob das Element angezeigt werden soll
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool Hide(this Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = Attribute.GetCustomAttribute(field, typeof(DisplayAttribute)) as DisplayAttribute;
+
+            return attribute == null ? false : attribute.Hide;
         }
     }
 }
