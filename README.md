@@ -1,13 +1,13 @@
 ## Projekt in Arbeit :construction:
 
-Das Projekt befindet sich aktuell (04.04.2018) in einem frühen Entwicklungsstadium. Eine detaillierte Roadmap und der Arbeitsfortschritt kann unter [Milestones](https://github.com/rmmlr/Hue2Json/milestones) angezeigt werden.
+Das Projekt befindet sich aktuell (27.04.2018) in einem frühen Entwicklungsstadium. Eine detaillierte Roadmap und der Arbeitsfortschritt kann unter [Milestones](https://github.com/rmmlr/Hue2Json/milestones) angezeigt werden.
 
 ---
 
 # Hue to Json
 
 ## Description
-Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen.
+Neben dem reinen sichern der Parameter im JSON-Format (Backup), ermöglicht __Hue to JSON__ das Wiederherstellen der ausgelesenen Parameter auf die Bridge (Restore). Somit wird eine Möglichkeit geboten *Datensicherungen* der Bridge anzulegen. Zudem werden einige nützliche Diestfunktionen (Utilities) bereit gestellt.
 
 
 ## Installation
@@ -48,6 +48,15 @@ Alle ausgelesenen Unique-IDs, Seriennummern sowie die Ethernet-Konfiguration wer
 
 #### Namen
 Alle ausgelesenen Beschreibungen und Namen einschließlich Gerätenamen werden anonymisiert.
+
+### Utilities
+
+#### Bridge Reset
+Löschen aller Einstellungen und Konfigurationen welche auf der Bridge hinterlegt sind. Nach einem Reset ist die Bridge "leer" lediglich ein User-Eintrag bleibt erhalten. Diese Funktion unterscheidet sich maßgeblich  vom Reset der Bridge per "Reset-Button". Da hier die jeweilige Werkseinstellung wieder hergestellt wird, was eigentlich nicht mit einem Reset gleich zusetzen ist. Kommt die Bridge zum Beispiel aus einem Starterset, werden hier auch die Leuchtmittel und Sensoren aus dem Set wieder eingetragen.
+
+#### Speicherbelegung anzeigen
+Anzeige der aktuellen Speicherbelegung auf der Bridge. Angezeigt werden alle verfügbaren Ressourcen, sowie die prozentuale Belegung der Bridge. Für Regeln gibt es eine weitere detaillierte Auflistung, da hier auch die eigentliche Konfiguration der Regeln entscheidend für die Auslastung ist.  
+Mehr zum Thema Regeln und den gegebenen Limits kann in folgenden Artikel [Hue Bridge Limits (100prznt)](https://100prznt.de/philips-hue/hue-bridge-limits/) nachgelesen werden.
 
 ### Programm
 Hauptfenster:
