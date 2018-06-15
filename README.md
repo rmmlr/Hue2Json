@@ -1,6 +1,6 @@
 ## Projekt in Arbeit :construction:
 
-Das Projekt befindet sich aktuell (27.04.2018) in einem frühen Entwicklungsstadium. Eine detaillierte Roadmap und der Arbeitsfortschritt kann unter [Milestones](https://github.com/rmmlr/Hue2Json/milestones) angezeigt werden.
+Das Projekt befindet sich aktuell (15.06.2018) in einem frühen Entwicklungsstadium. Eine detaillierte Roadmap und der Arbeitsfortschritt kann unter [Milestones](https://github.com/rmmlr/Hue2Json/milestones) angezeigt werden.
 
 ---
 
