@@ -2,6 +2,7 @@
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
+using Rca.Hue2Json.Api;
 using Rca.Hue2Json.Api.Models;
 using Rca.Hue2Json.HtmlConverter;
 using Rca.Hue2Json.Logging;
@@ -21,7 +22,7 @@ using System.Xml.Serialization;
 
 namespace Rca.Hue2Json
 {
-    public class Controller : INotifyPropertyChanged
+    public partial class Controller : INotifyPropertyChanged
     {
         #region Constants
         const string APP_NAME = "Hue2Json";
@@ -197,6 +198,10 @@ namespace Rca.Hue2Json
 
                     ConnectedBridge = bridge;
                     ConnectedBridge.CurrentAppKey = appKey;
+
+                    //Init own API caller
+                    ApiCaller.Host = bridge.IpAddress;
+                    ApiCaller.AppKey = appKey;
 
                     return BridgeResult.SuccessfulConnected;
                 }
@@ -495,6 +500,13 @@ namespace Rca.Hue2Json
                 if (user.Id != ConnectedBridge.CurrentAppKey && await m_HueClient.DeleteWhiteListEntryAsync(user.Id))
                     Logger.WriteToLog("User (" + user.Name + ") erfolgreich gelöscht");
             }
+        }
+
+        public void SetStartUpMode(string lightid, StartupMode startup)
+        {
+            var caller = new ApiCaller();
+
+            caller.HttpPut("lights/" + lightid, "{\"config\":{\"startup\":{\"mode\":\"" + startup.ToString().ToLower() + "\"}}}");
         }
 
         /// <summary>
