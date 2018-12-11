@@ -53,6 +53,9 @@
             this.btn_Restore = new System.Windows.Forms.Button();
             this.btn_Remapping = new System.Windows.Forms.Button();
             this.btn_ReadConfig = new System.Windows.Forms.Button();
+            this.tabPage_Lights = new System.Windows.Forms.TabPage();
+            this.btn_GetLights = new System.Windows.Forms.Button();
+            this.dgv_Lights = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Bridge = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -69,14 +72,22 @@
             this.überToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.devToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_StartupMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage_Restore.SuspendLayout();
+            this.tabPage_Lights.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Lights)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -178,6 +189,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage_Backup);
             this.tabControl.Controls.Add(this.tabPage_Restore);
+            this.tabControl.Controls.Add(this.tabPage_Lights);
             this.tabControl.Location = new System.Drawing.Point(12, 40);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
@@ -194,7 +206,7 @@
             this.tabPage_Backup.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_Backup.Size = new System.Drawing.Size(559, 422);
             this.tabPage_Backup.TabIndex = 0;
-            this.tabPage_Backup.Text = "Backup";
+            this.tabPage_Backup.Text = "Datensicherung";
             this.tabPage_Backup.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -205,7 +217,7 @@
             this.groupBox3.Size = new System.Drawing.Size(250, 100);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Vollständiges Backup";
+            this.groupBox3.Text = "Vollständige Datensicherung";
             // 
             // btn_FullBackup
             // 
@@ -214,7 +226,7 @@
             this.btn_FullBackup.Name = "btn_FullBackup";
             this.btn_FullBackup.Size = new System.Drawing.Size(195, 23);
             this.btn_FullBackup.TabIndex = 9;
-            this.btn_FullBackup.Text = "Backup erstellen";
+            this.btn_FullBackup.Text = "Datensicherung erstellen";
             this.btn_FullBackup.UseVisualStyleBackColor = true;
             this.btn_FullBackup.Click += new System.EventHandler(this.btn_FullBackup_Click);
             // 
@@ -249,7 +261,7 @@
             this.tabPage_Restore.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_Restore.Size = new System.Drawing.Size(559, 422);
             this.tabPage_Restore.TabIndex = 1;
-            this.tabPage_Restore.Text = "Restore";
+            this.tabPage_Restore.Text = "Wiederherstellung";
             this.tabPage_Restore.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -342,6 +354,49 @@
             this.btn_ReadConfig.UseVisualStyleBackColor = true;
             this.btn_ReadConfig.Click += new System.EventHandler(this.btn_ReadConfig_Click);
             // 
+            // tabPage_Lights
+            // 
+            this.tabPage_Lights.Controls.Add(this.label4);
+            this.tabPage_Lights.Controls.Add(this.label3);
+            this.tabPage_Lights.Controls.Add(this.btn_GetLights);
+            this.tabPage_Lights.Controls.Add(this.dgv_Lights);
+            this.tabPage_Lights.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Lights.Name = "tabPage_Lights";
+            this.tabPage_Lights.Size = new System.Drawing.Size(559, 422);
+            this.tabPage_Lights.TabIndex = 2;
+            this.tabPage_Lights.Text = "Leuchtmittel/Lampen";
+            this.tabPage_Lights.UseVisualStyleBackColor = true;
+            // 
+            // btn_GetLights
+            // 
+            this.btn_GetLights.Enabled = false;
+            this.btn_GetLights.Location = new System.Drawing.Point(16, 385);
+            this.btn_GetLights.Name = "btn_GetLights";
+            this.btn_GetLights.Size = new System.Drawing.Size(524, 23);
+            this.btn_GetLights.TabIndex = 1;
+            this.btn_GetLights.Text = "Aktualisieren";
+            this.btn_GetLights.UseVisualStyleBackColor = true;
+            this.btn_GetLights.Click += new System.EventHandler(this.btn_GetLights_Click);
+            // 
+            // dgv_Lights
+            // 
+            this.dgv_Lights.AllowUserToAddRows = false;
+            this.dgv_Lights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Lights.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_Name,
+            this.col_Type,
+            this.col_Version,
+            this.col_StartupMode});
+            this.dgv_Lights.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgv_Lights.Location = new System.Drawing.Point(16, 58);
+            this.dgv_Lights.Name = "dgv_Lights";
+            this.dgv_Lights.ReadOnly = true;
+            this.dgv_Lights.RowHeadersVisible = false;
+            this.dgv_Lights.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Lights.Size = new System.Drawing.Size(524, 317);
+            this.dgv_Lights.TabIndex = 0;
+            this.dgv_Lights.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Lights_CellContentClick);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -384,7 +439,7 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen...";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
@@ -414,7 +469,7 @@
             // sucheBridgeToolStripMenuItem
             // 
             this.sucheBridgeToolStripMenuItem.Name = "sucheBridgeToolStripMenuItem";
-            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.sucheBridgeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sucheBridgeToolStripMenuItem.Text = "Suche Bridge";
             this.sucheBridgeToolStripMenuItem.Click += new System.EventHandler(this.sucheBridgeToolStripMenuItem_Click);
             // 
@@ -422,14 +477,14 @@
             // 
             this.bridgeAuswahlToolStripMenuItem.Enabled = false;
             this.bridgeAuswahlToolStripMenuItem.Name = "bridgeAuswahlToolStripMenuItem";
-            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.bridgeAuswahlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bridgeAuswahlToolStripMenuItem.Text = "Bridge Auswahl";
             // 
             // speicherbelegungToolStripMenuItem
             // 
             this.speicherbelegungToolStripMenuItem.Enabled = false;
             this.speicherbelegungToolStripMenuItem.Name = "speicherbelegungToolStripMenuItem";
-            this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.speicherbelegungToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.speicherbelegungToolStripMenuItem.Text = "Speicherbelegung";
             this.speicherbelegungToolStripMenuItem.Click += new System.EventHandler(this.speicherbelegungToolStripMenuItem_Click);
             // 
@@ -437,7 +492,7 @@
             // 
             this.resetToolStripMenuItem.Enabled = false;
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
@@ -470,21 +525,67 @@
             // newUserToolStripMenuItem1
             // 
             this.newUserToolStripMenuItem1.Name = "newUserToolStripMenuItem1";
-            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.newUserToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.newUserToolStripMenuItem1.Text = "NewUser";
             this.newUserToolStripMenuItem1.Click += new System.EventHandler(this.newUserToolStripMenuItem1_Click);
+            // 
+            // resetTestToolStripMenuItem
+            // 
+            this.resetTestToolStripMenuItem.Name = "resetTestToolStripMenuItem";
+            this.resetTestToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.resetTestToolStripMenuItem.Text = "Reset Test";
+            this.resetTestToolStripMenuItem.Click += new System.EventHandler(this.resetTestToolStripMenuItem_Click);
             // 
             // newUserToolStripMenuItem
             // 
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // resetTestToolStripMenuItem
+            // col_Name
             // 
-            this.resetTestToolStripMenuItem.Name = "resetTestToolStripMenuItem";
-            this.resetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetTestToolStripMenuItem.Text = "Reset Test";
-            this.resetTestToolStripMenuItem.Click += new System.EventHandler(this.resetTestToolStripMenuItem_Click);
+            this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Name.DataPropertyName = "Name";
+            this.col_Name.HeaderText = "Name";
+            this.col_Name.Name = "col_Name";
+            // 
+            // col_Type
+            // 
+            this.col_Type.DataPropertyName = "Type";
+            this.col_Type.HeaderText = "Typ";
+            this.col_Type.Name = "col_Type";
+            this.col_Type.Width = 130;
+            // 
+            // col_Version
+            // 
+            this.col_Version.DataPropertyName = "SoftwareVersion";
+            this.col_Version.HeaderText = "Firmware";
+            this.col_Version.Name = "col_Version";
+            // 
+            // col_StartupMode
+            // 
+            this.col_StartupMode.DataPropertyName = "Startup";
+            this.col_StartupMode.HeaderText = "Einschaltverhalten";
+            this.col_StartupMode.Name = "col_StartupMode";
+            this.col_StartupMode.Width = 130;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(279, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Klick auf Zeile um das Einschaltverhalten zu konfigurieren";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(280, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Übersicht aller verbundenen Leuchtmittel/Lampen";
             // 
             // MainView
             // 
@@ -507,6 +608,9 @@
             this.groupBox2.PerformLayout();
             this.tabPage_Restore.ResumeLayout(false);
             this.tabPage_Restore.PerformLayout();
+            this.tabPage_Lights.ResumeLayout(false);
+            this.tabPage_Lights.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Lights)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -561,6 +665,15 @@
         private System.Windows.Forms.ToolStripMenuItem speicherbelegungToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetTestToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage_Lights;
+        private System.Windows.Forms.DataGridView dgv_Lights;
+        private System.Windows.Forms.Button btn_GetLights;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_StartupMode;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 

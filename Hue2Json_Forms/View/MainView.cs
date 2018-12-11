@@ -135,6 +135,10 @@ namespace Rca.Hue2Json.View
                     "Keine Philips Hue Bridge gefunden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             Cursor = DefaultCursor;
+
+            dgv_Lights.AutoGenerateColumns = false;
+            //dgv_Lights.DataMember = m_Controller.Lights;
+            dgv_Lights.DataSource = m_Controller.Lights;
         }
 
         void connectBridge(object sender, EventArgs e)
@@ -356,8 +360,12 @@ namespace Rca.Hue2Json.View
             Properties.Settings.Default.Save();
             btn_ReadParameters.Enabled = true;
             btn_FullBackup.Enabled = true;
+            btn_GetLights.Enabled = true;
             resetToolStripMenuItem.Enabled = true;
             speicherbelegungToolStripMenuItem.Enabled = true;
+
+            //Lights laden
+            m_Controller.GetLights();
         }
         #endregion Hilfsfunktionen
 
@@ -428,6 +436,26 @@ namespace Rca.Hue2Json.View
         private void btn_FullBackup_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Backup-Funktionalität wird in dieser Version noch nicht unterstützt!", "Noch nicht unterstützt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void btn_GetLights_Click(object sender, EventArgs e)
+        {
+            m_Controller.GetLights();
+        }
+
+        private void dgv_Lights_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var light = m_Controller.Lights[e.RowIndex];
+
+            var startUpDgl = new StartupModeView();
+            startUpDgl.LightName = light.Name;
+            startUpDgl.Startup = light.Startup;
+            startUpDgl.Init();
+            if (startUpDgl.ShowDialog() == DialogResult.OK && startUpDgl.Startup != light.Startup)
+            {
+                m_Controller.SetStartUpMode(light.Id, startUpDgl.Startup);
+                m_Controller.GetLights();
+            }
         }
     }
 }
