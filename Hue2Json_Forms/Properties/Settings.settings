@@ -6,10 +6,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DebugParameterPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\hue_params_elias.json</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DefaultSettingsFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">hue2json.config</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
