@@ -63,12 +63,12 @@ Mehr zum Thema Regeln und den gegebenen Limits kann in folgenden Artikel [Hue Br
 #### Einschaltverhalten der Leuchtmittel/Lampen konfigurieren
 Auf der Tab-Page `Leuchtmittel/Lampen` kann durch einfaches klicken der entsprechenden Leuchtmittel ein Konfigurationsmenu für zur Auswahl des Einschaltverhaltens geöffnet werden. Hier können ab Version 1.0.80 drei verschiedene Konfigurationen eingestellt werden.
 
-|               | Beschreibung                                                                                                        |
+| Konfiguration | Beschreibung                                                                                                        |
 | ------------- |---------------------------------------------------------------------------------------------------------------------|
 | Safty         | Nach dem Einschalten geht das Leuchtmittel an, mit 100 % Helligkeit und einer Farbtemperatur von 2700 K (Warmweiß). |
 | Powerfail     | Nach dem Einschalten nimmt das Leuchtmittel den Zustand an, welches es vor dem Ausschalten hatte. War es ausgeschalten bleibt es aus. Hat es mit 50 % Helligkeit rot geleuchtet, wird es nach dem Einschalten auch wieder mit 50 % Helligkeit rot leuchten. |
 | Last On State | Nach dem Einschalten geht das Leuchtmittel an, und zwar mit den Einstellungen, mit welchem es zuletzt geleuchtet hat. Auch wenn es vor dem Ausschalten schon aus war, werden die Einstellungen des letzten „leuchtenden Zustandes“ geladen. |
-| Custom        |                                                                                                                     |
+| Custom        |                                                                                                     |
 
 
 ### Programm
