@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Rca.Hue2Json.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,6 +39,8 @@ namespace Rca.Hue2Json.Api
         #region Services
         public string HttpGet(string uri)
         {
+            Logger.WriteToLog("HttpGet URI=" + uri);
+
             WebClient client = new WebClient();
 
             // Add a user agent header in case the 
@@ -65,6 +68,8 @@ namespace Rca.Hue2Json.Api
 
         public string HttpPut(string uri, string body)
         {
+            Logger.WriteToLog("HttpPut URI=" + uri);
+
             byte[] sentData = Encoding.UTF8.GetBytes(body);
 
             using (var client = new System.Net.WebClient())

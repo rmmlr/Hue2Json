@@ -1,4 +1,5 @@
-﻿using Rca.Hue2Json.Logging;
+﻿using Rca.Hue2Json.Api;
+using Rca.Hue2Json.Logging;
 using Rca.Hue2Json.Settings;
 using System;
 using System.Collections.Generic;
@@ -335,9 +336,12 @@ namespace Rca.Hue2Json.View
                             Logger.WriteToLog("Benutzer bereist vorhanden", LogLevel.Error);
                             throw new NotImplementedException();
                         case BridgeResult.UserCreated:
+                            source.Cancel();
+                            pressButtonDlg.BeginInvoke(new Action(() => pressButtonDlg.Close()));
+                            pressButtonDlg.StopTimer = true;
                             Logger.WriteToLog("Neuer Benutzer erfolgreich angelegt", LogLevel.DisplayMessage);
                             result = true;
-                            pressButtonDlg.KillForm();
+
                             break;
                     }
 

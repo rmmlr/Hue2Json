@@ -29,6 +29,8 @@ namespace Rca.Hue2Json.View
         /// Wartezeit für Link-Button Betätigung in Sekunden
         /// </summary>
         public int Timeout { get; set; }
+
+        public bool StopTimer { get; set; }
         #endregion
 
         #region Constructor
@@ -66,10 +68,15 @@ namespace Rca.Hue2Json.View
         #region Internal services
         private void cancelForm(object sender, EventArgs e)
         {
-            timer.Stop();
-            m_CancellationSource.Cancel();
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            //Alles irgendwie unschön :-(
+            this.Invoke((MethodInvoker)delegate
+            {
+                timer.Stop();
+                //m_CancellationSource.Cancel();
+                this.DialogResult = DialogResult.Cancel;
+                this.Dispose();
+                //this.Close();
+            });
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -82,7 +89,10 @@ namespace Rca.Hue2Json.View
             int progressValue = (int)(m_TimeoutCounter / (double)(Timeout * 10 / TIMER_INTERVALL) );
 
             if (progressValue > 100)
+            {
+                timer.Stop();
                 cancelForm(sender, e);
+            }
             else
             {
                 progressBar.Value = progressValue;
@@ -90,6 +100,8 @@ namespace Rca.Hue2Json.View
                 lbl_ProgressTime.Text = m_TimeToCancel.ToString(@"mm\:ss\,f");
             }
         }
+
         #endregion
+
     }
 }
