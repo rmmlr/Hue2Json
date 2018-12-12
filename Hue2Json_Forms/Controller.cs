@@ -239,6 +239,9 @@ namespace Rca.Hue2Json
                 m_AppKeyManager.AddKey(bridge.BridgeId, appKey);
                 m_HueClient.Initialize(appKey);
 
+                ApiCaller.Host = bridge.IpAddress;
+                ApiCaller.AppKey = appKey;
+
                 return BridgeResult.UserCreated;
             }
             catch (Exception ex)
