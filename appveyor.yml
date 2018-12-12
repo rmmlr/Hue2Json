@@ -26,7 +26,7 @@ build:
   project: Hue2Json.sln
   verbosity: minimal
 after_build:
-- cmd: 7z a Hue2Json.zip %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.dll
+- cmd: 7z a Hue2Json.zip %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.dll %APPVEYOR_BUILD_FOLDER%\Hue2Json_Forms\bin\%CONFIGURATION%\*.config
 artifacts:
 - path: Hue2Json.zip
 deploy:
