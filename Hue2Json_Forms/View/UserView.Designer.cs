@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.btn_DeleteUser = new System.Windows.Forms.Button();
             this.btn_Abort = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,18 +38,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn_Cancel
+            // btn_DeleteUser
             // 
-            this.btn_Cancel.Location = new System.Drawing.Point(713, 415);
-            this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel.TabIndex = 0;
-            this.btn_Cancel.Text = "Abbrechen";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_DeleteUser.ForeColor = System.Drawing.Color.Red;
+            this.btn_DeleteUser.Location = new System.Drawing.Point(513, 415);
+            this.btn_DeleteUser.Name = "btn_DeleteUser";
+            this.btn_DeleteUser.Size = new System.Drawing.Size(194, 23);
+            this.btn_DeleteUser.TabIndex = 0;
+            this.btn_DeleteUser.Text = "Ausgewählten Benutzer Löschen";
+            this.btn_DeleteUser.UseVisualStyleBackColor = true;
             // 
             // btn_Abort
             // 
-            this.btn_Abort.Location = new System.Drawing.Point(620, 415);
+            this.btn_Abort.Location = new System.Drawing.Point(713, 415);
             this.btn_Abort.Name = "btn_Abort";
             this.btn_Abort.Size = new System.Drawing.Size(75, 23);
             this.btn_Abort.TabIndex = 1;
@@ -98,10 +99,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(798, 450);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_Abort);
-            this.Controls.Add(this.btn_Cancel);
+            this.Controls.Add(this.btn_DeleteUser);
             this.Name = "UserView";
             this.Text = "UserView";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -111,7 +112,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.Button btn_DeleteUser;
         private System.Windows.Forms.Button btn_Abort;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
