@@ -103,9 +103,15 @@ namespace Rca.Hue2Json
             }
             var bridgeInfos = new List<BridgeInfo>();
 
+
+            //Läuft über meethue.com und erfordert eine Onlineverbindung
+            //BUG: https://github.com/rmmlr/Hue2Json/issues/34
             IBridgeLocator locator = new HttpBridgeLocator();
             var bridges = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(5));
 
+#if LOCAL
+            bridges = new List<LocatedBridge>() { new LocatedBridge() { IpAddress = "192.168.0.52" } };
+#endif
 
             foreach (LocatedBridge bridge in bridges)
             {
@@ -415,6 +421,30 @@ namespace Rca.Hue2Json
             }
 
             return hueCapabilities;
+        }
+
+        /// <summary>
+        /// Benutzer der aktuell verbundenen Bridge auslesen
+        /// </summary>
+        public async Task<List<WhiteList>> ReadUsers()
+        {
+            if (m_HueClient == null)
+                throw new ArgumentNullException("Keine Bridge verbunden");
+
+            var hueUsers = new List<WhiteList>();
+
+            try
+            {
+                var users = await m_HueClient.GetWhiteListAsync();
+
+                hueUsers = users.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteToLog("Fehler beim auslesen der Benutzer: " + ex.Message, LogLevel.Error);
+            }
+
+            return hueUsers;
         }
 
         public void RemapParameters(HueParameters backup)

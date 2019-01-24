@@ -461,5 +461,15 @@ namespace Rca.Hue2Json.View
                 m_Controller.GetLights();
             }
         }
+
+        private async void benutzerverwaltungToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_Controller.ConnectedBridge == null)
+                throw new ArgumentNullException("Keine Bridge verbunden");
+
+            var users = await m_Controller.ReadUsers();
+
+            var userDlg = new UserView(users);
+        }
     }
 }

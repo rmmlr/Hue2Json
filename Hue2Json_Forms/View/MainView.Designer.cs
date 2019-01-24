@@ -54,8 +54,14 @@
             this.btn_Remapping = new System.Windows.Forms.Button();
             this.btn_ReadConfig = new System.Windows.Forms.Button();
             this.tabPage_Lights = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btn_GetLights = new System.Windows.Forms.Button();
             this.dgv_Lights = new System.Windows.Forms.DataGridView();
+            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_StartupMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Bridge = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -74,12 +80,7 @@
             this.newUserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_StartupMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.benutzerverwaltungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage_Backup.SuspendLayout();
@@ -367,6 +368,25 @@
             this.tabPage_Lights.Text = "Leuchtmittel/Lampen";
             this.tabPage_Lights.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(280, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Übersicht aller verbundenen Leuchtmittel/Lampen";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(279, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Klick auf Zeile um das Einschaltverhalten zu konfigurieren";
+            // 
             // btn_GetLights
             // 
             this.btn_GetLights.Enabled = false;
@@ -396,6 +416,37 @@
             this.dgv_Lights.Size = new System.Drawing.Size(524, 317);
             this.dgv_Lights.TabIndex = 0;
             this.dgv_Lights.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Lights_CellContentClick);
+            // 
+            // col_Name
+            // 
+            this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Name.DataPropertyName = "Name";
+            this.col_Name.HeaderText = "Name";
+            this.col_Name.Name = "col_Name";
+            this.col_Name.ReadOnly = true;
+            // 
+            // col_Type
+            // 
+            this.col_Type.DataPropertyName = "Type";
+            this.col_Type.HeaderText = "Typ";
+            this.col_Type.Name = "col_Type";
+            this.col_Type.ReadOnly = true;
+            this.col_Type.Width = 130;
+            // 
+            // col_Version
+            // 
+            this.col_Version.DataPropertyName = "SoftwareVersion";
+            this.col_Version.HeaderText = "Firmware";
+            this.col_Version.Name = "col_Version";
+            this.col_Version.ReadOnly = true;
+            // 
+            // col_StartupMode
+            // 
+            this.col_StartupMode.DataPropertyName = "Startup";
+            this.col_StartupMode.HeaderText = "Einschaltverhalten";
+            this.col_StartupMode.Name = "col_StartupMode";
+            this.col_StartupMode.ReadOnly = true;
+            this.col_StartupMode.Width = 130;
             // 
             // statusStrip1
             // 
@@ -461,7 +512,8 @@
             this.sucheBridgeToolStripMenuItem,
             this.bridgeAuswahlToolStripMenuItem,
             this.speicherbelegungToolStripMenuItem,
-            this.resetToolStripMenuItem});
+            this.resetToolStripMenuItem,
+            this.benutzerverwaltungToolStripMenuItem});
             this.bridgeToolStripMenuItem.Name = "bridgeToolStripMenuItem";
             this.bridgeToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.bridgeToolStripMenuItem.Text = "Bridge";
@@ -541,51 +593,12 @@
             this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
             this.newUserToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // col_Name
+            // benutzerverwaltungToolStripMenuItem
             // 
-            this.col_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Name.DataPropertyName = "Name";
-            this.col_Name.HeaderText = "Name";
-            this.col_Name.Name = "col_Name";
-            // 
-            // col_Type
-            // 
-            this.col_Type.DataPropertyName = "Type";
-            this.col_Type.HeaderText = "Typ";
-            this.col_Type.Name = "col_Type";
-            this.col_Type.Width = 130;
-            // 
-            // col_Version
-            // 
-            this.col_Version.DataPropertyName = "SoftwareVersion";
-            this.col_Version.HeaderText = "Firmware";
-            this.col_Version.Name = "col_Version";
-            // 
-            // col_StartupMode
-            // 
-            this.col_StartupMode.DataPropertyName = "Startup";
-            this.col_StartupMode.HeaderText = "Einschaltverhalten";
-            this.col_StartupMode.Name = "col_StartupMode";
-            this.col_StartupMode.Width = 130;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(279, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Klick auf Zeile um das Einschaltverhalten zu konfigurieren";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(16, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(280, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Übersicht aller verbundenen Leuchtmittel/Lampen";
+            this.benutzerverwaltungToolStripMenuItem.Name = "benutzerverwaltungToolStripMenuItem";
+            this.benutzerverwaltungToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.benutzerverwaltungToolStripMenuItem.Text = "Benutzerverwaltung";
+            this.benutzerverwaltungToolStripMenuItem.Click += new System.EventHandler(this.benutzerverwaltungToolStripMenuItem_Click);
             // 
             // MainView
             // 
@@ -674,6 +687,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_StartupMode;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem benutzerverwaltungToolStripMenuItem;
     }
 }
 
